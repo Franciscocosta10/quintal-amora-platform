@@ -14,6 +14,6 @@ Funcionalidades:
 
 ## Documentação
 
-- [RFC](./docs/proposta.md)
+- [RFC](./docs/RFC.md)
 
 Link para acessar o docs: https://docs.google.com/document/d/1LlH1-6CzqvI3EezxPAWkU6ZBoxwEpqQD06bHw8eh-LI/edit?usp=sharing
