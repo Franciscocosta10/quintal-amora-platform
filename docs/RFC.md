@@ -51,7 +51,7 @@ Foi realizada uma pesquisa com 22 pessoas, com o objetivo de entender melhor a e
 
 Em relação ao perfil dos usuários observou-se que a maioria é composta por visitantes mais de 70%, seguido por expositores (22,7%) e uma menor parcela de organizadores o que mostra uma visão ampla dos diferentes públicos envolvidos no evento.
 
-![Perfil de Usuário](./images/Perfil_usuario.png)
+![Perfil de Usuário](./docs/images/Perfil_usuario.png)
 
 Quando perguntados sobre as dificuldades enfrentadas os principais problemas identificados foram:
 
