@@ -53,6 +53,8 @@ Diante disso, torna-se evidente a necessidade de uma solução integrada que pro
 
 Foi realizada uma pesquisa com **22 pessoas** para entender a experiência dos usuários.
 
+./images/Perfil_usuario.png
+
 **Perfil dos participantes:**
 - Visitantes: mais de 70%  
 - Expositores: 22,7%  
