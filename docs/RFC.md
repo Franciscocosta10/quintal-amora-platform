@@ -62,6 +62,7 @@ Quando perguntados sobre as dificuldades enfrentadas os principais problemas ide
 - Desorganização em concursos (36,4%)  
 
 ![Dificuldades do Evento](./docs/images/Dificuldade_evento.png)
+
 Os dados demonstram que a maior parte das dificuldades está na comunicação e organização das atividades durante o evento, evidenciando a ausência de uma estrutura centralizada para gestão dessas informações.
 
 ---
