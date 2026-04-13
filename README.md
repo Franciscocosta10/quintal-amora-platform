@@ -15,3 +15,5 @@ Funcionalidades:
 ## Documentação
 
 - [Visão do Produto](./docs/proposta.md)
+
+Link para acessar o documento RFC: https://docs.google.com/document/d/1LlH1-6CzqvI3EezxPAWkU6ZBoxwEpqQD06bHw8eh-LI/edit?usp=sharing
