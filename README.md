@@ -11,3 +11,7 @@ Funcionalidades:
 - Notificações em tempo real
 - Pedidos para retirada
 - Catálogo de lojas e artistas
+
+## 📚 Documentação
+
+- [Visão do Produto](./docs/proposta.md)
