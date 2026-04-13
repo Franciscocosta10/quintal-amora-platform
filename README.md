@@ -12,6 +12,6 @@ Funcionalidades:
 - Pedidos para retirada
 - Catálogo de lojas e artistas
 
-## 📚 Documentação
+## Documentação
 
 - [Visão do Produto](./docs/proposta.md)
