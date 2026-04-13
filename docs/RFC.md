@@ -2,7 +2,7 @@
 
 **Linha de Projeto (Direction):** Web App  
 **Autor:** Francisco Marcelo Caetano Costa  
-**Data da Proposta:** 23/03/2026  
+**Data da Proposta:** 12/04/2026  
 **Versão:** 1.0  
 
 ---
