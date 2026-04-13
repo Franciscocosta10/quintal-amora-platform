@@ -61,6 +61,7 @@ Quando perguntados sobre as dificuldades enfrentadas os principais problemas ide
 - Dificuldade em realizar pedidos (40,9%)  
 - Desorganização em concursos (36,4%)  
 
+![Dificuldades do Evento](./docs/images/Dificuldade_evento.png)
 Os dados demonstram que a maior parte das dificuldades está na comunicação e organização das atividades durante o evento, evidenciando a ausência de uma estrutura centralizada para gestão dessas informações.
 
 ---
@@ -69,6 +70,7 @@ Os dados demonstram que a maior parte das dificuldades está na comunicação e 
 
 A organizadora do evento Quintal da Amora, Amanda Belato Leal Nunes, manifestou formalmente interesse na proposta de desenvolvimento da solução, destacando a necessidade de melhorias na gestão do evento devido ao crescimento contínuo do público.
 
+![Carta de Interesse](./docs/images/Carta_interesse.png)
 ---
 
 ### 1.3 Análise de Soluções Existentes (Benchmark)
@@ -80,6 +82,7 @@ O Sympla é uma plataforma para a criação, divulgação e venda de ingressos p
 
 Suas principais funcionalidades envolvem o gerenciamento de inscrições, controle de participantes e emissão de ingressos digitais. No entanto, a plataforma demonstra limitações em contextos quando aplicada a eventos comunitários como o Quintal da Amora pois seu foco principal está na venda de ingressos e não na gestão operacional do evento em tempo real.
 
+![Sympla](./docs/images/Sympla.png)
 ---
 
 #### Eventbrite  
@@ -89,6 +92,7 @@ O Eventbrite é uma plataforma voltada para a organização e divulgação de ev
 
 Entre seus recursos estão o gerenciamento de inscrições, controle de público e divulgação de eventos. Apesar de ser completo em alguns sentidos apresenta limitações parecidas ao Sympla, pois não atende de forma eficiente eventos locais além de não oferecer suporte para operações internas como pedidos em praça de alimentação ou gerenciamento de atividades simultâneas.
 
+![Eventbrite](./docs/images/Eventbrite.png)
 ---
 
 #### Redes sociais (Instagram e WhatsApp)
@@ -97,6 +101,7 @@ Atualmente, muitos eventos utilizam redes sociais como Instagram e aplicativos d
 
 No entanto, apresentam limitações como a falta de centralização das informações, dificuldade de controle e organização dos dados e ausência de automação. Informações importantes podem se perder facilmente e nem todos os participantes recebem os avisos em tempo suficiente.
 
+![Quintal da Amora](./docs/images/Quintal_amora.png)
 ---
 
 #### Planilhas e métodos manuais
