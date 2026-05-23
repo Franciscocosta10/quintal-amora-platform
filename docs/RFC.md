@@ -412,3 +412,159 @@ O fluxo de navegação do sistema representa o caminho percorrido pelos usuário
 O fluxo é focado nos participantes do evento que desejam acessar funcionalidades como programação, concursos, check-in e catálogo de lojas e artistas.
 
 ![Fluxo de navegação](./docs/images/Fluxo_de_navegacao.png)
+
+# 5. Arquitetura do Sistema
+
+## 5.1 Diagrama C4
+
+O modelo C4 foi utilizado para representar a arquitetura do sistema em diferentes níveis de detalhes, permitindo o entendimento desde a visão geral da aplicação até a organização interna dos componentes responsáveis pelas funcionalidades do sistema.
+
+---
+
+### Nível 1 – Diagrama de Contexto
+
+O Diagrama de Contexto apresenta uma visão macro da plataforma Quintal da Amora, demonstrando como o sistema interage com usuários e serviços externos.
+
+![Diagrama de contexto](./docs/images/Diagrama_de_contexto.png)
+
+---
+
+### Nível 2 – Diagrama de Containers
+
+O Diagrama de Containers apresenta os principais blocos tecnológicos que compõem a aplicação.
+
+![Diagrama de containers](./docs/images/Diagrama_de_containers.png)
+
+---
+
+### Nível 3 – Diagrama de Componentes
+
+O Diagrama de Componentes representa a organização interna do container da API Backend.
+
+![Diagrama de componentes](./docs/images/Diagrama_de_componentes.png)
+
+---
+
+## 5.2 Modelo de Dados
+
+O modelo de dados do sistema foi desenvolvido para armazenar informações relacionadas ao evento, usuários e funcionalidades da plataforma.
+
+---
+
+### DER – Diagrama Entidade Relacionamento
+
+![Diagrama Entidade Relacional DER](./docs/images/Entidade_relacional.png)
+
+---
+
+### Esquema Relacional
+
+![Esquema relacional](./docs/images/Esquema_relacional.png)
+
+---
+
+### Modelo de Documentos (NoSQL)
+
+O sistema também poderá utilizar armazenamento NoSQL para notificações e logs em tempo real.
+
+![Modelo de documentos](./docs/images/Modelo_de_documentos.png)
+
+---
+
+## 5.3 Principais Componentes
+
+### API Backend
+
+Responsável pelo processamento das regras de negócio e comunicação com o banco de dados.
+
+---
+
+### Sistema de Autenticação
+
+Responsável pelo login, controle de sessão e permissões dos usuários.
+
+---
+
+### Módulo de Programação
+
+Gerencia atividades, horários e informações do evento.
+
+---
+
+### Módulo de Concursos
+
+Responsável pelo gerenciamento de concursos e confirmações de participação.
+
+---
+
+### Sistema de Check-in
+
+Permite validar a presença dos participantes utilizando localização ou QR Code.
+
+---
+
+### Serviço de Notificações
+
+Responsável pelo envio de avisos e atualizações em tempo real.
+
+---
+
+### Camada de Persistência
+
+Responsável pelo armazenamento e recuperação das informações do sistema.
+
+---
+
+## 5.4 Stack Tecnológica
+
+### React
+
+Utilizado no frontend para criação de interfaces modernas, proporcionando melhor experiência ao usuário.
+
+---
+
+### Tailwind CSS
+
+Escolhido para agilizar a estilização da aplicação e facilitar a criação de layouts responsivos.
+
+---
+
+### Vite
+
+Utilizado como ferramenta de build por oferecer inicialização rápida e melhor desempenho durante o desenvolvimento.
+
+---
+
+### Node.js
+
+Escolhido pela capacidade de lidar com múltiplas requisições simultâneas utilizando arquitetura assíncrona.
+
+---
+
+### Sails.js
+
+Framework utilizado no backend para facilitar a construção da API REST e organização da aplicação.
+
+---
+
+### PostgreSQL
+
+Banco de dados relacional escolhido pela confiabilidade, desempenho e suporte a relacionamentos complexos.
+
+---
+
+### JWT (JSON Web Token)
+
+Utilizado para autenticação segura dos usuários e controle de acesso.
+
+---
+
+### Git e GitHub
+
+Utilizados para versionamento de código e gerenciamento do projeto.
+
+---
+
+### Figma
+
+Utilizado para prototipação das telas e desenvolvimento da interface visual do sistema.
