@@ -223,7 +223,7 @@ Perde muito tempo com processos manuais e sente falta de uma ferramenta focada n
 
 ### 2.2 Casos de Uso Principais
 
-![Caso de uso](./docs/images/Caso de uso portifolio.png)
+![Caso de uso](./docs/images/Caso_de_uso.png)
 
 ---
 
@@ -347,17 +347,17 @@ O processamento e liquidação financeira de vendas dos expositores não será g
 
 #### Visão dos Usuários
 
-*(Inserir diagrama de atividades dos usuários)*
+![Diagrama de atividade](./docs/images/Diagrama_de_atividade_clientes.png)
 
 #### Visão dos Administradores
 
-*(Inserir diagrama de atividades dos administradores)*
+![Diagrama de atividade](./docs/images/Diagrama_de_atividade_adm.png)
 
 ---
 
 ### Diagrama de Sequência
 
-*(Inserir diagrama de sequência do sistema)*
+![Diagrama de sequencia](./docs/images/Diagrama_de_sequencia.png)
 
 ---
 
@@ -410,3 +410,5 @@ O frontend exibirá um indicador de carregamento (“Enviando...”), evitando m
 O fluxo de navegação do sistema representa o caminho percorrido pelos usuários durante a utilização da plataforma, demonstrando como ocorre a navegação entre as principais telas e funcionalidades do aplicativo web.
 
 O fluxo é focado nos participantes do evento que desejam acessar funcionalidades como programação, concursos, check-in e catálogo de lojas e artistas.
+
+![Fluxo de navegação](./docs/images/Fluxo_de_navegacao.png)
