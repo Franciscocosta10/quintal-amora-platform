@@ -223,14 +223,7 @@ Perde muito tempo com processos manuais e sente falta de uma ferramenta focada n
 
 ### 2.2 Casos de Uso Principais
 
-- Realizar cadastro e login no sistema  
-- Efetuar check-in no evento  
-- Visualizar programação do evento  
-- Participar de concursos e atividades  
-- Receber notificações em tempo real  
-- Consultar catálogo de lojas e artistas  
-- Gerenciar programação e concursos  
-- Administrar usuários e informações do evento  
+![Caso de uso](./docs/images/Caso de uso portifolio.png)
 
 ---
 
