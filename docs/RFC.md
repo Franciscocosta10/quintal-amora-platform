@@ -170,4 +170,250 @@ Desenvolver uma plataforma web que auxilie na gestão e melhore o engajamento de
 - Suporte a pelo menos 1000 usuários simultâneos durante o evento  
 - Redução de pelo menos 30% no número de atrasos  
 - Alcançar pelo menos 70% de adesão dos participantes  
-- Taxa mínima de 60% de visualização das notificações  
+- Taxa mínima de 60% de visualização das notificações
+
+## 2. Engenharia de Requisitos
+
+### 2.1 Personas
+
+#### Persona 1: O Participante
+
+**Nome:** Lucas, 22 anos  
+
+**Contexto:**  
+É fã da cultura geek e otaku. Frequenta presencialmente todas as edições do Quintal da Amora.
+
+**Objetivos:**  
+Deseja acompanhar o cronograma de atividades de forma mais fácil e rápida. Também quer se informar para participar da gestão de concursos do evento.
+
+**Principais Dificuldades:**  
+Costuma perder tempo ao acessar as redes sociais do evento para procurar publicações do cronograma. Fica frustrado com a falta de avisos em tempo real para quem não está próximo ao local da atividade.
+
+---
+
+#### Persona 2: A Organizadora
+
+**Nome:** Amanda, 30 anos  
+
+**Contexto:**  
+É responsável pela Amora Book Store e pela organização, operação e gestão do evento.
+
+**Objetivos:**  
+Precisa informar em tempo real ao público quais atividades irão acontecer, sem depender exclusivamente das redes sociais e chamadas presenciais. Busca maior controle do evento, mais dados para análises e uma melhor experiência para os participantes.
+
+**Principais Dificuldades:**  
+Sente que o uso de WhatsApp e planilhas se tornou menos eficiente e busca uma forma de otimizar esses processos. Tem dificuldades na gestão em tempo real devido ao crescimento contínuo do público.
+
+---
+
+#### Persona 3: O Expositor Local
+
+**Nome:** Anselmo, 33 anos  
+
+**Contexto:**  
+É um expositor que possui um estande no evento.
+
+**Objetivos:**  
+Deseja focar nas vendas e utilizar o sistema web para visualizar melhor os seus dados durante o evento.
+
+**Principais Dificuldades:**  
+Perde muito tempo com processos manuais e sente falta de uma ferramenta focada na operação durante o evento.
+
+---
+
+### 2.2 Casos de Uso Principais
+
+- Realizar cadastro e login no sistema  
+- Efetuar check-in no evento  
+- Visualizar programação do evento  
+- Participar de concursos e atividades  
+- Receber notificações em tempo real  
+- Consultar catálogo de lojas e artistas  
+- Gerenciar programação e concursos  
+- Administrar usuários e informações do evento  
+
+---
+
+### 2.3 Requisitos Funcionais (RF)
+
+#### Usuários e Acesso
+
+- **RF01** – O sistema deve permitir o cadastro de usuários  
+- **RF02** – O sistema deve permitir login e logout  
+- **RF03** – O sistema deve diferenciar perfis de usuários (visitante e administrador)  
+
+#### Check-in no Evento
+
+- **RF04** – O sistema deve permitir check-in no evento  
+- **RF05** – O sistema deve registrar o horário de entrada do usuário  
+
+#### Programação do Evento
+
+- **RF06** – O sistema deve exibir a programação completa do evento  
+- **RF07** – O sistema deve permitir que administradores cadastrem e editem programações  
+
+#### Concursos e Atividades
+
+- **RF08** – O sistema deve permitir confirmação de presença em concursos  
+- **RF09** – O sistema deve notificar usuários inscritos sobre horários das atividades  
+- **RF10** – O sistema deve gerenciar lista de participantes  
+
+#### Notificações
+
+- **RF11** – O sistema deve enviar notificações sobre eventos e atividades  
+- **RF12** – O sistema deve enviar alertas de chamada para concursos  
+
+#### Catálogo de Lojas e Artistas
+
+- **RF13** – O sistema deve listar lojas e artistas participantes  
+- **RF14** – O sistema deve exibir detalhes de cada participante  
+- **RF15** – O sistema deve permitir cadastro e edição pelo administrador  
+
+#### Administração
+
+- **RF16** – O sistema deve possuir painel administrativo  
+- **RF17** – O sistema deve permitir gerenciamento de usuários  
+- **RF18** – O sistema deve permitir gerenciamento do evento, incluindo programação e concursos  
+
+---
+
+### 2.4 Requisitos Não Funcionais (RNF)
+
+#### Desempenho
+
+- **RNF01** – O sistema deve responder requisições em até 2 segundos  
+- **RNF02** – O sistema deve suportar múltiplos usuários simultâneos durante o evento  
+
+#### Usabilidade
+
+- **RNF03** – A interface deve ser responsiva para dispositivos móveis  
+- **RNF04** – O sistema deve ser de fácil uso para usuários leigos  
+
+#### Segurança
+
+- **RNF05** – O sistema deve garantir autenticação segura (JWT ou sessão)  
+- **RNF06** – O sistema deve proteger os dados dos usuários  
+- **RNF07** – O sistema deve restringir acesso ao painel administrativo  
+
+#### Disponibilidade
+
+- **RNF08** – O sistema deve estar disponível durante todo o evento  
+- **RNF09** – O sistema deve funcionar em navegadores modernos  
+
+#### Escalabilidade
+
+- **RNF10** – O sistema deve suportar aumento de usuários sem perda significativa de performance  
+
+#### Manutenibilidade
+
+- **RNF11** – O sistema deve possuir código organizado e documentado  
+
+---
+
+### 2.5 Regras de Negócio
+
+#### Validação de Presença
+
+O sistema deverá possuir uma funcionalidade de check-in para registrar a presença dos participantes. Essas informações serão utilizadas na geração de relatórios do evento.
+
+#### Permissões de Disparo
+
+O envio de notificações em tempo real será obrigatório no sistema. Apenas usuários com perfil de administrador poderão enviar esses avisos.
+
+#### Sincronização de Concursos
+
+A abertura e o fechamento das inscrições de concursos deverão respeitar as validações do cronograma oficial do evento.
+
+#### Restrição de Visibilidade e Edição do Cronograma
+
+O cronograma de atividades terá visibilidade pública para consulta. Entretanto, alterações, atrasos e cancelamentos de atrações só poderão ser realizados por usuários com nível de permissão de administrador.
+
+---
+
+### 2.6 Fora do Escopo
+
+#### Comercialização de Ingressos
+
+O sistema não atuará como plataforma de venda de ingressos ou inscrições pagas antecipadas, pois o evento Quintal da Amora é gratuito.
+
+#### Rede Social Integrada
+
+O aplicativo web será focado na operação e gestão do evento. Portanto, não contará com recursos de interação social direta entre usuários, como chat privado, lista de amigos ou feed de postagens.
+
+#### Gateway de Pagamento Complexo
+
+O processamento e liquidação financeira de vendas dos expositores não será gerenciado pelo aplicativo, sendo realizado apenas presencialmente.
+
+---
+
+# 3. Fluxos e Comportamento do Sistema
+
+## 3.1 Fluxo Principal do Usuário
+
+### Diagrama de Atividades
+
+#### Visão dos Usuários
+
+*(Inserir diagrama de atividades dos usuários)*
+
+#### Visão dos Administradores
+
+*(Inserir diagrama de atividades dos administradores)*
+
+---
+
+### Diagrama de Sequência
+
+*(Inserir diagrama de sequência do sistema)*
+
+---
+
+## 3.2 Fluxos Alternativos
+
+### Exceção 1: Limite de Vagas em Concursos
+
+**Cenário:**  
+Um participante tenta se inscrever em um concurso, porém a atividade já atingiu o limite máximo de vagas estipulado pela organização.
+
+**Comportamento do Sistema:**  
+O botão “Inscrever-se” será desabilitado no frontend. Caso a requisição ainda seja enviada ao servidor, o backend rejeitará a inscrição, exibirá a mensagem “Vagas Esgotadas” e atualizará o status no cronograma para os demais usuários.
+
+---
+
+### Exceção 2: Tentativa de Acesso Não Autorizado à Gestão
+
+**Cenário:**  
+Um usuário comum tenta acessar rotas administrativas por meio de manipulação de URL.
+
+**Comportamento do Sistema:**  
+O backend validará a falta de permissão do usuário, bloqueará a requisição retornando erro `403 Forbidden` e redirecionará o usuário para a tela inicial do cronograma.
+
+---
+
+### Exceção 3: Encerramento do Evento e Bloqueio de Interações
+
+**Cenário:**  
+O horário oficial do evento é encerrado, porém usuários ainda tentam executar ações como envio de notificações ou realização de check-ins.
+
+**Comportamento do Sistema:**  
+O sistema identificará o encerramento do evento com base no cronograma oficial e desabilitará todas as ações interativas, mantendo apenas a visualização pública das informações.
+
+---
+
+### Exceção 4: Atraso na Resposta do Servidor sob Carga Máxima
+
+**Cenário:**  
+Ocorrem picos de acesso no momento em que o sistema dispara notificações gerais, causando lentidão no processamento.
+
+**Comportamento do Sistema:**  
+O frontend exibirá um indicador de carregamento (“Enviando...”), evitando múltiplos cliques. Caso o servidor demore para responder, será exibida a mensagem “Processando notificações”.
+
+---
+
+# 4. Mockups e Experiência do Usuário (UX)
+
+## 4.1 Fluxo de Navegação
+
+O fluxo de navegação do sistema representa o caminho percorrido pelos usuários durante a utilização da plataforma, demonstrando como ocorre a navegação entre as principais telas e funcionalidades do aplicativo web.
+
+O fluxo é focado nos participantes do evento que desejam acessar funcionalidades como programação, concursos, check-in e catálogo de lojas e artistas.
