@@ -9,7 +9,6 @@ Funcionalidades:
 - Check-in por geolocalização
 - Programação do evento
 - Notificações em tempo real
-- Pedidos para retirada
 - Catálogo de lojas e artistas
 
 ## Documentação
