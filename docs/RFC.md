@@ -622,7 +622,7 @@ O modelo de dados do sistema foi desenvolvido para armazenar informações relac
 
 ### DER – Diagrama Entidade Relacionamento
 
-![Diagrama Entidade Relacional DER](./docs/images/DER_diagrama.jpg)
+![Diagrama Entidade Relacional DER](./docs/images/DER_diagrama.png)
 
 ---
 
