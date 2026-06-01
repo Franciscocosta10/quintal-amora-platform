@@ -18,9 +18,7 @@ Francisco Marcelo Caetano Costa
 
 ### 1.1 Contexto e Problema
 
-O projeto Quintal da Amora consiste no desenvolvimento de uma plataforma SaaS (Software as a Service) voltada para gerenciamento, organização e experiência digital de eventos presenciais.
-
-A empresa interessada no desenvolvimento da plataforma é a Amora Book Store, responsável pela organização do evento Quintal da Amora, realizado na cidade de Joinville - SC.
+O projeto Quintal da Amora consiste no desenvolvimento de uma plataforma SaaS (Software as a Service) voltada para gerenciamento, organização e experiência digital de eventos presenciais. A empresa interessada no desenvolvimento da plataforma é a Amora Book Store, responsável pela organização do evento Quintal da Amora, realizado na cidade de Joinville - SC.
 
 A solução foi idealizada para auxiliar tanto os organizadores quanto os visitantes do evento, centralizando informações, automatizando processos e proporcionando uma experiência mais moderna, organizada e interativa durante a realização das atividades no evento.
 
