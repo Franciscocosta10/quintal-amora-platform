@@ -1,6 +1,6 @@
 # Aplicativo Web - Quintal da Amora
 
-**Linha de Projeto (Direction):**  
+**Linha de Projeto:**  
 Web App  
 
 **Autor:**  
@@ -18,6 +18,12 @@ Francisco Marcelo Caetano Costa
 
 ### 1.1 Contexto e Problema
 
+O projeto Quintal da Amora consiste no desenvolvimento de uma plataforma SaaS (Software as a Service) voltada para gerenciamento, organização e experiência digital de eventos presenciais.
+
+A empresa interessada no desenvolvimento da plataforma é a Amora Book Store, responsável pela organização do evento Quintal da Amora, realizado na cidade de Joinville - SC.
+
+A solução foi idealizada para auxiliar tanto os organizadores quanto os visitantes do evento, centralizando informações, automatizando processos e proporcionando uma experiência mais moderna, organizada e interativa durante a realização das atividades no evento.
+
 Eventos presenciais como o Quintal da Amora, enfrentam desafios significativos relacionados a organização, comunicação e gestão de conteúdos durante sua realização. Esses problemas afetam diretamente tanto os organizadores do evento quanto os visitantes que dependem de informações claras e processos estruturados para participar das atividades.
 
 O problema ocorre durante a realização do evento, onde há grande circulação de pessoas e múltiplas atividades acontecendo ao mesmo tempo como concursos, programação cultural e funcionamento da praça de alimentação.
@@ -25,8 +31,7 @@ O problema ocorre durante a realização do evento, onde há grande circulação
 Atualmente o Quintal da Amora utiliza processos manuais ou ferramentas não integradas, como redes sociais e grupos de comunicação como WhatsApp. Dessa forma resulta em diversas dificuldades para os organizadores e clientes, como:
 
 - Ausência de dados precisos em relação a frequência de participantes.  
-- Atrasos na disseminação de informações e cronogramas de atividades.  
-- Congestionamento e filas extensas na área de alimentação.  
+- Atrasos na disseminação de informações e cronogramas de atividades.    
 - Baixa visibilidade dos produtos oferecidos pelos vendedores.  
 
 ---
@@ -39,7 +44,7 @@ O projeto tem como base o evento comunitário Quintal da Amora realizado em Join
 
 O evento está na sua 15ª edição e vem apresentando crescimento contínuo no número de participantes a cada nova realização. Com um público frequente e cada vez mais conectado, surgem desafios relacionados a organização e ao gerenciamento das atividades que ocorrem durante o evento.
 
-Atualmente diversas funcionalidades importantes como controle de presença, acompanhamento da programação, participação em concursos e pedidos na praça de alimentação não estão integradas em uma única plataforma, sendo realizadas de forma manual ou espalhadas em outras ferramentas.
+Atualmente diversas funcionalidades importantes como controle de presença, acompanhamento da programação e participação em concursos não estão integradas em uma única plataforma, sendo realizadas de forma manual ou espalhadas em outras ferramentas.
 
 Diante desse contexto, é evidente a necessidade de uma solução que faça a integração dessas atividades promovendo um maior controle, automatização dos processos e melhoria na organização geral do evento tanto para os organizadores quanto para os visitantes.
 
@@ -107,7 +112,7 @@ No entanto, apresentam limitações como a falta de centralização das informa�
 
 #### Planilhas e métodos manuais
 
-Outra solução comum é o uso de planilhas ou anotações para controle de participantes, pedidos e organização geral do evento. Essas ferramentas são simples e de baixo custo sendo utilizadas principalmente por organizadores.
+Outra solução comum é o uso de planilhas ou anotações para controle de participantes e organização geral do evento. Essas ferramentas são simples e de baixo custo sendo utilizadas principalmente por organizadores.
 
 Entretanto, esse método apresenta limitações como maior probabilidade de erros e dificuldade de atualização em tempo real. Além disso, não permite integração com o público, reduzindo a sua eficiência de comunicação e de gestão do evento.
 
@@ -129,7 +134,7 @@ Entretanto, esse método apresenta limitações como maior probabilidade de erro
 
 A criação de uma nova solução é justificada pela ausência de plataformas que atendam às necessidades operacionais de eventos presenciais. As soluções existentes analisadas focam na divulgação de eventos e na venda de ingressos, não focando na gestão em tempo real das atividades internas.
 
-Observa-se uma lacuna no suporte a funcionalidades como controle de presença por proximidade, gerenciamento de concursos, organização de pedidos para retirada e comunicação dinâmica com os participantes durante o evento.
+Observa-se uma lacuna no suporte a funcionalidades como controle de presença, gerenciamento de concursos, organização de pedidos para retirada e comunicação dinâmica com os participantes durante o evento.
 
 Dessa forma, o projeto busca atender o nicho de eventos comunitários presenciais como o Quintal da Amora, oferecendo uma plataforma centralizada que integre gestão operacional, comunicação em tempo real e engajamento do público.
 
@@ -152,13 +157,12 @@ Dessa forma, o projeto busca atender o nicho de eventos comunitários presenciai
 ### 1.5 Objetivos do Projeto
 
 **Objetivo Geral**  
-Desenvolver uma plataforma web que auxilie na gestão e melhore o engajamento de participantes do evento presencial Quintal da Amora.
+Desenvolver uma plataforma web que auxilie na gestão e melhore o engajamento  de participantes de eventos presenciais, tendo como empresa interessada a Amora Book Store, responsável pela organização do evento Quintal da Amora
 
 **Objetivos Específicos**
-- Implementar sistema de check-in por geolocalização  
+- Implementar sistema de check-in por QR Code  
 - Desenvolver visualização da programação  
-- Criar sistema de notificações em tempo real  
-- Implementar controle de pedidos  
+- Criar sistema de notificações em tempo real    
 - Desenvolver gerenciamento de concursos  
 - Criar painel administrativo  
 
@@ -223,7 +227,7 @@ Perde muito tempo com processos manuais e sente falta de uma ferramenta focada n
 
 ### 2.2 Casos de Uso Principais
 
-![Caso de uso](./docs/images/Caso_de_uso.png)
+![Caso de uso](./docs/images/Caso_de_uso_portifolio2.png)
 
 ---
 
@@ -237,7 +241,7 @@ Perde muito tempo com processos manuais e sente falta de uma ferramenta focada n
 
 #### Check-in no Evento
 
-- **RF04** – O sistema deve permitir check-in no evento  
+- **RF04** – O sistema deve permitir check-in por QR Code  
 - **RF05** – O sistema deve registrar o horário de entrada do usuário  
 
 #### Programação do Evento
@@ -413,6 +417,173 @@ O fluxo é focado nos participantes do evento que desejam acessar funcionalidade
 
 ![Fluxo de navegação](./docs/images/Fluxo_de_navegacao.png)
 
+## 4.2 Wireframes ou Mockups das Telas
+
+Os protótipos foram desenvolvidos seguindo uma identidade visual do evento Quintal da Amora, inspirada na cultura geek e otaku.
+
+### Tela Inicial
+
+A tela inicial foi desenvolvida para apresentar rapidamente as principais informações do evento, permitindo que o usuário visualize a programação, lojas participantes, avisos importantes e acesso às principais funcionalidades do sistema.
+
+#### Principais Funcionalidades
+
+- Visualização da programação do evento
+- Acesso às lojas e artistas participantes
+- Visualização de avisos importantes
+- Navegação entre páginas do sistema
+- Acesso ao login e cadastro
+
+#### Principais Ações do Usuário
+
+- Navegar pelas funcionalidades do sistema
+- Visualizar horários das atrações
+- Consultar informações do evento
+- Acessar concursos e atividades
+- Realizar login ou cadastro
+
+![Tela Inicial](./docs/images/Tela_inicial.png)
+
+### Fluxo principal
+
+### Tela Inicial
+
+![Tela Inicial](./docs/images/Tela_inicial2.png)
+
+### Tela de Login/Cadastro
+
+A tela de login permite que usuários autenticados acessem funcionalidades da plataforma, como inscrições, check-in e personalização da experiência no evento.
+
+#### Principais Funcionalidades
+
+- Autenticação de usuários
+- Cadastro de nova conta
+- Recuperação de senha
+- Login rápido e intuitivo
+
+#### Principais Ações do Usuário
+
+- Inserir e-mail e senha
+- Criar conta
+- Recuperar senha
+- Acessar o sistema
+
+![Tela Login](./docs/images/Login.png)
+
+### Tela de Programação do Evento
+
+A tela de programação permite que o visitante acompanhe todas as atividades do evento organizadas por dia e horário.
+
+#### Principais Funcionalidades
+
+- Exibição completa do cronograma
+- Filtro por dias do evento
+- Organização por horário
+
+#### Principais Ações do Usuário
+
+- Consultar horários
+- Visualizar detalhes das atrações
+- Filtrar data
+- Organizar planejamento de visita
+
+![Tela Programação](./docs/images/Programacao.png)
+
+### Tela de Concursos
+
+A tela de concursos foi desenvolvida para apresentar os concursos disponíveis durante o evento.
+
+#### Principais Funcionalidades
+
+- Exibição dos concursos disponíveis
+- Visualização das regras
+- Informações sobre horários
+- Inscrição em concursos
+
+#### Principais Ações do Usuário
+
+- Visualizar concursos
+- Realizar inscrição
+- Acompanhar horários
+
+![Tela Concursos](./docs/images/Concurso.png)
+
+### Tela de Check-in
+
+A tela de check-in foi desenvolvida para facilitar a confirmação de presença do visitante no evento.
+
+#### Principais Funcionalidades
+
+- Realização de check-in digital
+- Confirmação de participação
+- Geração de QR Code
+- Exibição do status do check-in
+
+#### Principais Ações do Usuário
+
+- Confirmar presença no evento
+- Visualizar QR Code
+- Consultar status da entrada
+- Receber confirmação de acesso
+
+![Tela Check-in](./docs/images/Check-in.png)
+
+## 4.3 Fluxo de Interação do Usuário
+
+### Passo 1 — Acesso ao Sistema
+
+O usuário acessa a plataforma Quintal da Amora através da tela inicial do sistema.
+
+- programação do evento
+- concursos
+- lojas participantes
+- informações gerais
+
+![Tela Inicial](./docs/images/Tela_inicial2.png)
+
+### Passo 2 — Login ou Cadastro
+
+Para acessar funcionalidades personalizadas, o usuário realiza login ou cria uma nova conta.
+
+- e-mail
+- senha
+- confirmação de cadastro
+
+![Tela Login](./docs/images/Login.png)
+
+### Passo 3 — Visualização da Programação
+
+Após acessar o sistema, o usuário pode consultar a programação completa do evento.
+
+- visualizar horários
+- consultar atrações
+- acompanhar atividades por dia
+
+![Tela Programação](./docs/images/Programacao.png)
+
+### Passo 4 — Participação em Concursos
+
+O usuário pode acessar a área de concursos para consultar informações e realizar inscrições.
+
+- visualizar categorias
+- consultar regras
+- realizar inscrição
+
+![Tela Concursos](./docs/images/Concurso.png)
+
+### Passo 5 — Realização do Check-in
+
+Ao chegar no evento, o visitante realiza o check-in digital utilizando a plataforma.
+
+- presença no evento
+- validação do ingresso
+- acesso às atividades
+
+![Tela Check-in](./docs/images/Check-in.png)
+
+## Protótipo Navegável
+
+https://www.figma.com/design/ibf3uH0GvsxAJaFGBh6csL/Untitled?node-id=0-1&t=yFmr1o0aAHqEBozv-1
+
 # 5. Arquitetura do Sistema
 
 ## 5.1 Diagrama C4
@@ -453,7 +624,7 @@ O modelo de dados do sistema foi desenvolvido para armazenar informações relac
 
 ### DER – Diagrama Entidade Relacionamento
 
-![Diagrama Entidade Relacional DER](./docs/images/Entidade_relacional.jpg)
+![Diagrama Entidade Relacional DER](./docs/images/DER_diagrama.jpg)
 
 ---
 
@@ -499,7 +670,7 @@ Responsável pelo gerenciamento de concursos e confirmações de participação.
 
 ### Sistema de Check-in
 
-Permite validar a presença dos participantes utilizando localização ou QR Code.
+Permite validar a presença dos participantes utilizando QR Code.
 
 ---
 
