@@ -603,7 +603,7 @@ O usuário acessa a plataforma Quintal da Amora através da tela inicial do sist
 - lojas participantes
 - informações gerais
 
-![Tela Inicial](./docs/images/Tela_inicial2.png)
+![Tela Inicial](./docs/images/Tela_principal.png)
 
 ### Passo 2 — Login ou Cadastro
 
