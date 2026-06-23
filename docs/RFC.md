@@ -662,7 +662,7 @@ O modelo C4 foi utilizado para representar a arquitetura do sistema em diferente
 
 O Diagrama de Contexto apresenta uma visão macro da plataforma Quintal da Amora, demonstrando como o sistema interage com usuários e serviços externos.
 
-![Diagrama de contexto](./docs/images/Diagrama_de_contexto.png)
+![Diagrama de contexto](./docs/images/Diagrama_de_contexto2.png)
 
 ---
 
