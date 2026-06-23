@@ -469,6 +469,7 @@ Durante o uso do sistema pelo usuário a conexão da internet caí, impedindo a 
 
 **Comportamento do Sistema:**  
 O aplicativo informa ao usuário que a conexão está indisponível e mantém acessíveis as informações previamente carregadas, como programação e dados já sincronizados. Funcionalidades que dependem de comunicação em tempo real, como envio de notificações, realização de check-ins e atualização de inscrições em concursos, permanecem temporariamente indisponíveis até o restabelecimento da conexão.
+
 ---
 
 # 4. Mockups e Experiência do Usuário (UX)
