@@ -442,6 +442,7 @@ Um usuário comum (Participante) tenta acessar rotas de alteração do cronogram
 
 **Comportamento do Sistema:**  
 O backend válida a falta de credencial do usuário , bloqueia a requisição retornando um erro 403 Forbidden e redireciona o usuário imediatamente para a tela inicial do cronograma.
+
 ---
 
 ### Exceção 3: Encerramento do Evento e Bloqueio de Interações
