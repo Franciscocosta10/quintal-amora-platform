@@ -513,7 +513,7 @@ A tela inicial foi desenvolvida para apresentar rapidamente as principais inform
 
 ### Tela Inicial
 
-![Tela Inicial](./docs/images/Tela_inicial2.png)
+![Tela Inicial](./docs/images/Tela_principal.png)
 
 ### Tela de Login/Cadastro
 
