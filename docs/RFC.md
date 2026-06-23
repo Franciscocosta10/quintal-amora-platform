@@ -877,9 +877,9 @@ A implantação da plataforma **Quintal da Amora** foi planejada considerando so
 
 | Componente | Solução Proposta | Custo Estimado |
 |------------|------------------|----------------|
-| Hospedagem Frontend | Vercel | Gratuito |
-| Hospedagem Backend | Render | US$ 0 a US$ 25/mês |
-| Banco de Dados PostgreSQL | PostgreSQL Gerenciado | Gratuito a US$ 20/mês |
+| Hospedagem Frontend | Netlify | Gratuito |
+| Hospedagem Backend | Railway | US$ 5 a US$ 20/mês |
+| Banco de Dados PostgreSQL | Neon  | Gratuito a US$ 19/mês |
 | Domínio | Registro.br | Aproximadamente R$ 40 por ano |
 | Notificações | Firebase Cloud Messaging | Gratuito |
 | Repositório e CI/CD | GitHub e GitHub Actions | Gratuito |
@@ -920,7 +920,7 @@ O projeto utilizará inicialmente planos gratuitos ou de baixo custo oferecidos 
 
 A Central de Gerenciamento é a área administrativa da plataforma **Quintal da Amora**, utilizada pelos organizadores para gerenciar usuários, programação, concursos, notificações e demais informações do evento. Essa funcionalidade centraliza as operações administrativas, facilitando o controle e a atualização dos conteúdos disponibilizados aos participantes.
 
-![Modelo de documentos](./docs/images/Modelo_de_documentos.png)
+![Modelo de documentos](./docs/images/Tela_central_gerenciamento.png)
 
 
 #### Principais funcionalidades
