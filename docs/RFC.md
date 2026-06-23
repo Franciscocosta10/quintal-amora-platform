@@ -957,3 +957,12 @@ O protótipo permite visualizar o fluxo de navegação e a disposição dos elem
 ---
 
 # 12. Parecer do Comitê de Avaliação
+Avaliador 1: __________________________
+Status: [ ] Aprovado [ ] Ajustar
+
+Observações:
+
+Avaliador 2: __________________________
+Status: [ ] Aprovado [ ] Ajustar
+
+Observações:
