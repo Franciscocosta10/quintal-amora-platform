@@ -906,8 +906,11 @@ O projeto utilizará inicialmente planos gratuitos ou de baixo custo oferecidos 
 # 10. Referências
 
 EVENTBRITE. Eventbrite: Event Management and Ticketing Platform. Disponível em: Eventbrite. Acesso em: 10 abr. 2026.
+
 SYMPLA. Sympla: plataforma de eventos, ingressos e gestão de participantes. Disponível em: Sympla. Acesso em: 10 abr. 2026.
+
 AMORA BOOK STORE. Amora Book Store. Disponível em: Amora Book Store. Acesso em: 23 mai. 2026.
+
 BRASIL. Lei nº 13.709, de 14 de agosto de 2018. Lei Geral de Proteção de Dados Pessoais (LGPD). Acesso em: 08 jun. 2026
 
 ---
