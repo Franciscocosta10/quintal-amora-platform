@@ -690,7 +690,7 @@ O modelo de dados apresentado a seguir representa as entidades do sistema, seus 
 
 ### DER – Diagrama Entidade Relacionamento
 
-![Diagrama Entidade Relacional DER](./docs/images/DER_diagrama.png)
+![Diagrama Entidade Relacional DER](./docs/images/DER_diagrama2.png)
 
 ---
 
