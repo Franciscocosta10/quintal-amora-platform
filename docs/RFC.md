@@ -670,7 +670,7 @@ O Diagrama de Contexto apresenta uma visão macro da plataforma Quintal da Amora
 
 O Diagrama de Containers apresenta os principais blocos tecnológicos que compõem a aplicação.
 
-![Diagrama de containers](./docs/images/Diagrama_de_containers2.png)
+![Diagrama de containers](./docs/images/Diagrama_containers2.png)
 
 ---
 
