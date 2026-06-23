@@ -6,7 +6,7 @@ O evento Quintal da Amora enfrenta algumas dificuldades na organização, comuni
 Meu objetivo com esse projeto é centralizar a gestão do evento, melhorar a comunicação e otimizar a experiência dos participantes.
 
 Funcionalidades:
-- Check-in por geolocalização
+- Check-in por QR Code
 - Programação do evento
 - Notificações em tempo real
 - Catálogo de lojas e artistas
