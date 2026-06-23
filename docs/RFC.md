@@ -774,7 +774,8 @@ Escolhido pela capacidade de lidar com múltiplas requisições simultâneas uti
 
 ### Sails.js
 
-Framework utilizado no backend para facilitar a construção da API REST e organização da aplicação.
+Framework utilizado no backend para facilitar a construção da API REST e organização da aplicação. 
+
 ---
 
 ### PostgreSQL
