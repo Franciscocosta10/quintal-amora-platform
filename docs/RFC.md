@@ -507,7 +507,7 @@ A tela inicial foi desenvolvida para apresentar rapidamente as principais inform
 - Acessar concursos e atividades
 - Realizar login ou cadastro
 
-![Tela Inicial](./docs/images/Tela_inicial.png)
+![Tela Inicial](./docs/images/Tela_inicial(2).png)
 
 ### Fluxo principal
 
