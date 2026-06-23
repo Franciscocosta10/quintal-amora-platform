@@ -238,7 +238,7 @@ Os principais casos de uso do sistema estão relacionados à navegação dos usu
 
 Com base nesses casos de uso, foram definidos os requisitos funcionais apresentados a seguir.
 
-![Caso de uso](./docs/images/Caso_de_uso_portifolio.png)
+![Caso de uso](./docs/images/Caso_de_uso_portifolio2.png)
 
 ---
 
