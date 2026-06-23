@@ -355,7 +355,7 @@ O aplicativo web focará na operação e gestão do evento. Portanto, não conta
 
 O processamento e liquidação financeira de vendas dos expositores não será gerenciado pelo aplicativo, sendo realizado apenas presencialmente.
 
-## 2.7 Priorização dos Requisitos
+### 2.7 Priorização dos Requisitos
 
 A priorização dos requisitos foi realizada utilizando a técnica **MoSCoW**, que classifica as funcionalidades de acordo com sua importância para a entrega da solução.
 
