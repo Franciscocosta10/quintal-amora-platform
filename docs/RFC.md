@@ -24,7 +24,7 @@ A solução foi idealizada para auxiliar tanto os organizadores quanto os visita
 
 O principal problema identificado no evento Quintal da Amora está relacionado à comunicação e ao gerenciamento das informações durante sua realização. Como o evento reúne grande quantidade de participantes e diversas atividades simultâneas, como concursos, encontros com influenciadores, apresentações e atrações temáticas, torna-se necessário garantir que as informações estejam disponíveis de forma rápida, organizada e acessível. 
 
-Atualmente o Quintal da Amora utiliza processos manuais ou ferramentas não integradas, como redes sociais e grupos de comunicação como WhatsApp, para divulgar informações e realizar parte da gestão operacional do evento. Esse cenário pode gerar dificuldades tanto para os organizadores quanto para os participantes, tais como: 
+Atualmente o Quintal da Amora utiliza processos manuais ou ferramentas não integradas, como redes sociais e grupos de comunicação como WhatsApp, para divulgar informações e realizar parte da gestão operacional do evento. Esse cenário pode gerar dificuldades tanto para os organizadores quanto para os participantes, tais como:  
 
 - Dificuldade em centralizar e atualizar informações sobre a programação do evento;
 - Atrasos na comunicação de alterações de programação e avisos importantes;
@@ -42,9 +42,9 @@ Dessa forma, a proposta do sistema é centralizar comunicação, o gerenciamento
 
 O projeto tem como base o evento comunitário Quintal da Amora realizado em Joinville, voltado para a comunidade geek e otaku da região.
 
-O evento está na sua 15ª edição e vem apresentando crescimento contínuo no número de participantes a cada nova realização. Com um público frequente e cada vez mais conectado, surgem desafios relacionados a organização e ao gerenciamento das atividades que ocorrem durante o evento.
+O evento está na sua 15ª edição e vem apresentando crescimento contínuo no número de participantes a cada nova realização. Com um público frequente e cada vez mais conectado, surgem desafios relacionados à organização e ao gerenciamento das atividades que ocorrem durante o evento.
 
-Atualmente diversas funcionalidades importantes como controle de presença, acompanhamento da programação e participação em concursos não estão integradas em uma única plataforma, sendo realizadas de forma manual ou espalhadas em outras ferramentas.
+Atualmente diversas funcionalidades importantes como controle de presença, acompanhamento da programação, participação em concursos não estão integradas em uma única plataforma, sendo realizadas de forma manual ou espalhadas em outras ferramentas.
 
 Diante desse contexto, é evidente a necessidade de uma solução que faça a integração dessas atividades promovendo um maior controle, automatização dos processos e melhoria na organização geral do evento tanto para os organizadores quanto para os visitantes.
 
@@ -167,7 +167,6 @@ Desenvolver uma plataforma web que auxilie na gestão e melhore o engajamento  d
 - Criar sistema de notificações em tempo real: Permitir o envio de comunicados, avisos e atualizações instantâneas aos participantes durante a realização do evento.
 - Desenvolver gerenciamento de concursos: Implementar funcionalidades para cadastro e gerenciamento dos concursos realizados durante o evento, permitindo definir informações como nome, categoria, descrição, data, horário, limite de participantes e período de inscrição. Os participantes poderão realizar inscrições e confirmar presença diretamente pela plataforma.
 - Criar painel administrativo: Desenvolver uma interface destinada aos organizadores para gerenciamento de usuários, programação, concursos, notificações e demais informações do evento.
-
 ---
 
 ### 1.6 Métricas de Sucesso (KPIs)
@@ -345,7 +344,7 @@ O cronograma de atividades, terá visibilidade pública para a visualização. N
 
 #### Comercialização de Ingressos
 
-O sistema não atuará como plataforma de venda de ingressos ou inscrições pagas antecipadas, pois o evento Quintal da Amora é gratuito.
+O sistema não atuará como uma plataforma de venda de ingressos ou inscrições pagas antecipadas, o evento Quintal da Amora é totalmente gratuito.
 
 #### Rede Social Integrada
 
@@ -353,7 +352,7 @@ O aplicativo web focará na operação e gestão do evento. Portanto, não conta
 
 #### Gateway de Pagamento Complexo
 
-O processamento e liquidação financeira de vendas dos expositores não será gerenciado pelo aplicativo, sendo realizado apenas presencialmente.
+O processamento e liquidação financeira de vendas dos expositores não será gerenciado por dentro do aplicativo, somente presencial.
 
 ### 2.7 Priorização dos Requisitos
 
@@ -403,7 +402,7 @@ Funcionalidades que não serão desenvolvidas na primeira versão do projeto:
 
 ### Diagrama de Atividades
 
-O diagrama de atividades apresentado a seguir descreve o fluxo principal de interação dos usuários com a plataforma Quintal da Amora, desde a consulta da programação até a realização do check-in nos eventos. 
+O diagrama de atividades apresentado a seguir descreve o fluxo principal de interação dos usuários com a plataforma Quintal da Amora, desde a consulta da programação até a realização do check-in nos eventos.
 
 #### Visão dos Usuários
 
@@ -760,12 +759,6 @@ Escolhido para agilizar a estilização da aplicação e facilitar a criação d
 
 ---
 
-### Vite
-
-Utilizado como ferramenta de build por oferecer inicialização rápida e melhor desempenho durante o desenvolvimento.
-
----
-
 ### Node.js
 
 Escolhido pela capacidade de lidar com múltiplas requisições simultâneas utilizando arquitetura assíncrona.
@@ -960,12 +953,10 @@ O protótipo permite visualizar o fluxo de navegação e a disposição dos elem
 ---
 
 # 12. Parecer do Comitê de Avaliação
-Avaliador 1: __________________________
-Status: [ ] Aprovado [ ] Ajustar
+Avaliador 1:
 
-Observações:
+![Modelo de documentos](./docs/images/avaliador1.png)
 
-Avaliador 2: __________________________
-Status: [ ] Aprovado [ ] Ajustar
+Avaliador 2:
 
-Observações:
+![Modelo de documentos](./docs/images/avaliador2.png)
