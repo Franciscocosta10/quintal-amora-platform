@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: quintal_amora_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: quintal_admin
+      POSTGRES_PASSWORD: dev_password_local
+      POSTGRES_DB: quintal_amora
+    ports:
+      - "5432:5432"
+    volumes:
+      - quintal_pgdata:/var/lib/postgresql/data
+
+volumes:
+  quintal_pgdata:
