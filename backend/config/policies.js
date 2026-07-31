@@ -2,21 +2,28 @@
  * Policy Mappings
  * (sails.config.policies)
  *
- * Policies are simple functions which run **before** your actions.
- *
- * For more information on configuring policies, check out:
- * https://sailsjs.com/docs/concepts/policies
+ * Por padrão nada é público automaticamente (removemos o '*': true);
+ * cada rota nova precisa declarar explicitamente aqui se é pública ou
+ * protegida. Isso evita o erro clássico de esquecer de proteger uma
+ * rota de administração (RNF07).
  */
 
 module.exports.policies = {
 
-  /***************************************************************************
-  *                                                                          *
-  * Default policy for all controllers and actions, unless overridden.       *
-  * (`true` allows public access)                                            *
-  *                                                                          *
-  ***************************************************************************/
+  // -------------------------------------------------------------------
+  // Autenticação (públicas: cadastro e login não podem exigir login)
+  // -------------------------------------------------------------------
+  'auth/signup': true,
+  'auth/login': true,
+  'auth/logout': true,
 
-  // '*': true,
+  'auth/me': ['isLoggedIn'],
+
+  // -------------------------------------------------------------------
+  // A partir da etapa 2 (Programação), etapa 3 (Concursos) etc.,
+  // outras entradas vão entrar aqui, por exemplo:
+  // 'programacao/find': true,                        // leitura é pública (RF06)
+  // 'programacao/create': ['isLoggedIn', 'isAdmin'],  // escrita é restrita (RF07)
+  // -------------------------------------------------------------------
 
 };
