@@ -870,7 +870,6 @@ A implantação da plataforma **Quintal da Amora** foi planejada considerando so
 
 | Componente | Solução Proposta | Custo Estimado |
 |------------|------------------|----------------|
-| Hospedagem Frontend | Netlify | Gratuito |
 | Hospedagem Backend | Railway | US$ 5 a US$ 20/mês |
 | Banco de Dados PostgreSQL | Neon  | Gratuito a US$ 19/mês |
 | Domínio | Registro.br | Aproximadamente R$ 40 por ano |
