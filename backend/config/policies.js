@@ -16,7 +16,8 @@ module.exports.policies = {
   'auth/signup': true,
   'auth/login': true,
   'auth/logout': true,
-
+  'auth/forgot-password': true,
+  'auth/reset-password': true,
   'auth/me': ['isLoggedIn'],
 
   // -------------------------------------------------------------------

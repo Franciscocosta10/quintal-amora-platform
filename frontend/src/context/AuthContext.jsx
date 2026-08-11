@@ -34,7 +34,7 @@ export function AuthProvider({ children }) {
         return;
       }
       try {
-        const dados = await apiFetch('/api/v1/auth/me');
+        const dados = await apiFetch('/auth/me');
         if (!cancelado) {
           setUsuario(dados);
         }
@@ -58,7 +58,7 @@ export function AuthProvider({ children }) {
   }, []);
 
   async function login(email, senha) {
-    const dados = await apiFetch('/api/v1/auth/login', {
+    const dados = await apiFetch('/auth/login', {
       method: 'POST',
       body: { email, senha },
       auth: false,
@@ -69,7 +69,7 @@ export function AuthProvider({ children }) {
   }
 
   async function cadastrar({ nomeCompleto, email, senha }) {
-    const dados = await apiFetch('/api/v1/auth/signup', {
+    const dados = await apiFetch('/auth/signup', {
       method: 'POST',
       body: { nomeCompleto, email, senha },
       auth: false,
@@ -81,7 +81,7 @@ export function AuthProvider({ children }) {
 
   async function logout() {
     try {
-      await apiFetch('/api/v1/auth/logout', { method: 'POST' });
+      await apiFetch('/auth/logout', { method: 'POST' });
     } catch {
       // mesmo se a chamada falhar, o token local é descartado abaixo
     }

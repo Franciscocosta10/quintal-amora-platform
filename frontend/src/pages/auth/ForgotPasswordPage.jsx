@@ -1,15 +1,5 @@
 /**
  * pages/auth/ForgotPasswordPage.jsx
- *
- * ATENÇÃO: o backend ainda não tem rota de recuperação de senha
- * (não existe no RFC como RF explícito, nem foi implementada na Etapa 1
- * de auth). Esta tela fica funcional na interface — valida o e-mail e
- * mostra uma confirmação — mas o envio real do link fica marcado como
- * TODO até existirem os endpoints no backend, por exemplo:
- *   POST /api/v1/auth/esqueci-senha        (gera token, envia e-mail)
- *   POST /api/v1/auth/redefinir-senha      (valida token, troca senha)
- * Quando esses existirem, é só trocar o TODO abaixo pela chamada real
- * via apiFetch (mesmo padrão do login/signup).
  */
 
 import { useState } from 'react';
@@ -17,6 +7,7 @@ import { Link } from 'react-router-dom';
 import AuthLayout from '../../components/auth/AuthLayout';
 import FormField from '../../components/auth/FormField';
 import StepIndicator from '../../components/auth/StepIndicator';
+import { apiFetch } from '../../lib/api';
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState('');
@@ -33,17 +24,21 @@ export default function ForgotPasswordPage() {
       return;
     }
 
-    setEnviando(true);
-    try {
-      // TODO: trocar por uma chamada real quando o endpoint existir:
-      // await apiFetch('/api/v1/auth/esqueci-senha', { method: 'POST', body: { email }, auth: false });
-      await new Promise((resolve) => setTimeout(resolve, 600));
-      setEnviado(true);
-    } catch (err) {
-      setErro(err.message);
-    } finally {
-      setEnviando(false);
-    }
+   setEnviando(true);
+
+try {
+  await apiFetch('/auth/forgot-password', {
+    method: 'POST',
+    body: { email },
+    auth: false,
+  });
+
+  setEnviado(true);
+} catch (err) {
+  setErro(err.message);
+} finally {
+  setEnviando(false);
+}
   }
 
   return (

@@ -23,7 +23,7 @@ export function setToken(token) {
 }
 
 /**
- * @param {string} path - ex: '/api/v1/auth/login'
+ * @param {string} path - ex: '/auth/login'
  * @param {object} options
  * @param {'GET'|'POST'|'PUT'|'PATCH'|'DELETE'} [options.method]
  * @param {object} [options.body]
