@@ -53,6 +53,16 @@ module.exports = {
       defaultsTo: true
     },
 
+    resetPasswordToken: {
+      type: 'string',
+      allowNull: true,
+},
+
+    resetPasswordExpiresAt: {
+      type: 'number',
+      allowNull: true,
+},
+
     // ---------------------------------------------------------------------
     // Associações (preenchidas conforme os demais módulos forem implementados)
     // ---------------------------------------------------------------------
