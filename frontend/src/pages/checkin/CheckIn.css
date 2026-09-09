@@ -1,0 +1,112 @@
+.checkin-page {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 24px 20px 48px;
+  text-align: left;
+}
+
+.checkin-hero h1 {
+  font-size: 28px;
+  margin: 0 0 8px;
+  color: #08060d;
+}
+
+.checkin-hero p {
+  color: #6b6375;
+  margin: 0 0 24px;
+}
+
+.checkin-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.checkin-tabs button {
+  border: none;
+  border-radius: 999px;
+  padding: 8px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  background: rgba(233, 30, 99, 0.08);
+  color: #c2185b;
+  transition: background 0.2s;
+}
+
+.checkin-tabs button.active {
+  background: #e91e63;
+  color: #fff;
+}
+
+.checkin-card {
+  border: 1px solid #f3d3e0;
+  border-radius: 16px;
+  padding: 24px;
+  background: #fff8fb;
+}
+
+.checkin-card h2 {
+  margin: 0 0 16px;
+  font-size: 18px;
+  color: #08060d;
+}
+
+.checkin-scan-btn {
+  border: none;
+  border-radius: 999px;
+  padding: 12px 24px;
+  background: #e91e63;
+  color: #fff;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.checkin-scan-btn:hover {
+  background: #c2185b;
+}
+
+.qr-scanner {
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.checkin-sucesso {
+  color: #2e7d32;
+  font-weight: 600;
+  background: rgba(46, 125, 50, 0.08);
+  padding: 12px 16px;
+  border-radius: 10px;
+}
+
+.checkin-erro {
+  color: #c62828;
+  background: rgba(198, 40, 40, 0.08);
+  padding: 10px 14px;
+  border-radius: 10px;
+  margin-top: 12px;
+}
+
+.checkin-como-funciona {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid #f3d3e0;
+}
+
+.checkin-como-funciona h3 {
+  font-size: 15px;
+  margin: 0 0 10px;
+  color: #08060d;
+}
+
+.checkin-como-funciona ol {
+  margin: 0;
+  padding-left: 20px;
+  color: #6b6375;
+  font-size: 14px;
+  line-height: 1.6;
+}

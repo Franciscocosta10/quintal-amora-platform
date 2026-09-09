@@ -5,4 +5,7 @@ module.exports.routes = {
   'GET /auth/me': { action: 'auth/me' },
   'POST /auth/forgot-password': { action: 'auth/forgot-password' },
   'POST /auth/reset-password': { action: 'auth/reset-password' },
+  'POST /checkin': { action: 'checkin/create' },
+  'GET /checkin/status/:eventoId': { action: 'checkin/status' },
+  'GET /checkin/historico': { action: 'checkin/historico' },
 };

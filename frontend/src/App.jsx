@@ -4,7 +4,9 @@ import LoginPage from "./pages/auth/LoginPage";
 import SignupPage from "./pages/auth/SignupPage";
 import ForgotPasswordPage from "./pages/auth/ForgotPasswordPage";
 import RedefinirSenha from "./pages/auth/RedefinirSenha";
+import CheckIn from "./pages/checkin/CheckIn";
 import HomePage from "./pages/HomePage";
+
 
 function App() {
   return (
@@ -14,6 +16,7 @@ function App() {
       <Route path="/cadastro" element={<SignupPage />} />
       <Route path="/esqueci-senha" element={<ForgotPasswordPage />} />
       <Route path="/redefinir-senha" element={<RedefinirSenha />} />
+      <Route path="/checkin" element={<CheckIn />} />
       <Route path="/home" element={<HomePage />} />
     </Routes>
   );
