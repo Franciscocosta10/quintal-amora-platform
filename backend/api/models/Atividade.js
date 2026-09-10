@@ -1,14 +1,6 @@
 /**
  * Atividade.js
  *
- * É a "Programação" do evento (RF06, RF07): apresentações, atrações,
- * encontros com influenciadores etc. Concursos têm seu próprio modelo
- * (Concurso.js) porque carregam regras extras (inscrição, limite de vagas),
- * mas ambos compõem o cronograma visível ao público.
- *
- * Regra de negócio "Restrição de Visibilidade e Edição do Cronograma":
- * leitura é pública; escrita fica restrita a administradores via
- * policy `isAdmin` nas rotas correspondentes do controller (etapa 2).
  */
 
 module.exports = {
