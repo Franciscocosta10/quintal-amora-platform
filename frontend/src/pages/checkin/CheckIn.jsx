@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import QrScanner from '../../components/checkin/QrScanner';
 import { registrarCheckin, consultarStatusCheckin, consultarHistoricoCheckins } from '../../services/checkinApi';
 import './CheckIn.css';
+import Layout from '../../components/Layout';
 
 // TODO: substituir pela lógica real de "evento ativo no momento"
 const EVENTO_ID_ATUAL = 1;
@@ -70,131 +71,133 @@ export default function CheckIn() {
 }, []);
 
   return (
-    <div className="checkin-page">
-      <header className="checkin-hero">
-        <h1>Check-in fácil e rápido!</h1>
-        <p>Escaneie o QR Code nos totens espalhados pelo evento para registrar sua presença.</p>
-      </header>
+    <Layout>
+      <div className="checkin-page">
+        <header className="checkin-hero">
+          <h1>Check-in fácil e rápido!</h1>
+          <p>Escaneie o QR Code nos totens espalhados pelo evento para registrar sua presença.</p>
+        </header>
 
-      <nav className="checkin-tabs" role="tablist">
-        <button
-          role="tab"
-          aria-selected={aba === 'meu-checkin'}
-          className={aba === 'meu-checkin' ? 'active' : ''}
-          onClick={() => setAba('meu-checkin')}
-        >
-          Meu check-in
-        </button>
-        <button
-          role="tab"
-          aria-selected={aba === 'historico'}
-          className={aba === 'historico' ? 'active' : ''}
-          onClick={() => { setAba('historico'); carregarHistorico();}}
-        >
-          Histórico
-        </button>
-      </nav>
+        <nav className="checkin-tabs" role="tablist">
+          <button
+            role="tab"
+            aria-selected={aba === 'meu-checkin'}
+            className={aba === 'meu-checkin' ? 'active' : ''}
+            onClick={() => setAba('meu-checkin')}
+          >
+            Meu check-in
+          </button>
+          <button
+            role="tab"
+            aria-selected={aba === 'historico'}
+            className={aba === 'historico' ? 'active' : ''}
+            onClick={() => { setAba('historico'); carregarHistorico();}}
+          >
+            Histórico
+          </button>
+        </nav>
 
-      {aba === 'meu-checkin' && (
-        <section className="checkin-card">
-          <h2>Faça seu check-in agora</h2>
+        {aba === 'meu-checkin' && (
+          <section className="checkin-card">
+            <h2>Faça seu check-in agora</h2>
 
-          {carregando && <p>Carregando...</p>}
+            {carregando && <p>Carregando...</p>}
 
-          {!carregando && status?.fezCheckin && (
-            <p className="checkin-sucesso">
-              ✓ Seu check-in foi validado com sucesso!{horarioCheckin ? ` (${horarioCheckin})` : ''}
-            </p>
-          )}
-
-          {!carregando && !status?.fezCheckin && (
-            <>
-              {!escaneando ? (
-                <button className="checkin-scan-btn" onClick={() => setEscaneando(true)}>
-                  Escanear QR Code
-                </button>
-              ) : (
-                <QrScanner
-                  onScan={handleScan}
-                  onError={handleScannerError}
-/>
-              )}
-            </>
-          )}
-
-          {erro && <p className="checkin-erro">{erro}</p>}
-
-          <div className="checkin-como-funciona">
-            <h3>Como funciona?</h3>
-            <ol>
-              <li>Encontre o QR Code mais próximo no evento</li>
-              <li>Escaneie o QR Code</li>
-              <li>Confirme suas informações</li>
-              <li>Check-in realizado com sucesso!</li>
-            </ol>
-          </div>
-        </section>
-      )}
-
-      {aba === 'historico' && (
-  <section className="checkin-card">
-    <h2>Histórico de check-ins</h2>
-
-    {carregandoHistorico && (
-      <p>Carregando histórico...</p>
-    )}
-
-    {erroHistorico && (
-      <p className="checkin-erro">
-        {erroHistorico}
-      </p>
-    )}
-
-    {!carregandoHistorico &&
-      !erroHistorico &&
-      historico.length === 0 && (
-        <p>
-          Você ainda não realizou nenhum check-in.
-        </p>
-      )}
-
-    {!carregandoHistorico &&
-      !erroHistorico &&
-      historico.length > 0 && (
-        <div className="checkin-historico">
-          {historico.map((item) => (
-            <article
-              key={item.id}
-              className="checkin-historico-item"
-            >
-              <h3>
-                {item.evento?.nome || `Evento #${item.evento}`}
-              </h3>
-
-              {item.evento?.edicao && (
-                <p>
-                  Edição: {item.evento.edicao}
-                </p>
-              )}
-
-              <p>
-                Entrada:{' '}
-                {new Date(
-                  item.dataHoraEntrada
-                ).toLocaleString('pt-BR')}
+            {!carregando && status?.fezCheckin && (
+              <p className="checkin-sucesso">
+                ✓ Seu check-in foi validado com sucesso!{horarioCheckin ? ` (${horarioCheckin})` : ''}
               </p>
+            )}
 
-              {item.pontoDeEntrada && (
+            {!carregando && !status?.fezCheckin && (
+              <>
+                {!escaneando ? (
+                  <button className="checkin-scan-btn" onClick={() => setEscaneando(true)}>
+                    Escanear QR Code
+                  </button>
+                ) : (
+                  <QrScanner
+                    onScan={handleScan}
+                    onError={handleScannerError}
+                  />
+                )}
+              </>
+            )}
+
+            {erro && <p className="checkin-erro">{erro}</p>}
+
+            <div className="checkin-como-funciona">
+              <h3>Como funciona?</h3>
+              <ol>
+                <li>Encontre o QR Code mais próximo no evento</li>
+                <li>Escaneie o QR Code</li>
+                <li>Confirme suas informações</li>
+                <li>Check-in realizado com sucesso!</li>
+              </ol>
+            </div>
+          </section>
+        )}
+
+        {aba === 'historico' && (
+          <section className="checkin-card">
+            <h2>Histórico de check-ins</h2>
+
+            {carregandoHistorico && (
+              <p>Carregando histórico...</p>
+            )}
+
+            {erroHistorico && (
+              <p className="checkin-erro">
+                {erroHistorico}
+              </p>
+            )}
+
+            {!carregandoHistorico &&
+              !erroHistorico &&
+              historico.length === 0 && (
                 <p>
-                  Local: {item.pontoDeEntrada}
+                  Você ainda não realizou nenhum check-in.
                 </p>
               )}
-            </article>
-          ))}
-        </div>
-      )}
-  </section>
-)}
-    </div>
+
+            {!carregandoHistorico &&
+              !erroHistorico &&
+              historico.length > 0 && (
+                <div className="checkin-historico">
+                  {historico.map((item) => (
+                    <article
+                      key={item.id}
+                      className="checkin-historico-item"
+                    >
+                      <h3>
+                        {item.evento?.nome || `Evento #${item.evento}`}
+                      </h3>
+
+                      {item.evento?.edicao && (
+                        <p>
+                          Edição: {item.evento.edicao}
+                        </p>
+                      )}
+
+                      <p>
+                        Entrada:{' '}
+                        {new Date(
+                          item.dataHoraEntrada
+                        ).toLocaleString('pt-BR')}
+                      </p>
+
+                      {item.pontoDeEntrada && (
+                        <p>
+                          Local: {item.pontoDeEntrada}
+                        </p>
+                      )}
+                    </article>
+                  ))}
+                </div>
+              )}
+          </section>
+        )}
+      </div>
+    </Layout>
   );
 }

@@ -8,24 +8,72 @@
  */
 
 import { useAuth } from '../hooks/useAuth';
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import Layout from '../components/Layout';
+import ScheduleList from '../components/schedule/ScheduleList';
+import { useAtividades } from '../hooks/useSchedule';
+import { buscarEventoAtual } from '../services/event';
+import './HomePage.css';
 
 export default function HomePage() {
   const { usuario, logout } = useAuth();
+  const { atividades, carregando, erro } = useAtividades();
+  const [evento, setEvento] = useState(null);
 
-  return (
-    <div className="flex min-h-screen flex-col items-center justify-center gap-3 bg-amora-50 px-6 text-center">
-      <p className="text-xs uppercase tracking-wide text-gray-400">
-        Área logada · placeholder (próximos módulos entram aqui)
-      </p>
-      <h1 className="text-2xl font-bold text-plum-900">Olá, {usuario?.nomeCompleto}! 🌸</h1>
-      <p className="text-sm text-gray-500">Perfil: {usuario?.perfil}</p>
-      <button
-        type="button"
-        onClick={logout}
-        className="mt-4 rounded-xl bg-amora-500 px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-amora-600"
+  useEffect(() => {
+      buscarEventoAtual().then(setEvento).catch(() => setEvento(null));
+    }, []);
+  
+    const previewAtividades = atividades.slice(0, 4);
+  
+    return (
+      <Layout
+        rightRail={
+          <>
+            <div className="home-card">
+              <h3>🔔 Avisos Importantes</h3>
+              <p className="home-card__placeholder">
+                Em breve: alertas de check-in e chamadas para concursos (RF11/RF12).
+              </p>
+            </div>
+            <div className="home-card">
+              <h3>🏪 Lojas participantes</h3>
+              <p className="home-card__placeholder">
+                Em breve: catálogo de expositores (RF13/RF14).
+              </p>
+            </div>
+          </>
+        }
       >
-        Sair
-      </button>
-    </div>
-  );
-}
+        <section className="home-banner">
+          <h1>QUINTAL DA AMORA</h1>
+          <p>Cultura geek e otaku em Joinville</p>
+          {/*
+            Os nomes de campo abaixo (evento.data, evento.horarioAbertura, ...)
+            são um CHUTE baseado no mockup — ajuste conforme os atributos reais
+            do seu model Evento (ver nota em evento/find-atual.js).
+          */}
+          {evento && (
+            <div className="home-banner__info">
+              <span>📅 {evento.data}</span>
+              <span>🕘 {evento.horarioAbertura} às {evento.horarioFechamento}</span>
+              <span>📍 {evento.local}</span>
+            </div>
+          )}
+        </section>
+  
+        <section className="home-schedule">
+          <div className="home-schedule__header">
+            <h2>📅 Cronograma de Atividades</h2>
+          </div>
+  
+          <ScheduleList atividades={previewAtividades} carregando={carregando} erro={erro} />
+  
+          <Link to="/schedule" className="home-schedule__cta">
+            Ver cronograma completo
+          </Link>
+        </section>
+      </Layout>
+    );
+  }

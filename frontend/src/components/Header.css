@@ -1,0 +1,33 @@
+.app-header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--border);
+}
+
+.app-header__bell {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.app-header__btn {
+  padding: 8px 18px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.app-header__btn--outline {
+  border: 1px solid var(--accent);
+  color: var(--accent);
+}
+
+.app-header__btn--filled {
+  background: var(--accent);
+  color: #fff;
+}

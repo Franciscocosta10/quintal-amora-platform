@@ -1,0 +1,67 @@
+.home-banner {
+  background: linear-gradient(135deg, var(--accent) 0%, #ff9ec7 100%);
+  color: #fff;
+  border-radius: 16px;
+  padding: 32px;
+  margin-bottom: 24px;
+}
+
+.home-banner h1 {
+  margin: 0;
+  font-size: 32px;
+  color: #fff;
+}
+
+.home-banner p {
+  margin: 4px 0 16px;
+  opacity: 0.9;
+}
+
+.home-banner__info {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  font-size: 14px;
+}
+
+.home-schedule {
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.home-schedule__header h2 {
+  margin: 0 0 16px;
+  font-size: 20px;
+  color: var(--text-h);
+}
+
+.home-schedule__cta {
+  display: block;
+  text-align: center;
+  margin-top: 16px;
+  padding: 12px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.home-card {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.home-card h3 {
+  margin: 0 0 8px;
+  font-size: 15px;
+  color: var(--text-h);
+}
+
+.home-card__placeholder {
+  font-size: 13px;
+  color: var(--text);
+  margin: 0;
+}
