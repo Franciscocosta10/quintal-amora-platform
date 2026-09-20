@@ -47,6 +47,11 @@ module.exports = {
       defaultsTo: 'confirmada'
     },
 
+    destaque: {
+      type: 'boolean',
+      defaultsTo: false
+    },
+
     evento: {
       model: 'evento',
       required: true
