@@ -1,7 +1,6 @@
 /**
  * RF06 — "O sistema deve exibir a programação completa do evento".
  */
-
 module.exports = {
 
   friendlyName: 'Find atividades',
@@ -50,41 +49,51 @@ module.exports = {
       query.destaque = inputs.destaque;
     }
 
-    // Filtro por dia: como guardamos `dataHoraInicio` em epoch ms, convertemos
-    // o dia recebido ("2026-05-10") para o intervalo [00:00:00, 23:59:59]
-    // daquele dia e usamos `>=`/`<` no lugar de comparar strings de data.
+    // Filtro por dia utilizando o horário de Brasília (-03:00)
     if (inputs.dia) {
-  var inicioDoDia = new Date(inputs.dia + 'T00:00:00-03:00');
-  var fimDoDia = new Date(inputs.dia + 'T23:59:59.999-03:00');
 
-  if (isNaN(inicioDoDia.getTime())) {
-    throw {
-      badRequest: {
-        message: 'Formato de data inválido. Use YYYY-MM-DD.'
+      var inicioDoDia = new Date(
+        inputs.dia + 'T00:00:00-03:00'
+      );
+
+      var fimDoDia = new Date(
+        inputs.dia + 'T23:59:59.999-03:00'
+      );
+
+      if (isNaN(inicioDoDia.getTime())) {
+        throw {
+          badRequest: {
+            message: 'Formato de data inválido. Use YYYY-MM-DD.'
+          }
+        };
       }
-    };
-  }
 
-  query.dataHoraInicio = {
-    '>=': inicioDoDia.getTime(),
-    '<=': fimDoDia.getTime()
-  };
-}
+      query.dataHoraInicio = {
+        '>=': inicioDoDia.getTime(),
+        '<=': fimDoDia.getTime()
+      };
+    }
 
-  var atividadesQuery = Atividade.find(query).sort('dataHoraInicio ASC');
+    var atividadesQuery = Atividade
+      .find(query)
+      .sort('dataHoraInicio ASC');
 
     if (inputs.limit !== undefined) {
-    if (inputs.limit < 1 || inputs.limit > 100) {
-      throw {
-        badRequest: {
-        message: 'O limite deve estar entre 1 e 100.'
+
+      if (inputs.limit < 1 || inputs.limit > 100) {
+        throw {
+          badRequest: {
+            message: 'O limite deve estar entre 1 e 100.'
+          }
+        };
       }
-    };
-  }
 
-  atividadesQuery = atividadesQuery.limit(inputs.limit);
-}
+      atividadesQuery = atividadesQuery.limit(inputs.limit);
+    }
 
+    var atividades = await atividadesQuery;
+
+    return atividades;
   }
 
 };
