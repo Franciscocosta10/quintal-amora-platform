@@ -8,7 +8,8 @@ import './Header.css';
  */
 export default function Header() {
   // Simulando a lógica de autenticação. 
-  // Futuramente, você extrairá isso do seu AuthContext (ex: const { isAuthenticated, user, logout } = useAuth();)
+  // Substituir a linha abaixo por: const { isAuthenticated, user, logout } = useAuth();
+  // ATENÇÃO: Valor mockado como 'true' temporariamente apenas para desenvolvimento visual da tela.
   const isAuthenticated = true; 
   const userMock = {
     name: 'Visitante Geek',
