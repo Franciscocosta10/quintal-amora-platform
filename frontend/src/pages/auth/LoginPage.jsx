@@ -24,7 +24,7 @@ export default function LoginPage() {
     setEnviando(true);
     try {
       await login(email, senha);
-      navigate('/', { replace: true });
+      navigate('/home', { replace: true });
     } catch (err) {
       setErro(err.message);
     } finally {

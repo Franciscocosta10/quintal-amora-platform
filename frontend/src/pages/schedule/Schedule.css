@@ -1,0 +1,27 @@
+.programacao-header h1 {
+  margin: 0 0 8px;
+  font-size: 28px;
+  color: var(--accent);
+}
+
+.programacao-header p {
+  color: var(--text);
+  margin-bottom: 24px;
+}
+
+.programacao-destaque {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.programacao-destaque h3 {
+  margin: 0 0 12px;
+  font-size: 16px;
+  color: var(--text-h);
+}
+
+.programacao-destaque__vazio {
+  font-size: 14px;
+  color: var(--text);
+}

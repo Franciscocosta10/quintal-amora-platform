@@ -21,4 +21,18 @@ module.exports.policies = {
   'checkin/status': ['isLoggedIn'],
   'checkin/create': ['isLoggedIn'],
   'checkin/historico': ['isLoggedIn'],
+
+  // Programação do evento (atividade)
+
+  'activity': {
+  'find': true,
+  'create': ['isLoggedIn', 'isAdmin'],
+  'update': ['isLoggedIn', 'isAdmin'],
+  'delete': ['isLoggedIn', 'isAdmin']
+},
+
+  'event': {
+    'actual-find': true      // dado público, usado na Home
+  },
 };
+

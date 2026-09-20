@@ -5,6 +5,7 @@ import SignupPage from "./pages/auth/SignupPage";
 import ForgotPasswordPage from "./pages/auth/ForgotPasswordPage";
 import RedefinirSenha from "./pages/auth/RedefinirSenha";
 import CheckIn from "./pages/checkin/CheckIn";
+import Schedule from "./pages/schedule/Schedule";
 import HomePage from "./pages/HomePage";
 
 
@@ -18,6 +19,7 @@ function App() {
       <Route path="/redefinir-senha" element={<RedefinirSenha />} />
       <Route path="/checkin" element={<CheckIn />} />
       <Route path="/home" element={<HomePage />} />
+      <Route path="/schedule" element={<Schedule />} />
     </Routes>
   );
 }
