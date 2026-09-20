@@ -1,17 +1,5 @@
 /**
  * RF06 — "O sistema deve exibir a programação completa do evento".
- *
- * Esta action é pública (sem isLoggedIn/isAdmin) porque qualquer visitante,
- * mesmo sem login, precisa ver a programação — é a mesma tela usada tanto
- * na Home (preview) quanto na tela de Programação completa.
- *
- * Suporta filtros opcionais via query string para reaproveitar a mesma
- * action nos dois lugares:
- *   GET /atividades                         -> tudo, ordenado por horário
- *   GET /atividades?eventoId=1              -> só de um evento específico
- *   GET /atividades?dia=2026-05-10          -> só de um dia (aba do front)
- *   GET /atividades?destaque=true           -> só os marcados como destaque
- *   GET /atividades?limit=3                 -> usado no preview da Home
  */
 
 module.exports = {
@@ -66,28 +54,36 @@ module.exports = {
     // o dia recebido ("2026-05-10") para o intervalo [00:00:00, 23:59:59]
     // daquele dia e usamos `>=`/`<` no lugar de comparar strings de data.
     if (inputs.dia) {
-      var inicioDoDia = new Date(inputs.dia + 'T00:00:00');
-      var fimDoDia = new Date(inputs.dia + 'T23:59:59.999');
+  var inicioDoDia = new Date(inputs.dia + 'T00:00:00-03:00');
+  var fimDoDia = new Date(inputs.dia + 'T23:59:59.999-03:00');
 
-      if (isNaN(inicioDoDia.getTime())) {
-        throw { badRequest: { message: 'Formato de data inválido. Use YYYY-MM-DD.' } };
+  if (isNaN(inicioDoDia.getTime())) {
+    throw {
+      badRequest: {
+        message: 'Formato de data inválido. Use YYYY-MM-DD.'
       }
+    };
+  }
 
-      query.dataHoraInicio = {
-        '>=': inicioDoDia.getTime(),
-        '<=': fimDoDia.getTime()
-      };
-    }
+  query.dataHoraInicio = {
+    '>=': inicioDoDia.getTime(),
+    '<=': fimDoDia.getTime()
+  };
+}
 
-    var atividadesQuery = Atividade.find(query).sort('dataHoraInicio ASC');
+  var atividadesQuery = Atividade.find(query).sort('dataHoraInicio ASC');
 
-    if (inputs.limit) {
-      atividadesQuery = atividadesQuery.limit(inputs.limit);
-    }
+    if (inputs.limit !== undefined) {
+    if (inputs.limit < 1 || inputs.limit > 100) {
+      throw {
+        badRequest: {
+        message: 'O limite deve estar entre 1 e 100.'
+      }
+    };
+  }
 
-    var atividades = await atividadesQuery;
-
-    return atividades;
+  atividadesQuery = atividadesQuery.limit(inputs.limit);
+}
 
   }
 
