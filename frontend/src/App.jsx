@@ -6,6 +6,8 @@ import ForgotPasswordPage from "./pages/auth/ForgotPasswordPage";
 import RedefinirSenha from "./pages/auth/RedefinirSenha";
 import CheckIn from "./pages/checkin/CheckIn";
 import Schedule from "./pages/schedule/Schedule";
+import Profile from "./components/profile/Profile";
+import ChangePhoto from "./components/profile/ChangePhoto";
 import HomePage from "./pages/HomePage";
 
 
@@ -20,6 +22,8 @@ function App() {
       <Route path="/checkin" element={<CheckIn />} />
       <Route path="/home" element={<HomePage />} />
       <Route path="/schedule" element={<Schedule />} />
+      <Route path="/profile" element={<Profile />} />
+      <Route path="/settings" element={<ChangePhoto />} />
     </Routes>
   );
 }
