@@ -14,6 +14,7 @@ module.exports.policies = {
   'auth/forgot-password': true,
   'auth/reset-password': true,
   'auth/me': ['isLoggedIn'],
+  'auth/change-profile': ['isLoggedIn'],
 
   // -------------------------------------------------------------------
   // Check-in

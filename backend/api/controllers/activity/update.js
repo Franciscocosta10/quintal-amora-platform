@@ -45,7 +45,13 @@ module.exports = {
 
     tipo: {
       type: 'string',
-      isIn: ['abertura', 'musica', 'cosplay', 'encontro', 'premiacao', 'encerramento', 'geral']
+      isIn: [
+        'atracao',
+        'apresentacao',
+        'encontro',
+        'oficina',
+        'outro'
+      ]
     },
 
     destaque: {
@@ -58,9 +64,11 @@ module.exports = {
     success: {
       description: 'Atividade atualizada com sucesso.'
     },
+
     notFound: {
       responseType: 'notFound'
     },
+
     badRequest: {
       responseType: 'badRequest'
     }
@@ -69,28 +77,41 @@ module.exports = {
   fn: async function (inputs) {
 
     var id = inputs.id;
+
     var camposParaAtualizar = _.omit(inputs, ['id']);
 
-    var atividadeExistente = await Atividade.findOne({ id: id });
+    var atividadeExistente = await Atividade.findOne({
+      id: id
+    });
+
     if (!atividadeExistente) {
       throw 'notFound';
     }
 
-    var inicioFinal = camposParaAtualizar.dataHoraInicio !== undefined
-      ? camposParaAtualizar.dataHoraInicio
-      : atividadeExistente.dataHoraInicio;
-    var fimFinal = camposParaAtualizar.dataHoraFim !== undefined
-      ? camposParaAtualizar.dataHoraFim
-      : atividadeExistente.dataHoraFim;
+    var inicioFinal =
+      camposParaAtualizar.dataHoraInicio !== undefined
+        ? camposParaAtualizar.dataHoraInicio
+        : atividadeExistente.dataHoraInicio;
+
+    var fimFinal =
+      camposParaAtualizar.dataHoraFim !== undefined
+        ? camposParaAtualizar.dataHoraFim
+        : atividadeExistente.dataHoraFim;
 
     if (fimFinal && fimFinal < inicioFinal) {
-      throw { badRequest: { message: 'dataHoraFim não pode ser anterior a dataHoraInicio.' } };
+      throw {
+        badRequest: {
+          message:
+            'dataHoraFim não pode ser anterior a dataHoraInicio.'
+        }
+      };
     }
 
-    var atividadeAtualizada = await Atividade.updateOne({ id: id }).set(camposParaAtualizar);
+    var atividadeAtualizada =
+      await Atividade.updateOne({ id: id })
+        .set(camposParaAtualizar);
 
     return atividadeAtualizada;
-
   }
 
 };

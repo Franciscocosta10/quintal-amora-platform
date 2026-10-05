@@ -41,8 +41,8 @@ module.exports = {
 
     tipo: {
       type: 'string',
-      isIn: ['abertura', 'musica', 'cosplay', 'encontro', 'premiacao', 'encerramento', 'geral'],
-      defaultsTo: 'geral'
+      isIn: ['atracao', 'apresentacao', 'encontro', 'oficina', 'outro'],
+      defaultsTo: 'outro'
     },
 
     destaque: {

@@ -1,5 +1,6 @@
 module.exports.routes = {
 
+  // Login e registro
   'POST /auth/signup': { action: 'auth/signup' },
 
   'POST /auth/login': { action: 'auth/login' },
@@ -12,6 +13,9 @@ module.exports.routes = {
 
   'POST /auth/reset-password': { action: 'auth/reset-password' },
 
+  'PUT /auth/change-profile': { action: 'auth/change-profile'},
+
+  // Check-in
   'POST /checkin': { action: 'checkin/create' },
 
   'GET /checkin/status/:eventoId': { action: 'checkin/status' },

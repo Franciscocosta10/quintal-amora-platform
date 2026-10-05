@@ -1,6 +1,4 @@
 /**
- * api.js
- *
  * Wrapper fino sobre `fetch` para centralizar:
  *  - a base URL (vem de VITE_API_URL, conforme já definido no seu .env)
  *  - o header Authorization com o JWT (RF01-RF03), quando existir
