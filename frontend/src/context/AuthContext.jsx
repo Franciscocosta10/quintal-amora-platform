@@ -74,6 +74,7 @@ export function AuthProvider({ children }) {
       body: { nomeCompleto, email, senha },
       auth: false,
     });
+    
     setToken(dados.token);
     setUsuario(dados.usuario);
     return dados.usuario;
@@ -82,21 +83,30 @@ export function AuthProvider({ children }) {
   async function logout() {
     try {
       await apiFetch('/auth/logout', { method: 'POST' });
-    } catch {
-      // mesmo se a chamada falhar, o token local é descartado abaixo
-    }
-    setToken(null);
-    setUsuario(null);
+  } catch {
+    // mesmo se a chamada falhar, o token local é descartado abaixo
   }
 
-  const value = {
-    usuario,
-    carregando,
-    isAuthenticated: !!usuario,
-    login,
-    cadastrar,
-    logout,
-  };
+  setToken(null);
+  setUsuario(null);
+}
+
+async function atualizarUsuario() {
+  const dados = await apiFetch('/auth/me');
+  setUsuario(dados);
+  return dados;
+}
+
+const value = {
+  usuario,
+  carregando,
+  isAuthenticated: !!usuario,
+  isAdmin: usuario?.perfil === 'administrador',
+  login,
+  cadastrar,
+  logout,
+  atualizarUsuario,
+};
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

@@ -1,50 +1,145 @@
 import './ScheduleItem.css';
+import { editarAtividade } from '../../services/Schedule';
 
-/**
- * Mapa tipo -> ícone. Usamos emoji em vez de instalar uma lib de ícones
- * (ex: lucide-react) porque o projeto ainda não tem nenhuma dependência de
- * ícones — se vocês já usam alguma em outra tela (Login, CheckIn), me
- * avisem que eu troco isso por ela para manter consistência visual.
- */
-const ICONES_POR_TIPO = {
-  abertura: '▶️',
-  musica: '🎵',
-  cosplay: '🎭',
-  encontro: '🧑‍🤝‍🧑',
-  premiacao: '🏆',
-  encerramento: '🏁',
-  geral: '📌'
+const TIPOS = {
+  atracao: {
+    label: 'Atração',
+    classe: 'atracao'
+  },
+  apresentacao: {
+    label: 'Apresentação',
+    classe: 'apresentacao'
+  },
+  encontro: {
+    label: 'Encontro',
+    classe: 'encontro'
+  },
+  oficina: {
+    label: 'Oficina',
+    classe: 'oficina'
+  },
+  outro: {
+    label: 'Outro',
+    classe: 'outro'
+  }
 };
 
 function formatarHorario(timestampMs) {
   return new Date(timestampMs).toLocaleTimeString('pt-BR', {
     hour: '2-digit',
-    minute: '2-digit'
+    minute: '2-digit',
+    timeZone: 'America/Sao_Paulo'
   });
 }
 
-/**
- * Uma linha da programação (horário + ícone + título + estrela de destaque).
- * Recebe `onToggleFavorito` opcional — a estrela hoje é só visual porque
- * "favoritos" (ver sidebar do mockup) não faz parte de RF06/RF07; deixamos
- * o gancho pronto para quando essa funcionalidade for implementada.
- */
-export default function ScheduleItem({ atividade, favorito = false, onToggleFavorito }) {
-  const icone = ICONES_POR_TIPO[atividade.tipo] || ICONES_POR_TIPO.geral;
+export default function ScheduleItem({
+  atividade,
+  favorito = false,
+  onToggleFavorito,
+  isAdmin = false,
+  onEditar
+}) {
+  const tipo = TIPOS[atividade.tipo] || TIPOS.outro;
+
+  async function alternarDestaque() {
+    try {
+      await editarAtividade(atividade.id, {
+        destaque: !atividade.destaque
+      });
+
+      window.location.reload();
+    } catch (error) {
+      console.error(
+        'Erro ao alterar destaque:',
+        error
+      );
+    }
+  }
 
   return (
     <div className="schedule-item">
-      <span className="schedule-item__time">{formatarHorario(atividade.dataHoraInicio)}</span>
-      <span className="schedule-item__icon" aria-hidden="true">{icone}</span>
-      <span className="schedule-item__title">{atividade.titulo}</span>
-      <button
-        type="button"
-        className={`schedule-item__star ${favorito ? 'is-active' : ''}`}
-        aria-label={favorito ? 'Remover dos favoritos' : 'Adicionar aos favoritos'}
-        onClick={() => onToggleFavorito?.(atividade.id)}
+      <span className="schedule-item__time">
+        {formatarHorario(atividade.dataHoraInicio)}
+      </span>
+
+      <span
+        className={`schedule-item__type schedule-item__type--${tipo.classe}`}
       >
-        {favorito ? '★' : '☆'}
-      </button>
+        {tipo.label}
+      </span>
+
+      <div className="schedule-item__content">
+        <span className="schedule-item__title">
+          {atividade.titulo}
+        </span>
+
+        {atividade.descricao && (
+          <span className="schedule-item__description">
+            {atividade.descricao}
+          </span>
+        )}
+
+        {atividade.local && (
+          <span className="schedule-item__location">
+            📍 {atividade.local}
+          </span>
+        )}
+      </div>
+
+      <div className="schedule-item__actions">
+        {isAdmin ? (
+          <>
+            <button
+              type="button"
+              className={`schedule-item__highlight ${
+                atividade.destaque
+                  ? 'is-active'
+                  : ''
+              }`}
+              title={
+                atividade.destaque
+                  ? 'Remover destaque'
+                  : 'Destacar atividade'
+              }
+              aria-label={
+                atividade.destaque
+                  ? 'Remover destaque'
+                  : 'Destacar atividade'
+              }
+              onClick={alternarDestaque}
+            >
+              {atividade.destaque ? '★' : '☆'}
+            </button>
+
+            <button
+              type="button"
+              className="schedule-item__edit"
+              onClick={() =>
+                onEditar?.(atividade)
+              }
+            >
+              Editar
+            </button>
+          </>
+        ) : (
+          <button
+            type="button"
+            className={`schedule-item__star ${
+              favorito ? 'is-active' : ''
+            }`}
+            aria-label={
+              favorito
+                ? 'Remover dos favoritos'
+                : 'Adicionar aos favoritos'
+            }
+            onClick={() =>
+              onToggleFavorito?.(atividade.id)
+            }
+          >
+            {favorito ? '★' : '☆'}
+          </button>
+        )}
+      </div>
     </div>
   );
 }

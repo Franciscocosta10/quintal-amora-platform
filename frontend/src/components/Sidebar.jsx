@@ -15,7 +15,7 @@ const ITENS_MENU = [
   { label: 'Início', to: '/home' },
   { label: 'Concursos', to: '/concursos' },
   { label: 'Check-in', to: '/checkin' },
-  { label: 'Favoritos', to: '/favoritos' }
+  { label: 'Programação', to: '/schedule' }
 ];
 
 export default function Sidebar() {

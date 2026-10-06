@@ -25,3 +25,86 @@
   font-size: 14px;
   color: var(--text);
 }
+
+.programacao-header__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.programacao__btn-adicionar {
+  flex-shrink: 0;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--accent);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.programacao__btn-adicionar:hover {
+  opacity: 0.9;
+}
+
+@media (max-width: 700px) {
+  .programacao-header__top {
+    flex-direction: column;
+  }
+
+  .programacao__btn-adicionar {
+    width: 100%;
+  }
+}
+
+.programacao-destaque__lista {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.programacao-destaque__item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.programacao-destaque__item:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.programacao-destaque__item strong {
+  color: var(--text-h);
+  font-size: 14px;
+}
+
+.programacao-destaque__item span {
+  color: var(--text);
+  font-size: 12px;
+}
+
+.programacao-todos {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.programacao-dia {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.programacao-dia__titulo {
+  margin: 0;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--border);
+  color: var(--text-h);
+  font-size: 20px;
+  font-weight: 700;
+}
