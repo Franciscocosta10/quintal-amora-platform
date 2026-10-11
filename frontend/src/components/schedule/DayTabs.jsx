@@ -24,9 +24,14 @@ export default function DayTabs({ dias, diaSelecionado, onSelecionar, favoritosS
           {dia.rotulo}
         </button>
       ))}
-      <button type="button" 
-        className={`day-tabs__tab ${ favoritosSelecionado ? 'is-active' : '' }`} 
-        onClick={onSelecionarFavoritos} > ★ Favoritos 
+      <button
+        type="button"
+        className={`day-tabs__tab ${
+        favoritosSelecionado ? 'is-active' : ''
+  }`}
+        onClick={() => onSelecionarFavoritos?.()}
+>
+         ★ Favoritos
       </button>
     </div>
   );
