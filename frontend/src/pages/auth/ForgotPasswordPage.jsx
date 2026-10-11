@@ -1,7 +1,3 @@
-/**
- * pages/auth/ForgotPasswordPage.jsx
- */
-
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import AuthLayout from '../../components/auth/AuthLayout';
@@ -79,7 +75,7 @@ try {
               id="email"
               label="E-mail cadastrado"
               type="email"
-              placeholder="Value"
+              placeholder="Digite seu e-mail"
               autoComplete="email"
               required
               value={email}

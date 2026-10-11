@@ -1,8 +1,6 @@
 /**
- * pages/auth/LoginPage.jsx
  * RF02 — login.
  */
-
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import AuthLayout from '../../components/auth/AuthLayout';
@@ -60,7 +58,7 @@ export default function LoginPage() {
           id="email"
           label="Email"
           type="email"
-          placeholder="Value"
+          placeholder="Digite seu e-mail"
           autoComplete="email"
           required
           value={email}
@@ -71,7 +69,7 @@ export default function LoginPage() {
           id="senha"
           label="Senha"
           type="password"
-          placeholder="Value"
+          placeholder="Digite sua senha"
           autoComplete="current-password"
           required
           value={senha}

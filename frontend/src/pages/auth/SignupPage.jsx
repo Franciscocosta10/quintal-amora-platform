@@ -1,10 +1,5 @@
 /**
- * pages/auth/SignupPage.jsx
  * RF01 — cadastro de usuário.
- *
- * Sem mockup próprio no protótipo (só vi login e esqueci-senha), então
- * segui a mesma linguagem visual das outras duas: ícone + título
- * sublinhado, cartão branco, botão rosa cheio.
  */
 
 import { useState } from 'react';
@@ -78,7 +73,7 @@ export default function SignupPage() {
           id="nomeCompleto"
           label="Nome completo"
           type="text"
-          placeholder="Value"
+          placeholder="Digite seu nome completo"
           autoComplete="name"
           required
           value={nomeCompleto}
@@ -89,7 +84,7 @@ export default function SignupPage() {
           id="email"
           label="Email"
           type="email"
-          placeholder="Value"
+          placeholder="Digite seu e-mail"
           autoComplete="email"
           required
           value={email}
@@ -100,7 +95,7 @@ export default function SignupPage() {
           id="senha"
           label="Senha"
           type="password"
-          placeholder="Value"
+          placeholder="Digite sua senha"
           autoComplete="new-password"
           required
           minLength={SENHA_MIN_LENGTH}
@@ -112,7 +107,7 @@ export default function SignupPage() {
           id="confirmarSenha"
           label="Confirmar senha"
           type="password"
-          placeholder="Value"
+          placeholder="Confirme sua senha"
           autoComplete="new-password"
           required
           value={confirmarSenha}
