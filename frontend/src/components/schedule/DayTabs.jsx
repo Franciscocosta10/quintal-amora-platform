@@ -1,10 +1,24 @@
 import './DayTabs.css';
+
 /**
- * DayTabs — as abas "Todos / Sábado - 10/05 / Domingo - 11/05" do mockup.
- * Puramente controlado: quem gerencia qual aba está ativa é a página pai
- * (Home ou Programacao), este componente só desenha e dispara o evento.
+ * DayTabs — abas "Todos / dias.../ Favoritos".
+ *
+ * `temFavoritos` e `isAdmin` controlam a aba "★ Favoritos":
+ *  - só aparece para quem NÃO é admin;
+ *  - só aparece se existir pelo menos 1 favorito.
+ * A aba fica logo depois de "Todos" (antes dos dias/categorias).
  */
-export default function DayTabs({ dias, diaSelecionado, onSelecionar, favoritosSelecionado = false, onSelecionarFavoritos }) {
+export default function DayTabs({
+  dias,
+  diaSelecionado,
+  onSelecionar,
+  favoritosSelecionado = false,
+  onSelecionarFavoritos,
+  isAdmin = false,
+  temFavoritos = false
+}) {
+  const mostrarAbaFavoritos = !isAdmin && temFavoritos;
+
   return (
     <div className="day-tabs">
       <button
@@ -14,6 +28,17 @@ export default function DayTabs({ dias, diaSelecionado, onSelecionar, favoritosS
       >
         Todos
       </button>
+
+      {mostrarAbaFavoritos && (
+        <button
+          type="button"
+          className={`day-tabs__tab ${favoritosSelecionado ? 'is-active' : ''}`}
+          onClick={() => onSelecionarFavoritos?.()}
+        >
+          ★ Favoritos
+        </button>
+      )}
+
       {dias.map((dia) => (
         <button
           key={dia.chave}
@@ -24,15 +49,6 @@ export default function DayTabs({ dias, diaSelecionado, onSelecionar, favoritosS
           {dia.rotulo}
         </button>
       ))}
-      <button
-        type="button"
-        className={`day-tabs__tab ${
-        favoritosSelecionado ? 'is-active' : ''
-  }`}
-        onClick={() => onSelecionarFavoritos?.()}
->
-         ★ Favoritos
-      </button>
     </div>
   );
 }

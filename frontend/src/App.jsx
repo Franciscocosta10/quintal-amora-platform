@@ -8,6 +8,7 @@ import CheckIn from "./pages/checkin/CheckIn";
 import Schedule from "./pages/schedule/Schedule";
 import Profile from "./components/profile/Profile";
 import ChangePhoto from "./components/profile/ChangePhoto";
+import Contests from "./pages/contest/Contests";
 import HomePage from "./pages/HomePage";
 
 
@@ -24,6 +25,7 @@ function App() {
       <Route path="/schedule" element={<Schedule />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/settings" element={<ChangePhoto />} />
+      <Route path="/concursos" element={<Contests />} />
     </Routes>
   );
 }

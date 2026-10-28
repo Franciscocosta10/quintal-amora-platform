@@ -31,6 +31,24 @@ module.exports.routes = {
 
   'DELETE /activity/delete/:id': { action: 'activity/delete' },
 
+  // Concursos
+  'GET /contest': { action: 'contest/find' },
+
+  'POST /contest/create': { action: 'contest/create' },
+
+  'PUT /contest/update/:id': { action: 'contest/update' },
+
+  'DELETE /contest/delete/:id': { action: 'contest/delete' },
+
+  // Inscrições em concursos
+  'POST /contest/:concursoId/register': { action: 'registration/create' },
+
+  'GET /contest/:concursoId/registrations': { action: 'registration/find' },
+
+  'GET /registration/mine': { action: 'registration/find-mine' },
+
+  'DELETE /registration/:id': { action: 'registration/cancel' },
+
   // Home
   'GET /event/actual-find': { action: 'event/actual-find' },
 };

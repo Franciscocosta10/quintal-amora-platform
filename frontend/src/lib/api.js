@@ -53,7 +53,7 @@ export async function apiFetch(path, { method = 'GET', body, auth = true } = {})
   }
 
   if (!resposta.ok) {
-    const mensagem = dados?.error || 'Não foi possível completar a solicitação. Tente novamente.';
+    const mensagem = dados?.message || dados?.error || 'Não foi possível completar a solicitação. Tente novamente.';
     throw new Error(mensagem);
   }
 

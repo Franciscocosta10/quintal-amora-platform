@@ -1,0 +1,63 @@
+.registration-confirmed-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.registration-confirmed-modal {
+  width: min(380px, 100%);
+  padding: 28px 24px;
+  border-radius: 14px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.registration-confirmed-modal__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin: 0 auto 14px;
+  border-radius: 50%;
+  background-color: #eef9f1;
+  color: #287a3d;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.registration-confirmed-modal h2 {
+  margin: 0 0 10px;
+  color: var(--text-h);
+  font-size: 20px;
+}
+
+.registration-confirmed-modal p {
+  margin: 0;
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.registration-confirmed-modal__btn {
+  margin-top: 20px;
+  padding: 10px 24px;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--accent);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.registration-confirmed-modal__btn:hover {
+  opacity: 0.9;
+}

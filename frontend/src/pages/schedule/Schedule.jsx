@@ -4,6 +4,7 @@ import DayTabs from '../../components/schedule/DayTabs';
 import ScheduleList from '../../components/schedule/ScheduleList';
 import ScheduleForm from '../../components/schedule/ScheduleForm';
 import { useAtividades } from '../../hooks/useSchedule';
+import { useFavoriteAtividades } from '../../hooks/useFavoriteAtividades';
 import {
   criarAtividade,
   editarAtividade,
@@ -23,10 +24,14 @@ export default function Schedule() {
     erro
   } = useAtividades();
 
+  const { favoritos, alternarFavorito, ehFavorito } = useFavoriteAtividades();
+
   const [eventoAtual, setEventoAtual] = useState(null);
   const [erroEvento, setErroEvento] = useState('');
 
   const [diaSelecionado, setDiaSelecionado] = useState(null);
+  const [favoritosSelecionado, setFavoritosSelecionado] = useState(false);
+
   const [formAberto, setFormAberto] = useState(false);
   const [atividadeEditando, setAtividadeEditando] = useState(null);
 
@@ -63,18 +68,28 @@ export default function Schedule() {
     };
   }, []);
 
-  const atividadesExibidas =
-    diaSelecionado === null
+  function selecionarDia(chave) {
+    setFavoritosSelecionado(false);
+    setDiaSelecionado(chave);
+  }
+
+  function selecionarFavoritos() {
+    setFavoritosSelecionado(true);
+  }
+
+  const atividadesExibidas = favoritosSelecionado
+    ? atividades.filter((atividade) => favoritos.includes(atividade.id))
+    : diaSelecionado === null
       ? atividades
       : (porDia[diaSelecionado] || []);
 
   const destaques = useMemo(
-  () =>
-    atividadesExibidas.filter(
-      (atividade) => atividade.destaque
-    ),
-  [atividadesExibidas]
-);
+    () =>
+      atividadesExibidas.filter(
+        (atividade) => atividade.destaque
+      ),
+    [atividadesExibidas]
+  );
 
   function abrirNovaAtividade() {
     setAtividadeEditando(null);
@@ -114,29 +129,29 @@ export default function Schedule() {
     <Layout
       rightRail={
         <div className="programacao-destaque">
-  <h3>⭐ Destaques</h3>
+          <h3>⭐ Destaques</h3>
 
-  {destaques.length === 0 ? (
-    <p className="programacao-destaque__vazio">
-      Nenhum destaque marcado ainda.
-    </p>
-  ) : (
-    <div className="programacao-destaque__lista">
-      {destaques.map((atividade) => (
-        <div
-          key={atividade.id}
-          className="programacao-destaque__item"
-        >
-          <strong>{atividade.titulo}</strong>
+          {destaques.length === 0 ? (
+            <p className="programacao-destaque__vazio">
+              Nenhum destaque marcado ainda.
+            </p>
+          ) : (
+            <div className="programacao-destaque__lista">
+              {destaques.map((atividade) => (
+                <div
+                  key={atividade.id}
+                  className="programacao-destaque__item"
+                >
+                  <strong>{atividade.titulo}</strong>
 
-          {atividade.local && (
-            <span>{atividade.local}</span>
+                  {atividade.local && (
+                    <span>{atividade.local}</span>
+                  )}
+                </div>
+              ))}
+            </div>
           )}
         </div>
-      ))}
-    </div>
-  )}
-</div>
       }
     >
       <div className="programacao-header">
@@ -174,39 +189,57 @@ export default function Schedule() {
       <DayTabs
         dias={dias}
         diaSelecionado={diaSelecionado}
-        onSelecionar={setDiaSelecionado}
+        onSelecionar={selecionarDia}
+        favoritosSelecionado={favoritosSelecionado}
+        onSelecionarFavoritos={selecionarFavoritos}
+        isAdmin={isAdmin}
+        temFavoritos={favoritos.length > 0}
       />
 
-      {diaSelecionado === null ? (
-  <div className="programacao-todos">
-    {dias.map((dia) => (
-      <section
-        key={dia.chave}
-        className="programacao-dia"
-      >
-        <h2 className="programacao-dia__titulo">
-          {dia.rotulo}
-        </h2>
-
+      {favoritosSelecionado ? (
         <ScheduleList
-          atividades={porDia[dia.chave] || []}
+          atividades={atividadesExibidas}
           carregando={carregando}
           erro={erro}
           isAdmin={isAdmin}
           onEditar={abrirEdicao}
+          ehFavorito={ehFavorito}
+          onAlternarFavorito={alternarFavorito}
         />
-      </section>
-    ))}
-  </div>
-) : (
-  <ScheduleList
-    atividades={atividadesExibidas}
-    carregando={carregando}
-    erro={erro}
-    isAdmin={isAdmin}
-    onEditar={abrirEdicao}
-  />
-)}
+      ) : diaSelecionado === null ? (
+        <div className="programacao-todos">
+          {dias.map((dia) => (
+            <section
+              key={dia.chave}
+              className="programacao-dia"
+            >
+              <h2 className="programacao-dia__titulo">
+                {dia.rotulo}
+              </h2>
+
+              <ScheduleList
+                atividades={porDia[dia.chave] || []}
+                carregando={carregando}
+                erro={erro}
+                isAdmin={isAdmin}
+                onEditar={abrirEdicao}
+                ehFavorito={ehFavorito}
+                onAlternarFavorito={alternarFavorito}
+              />
+            </section>
+          ))}
+        </div>
+      ) : (
+        <ScheduleList
+          atividades={atividadesExibidas}
+          carregando={carregando}
+          erro={erro}
+          isAdmin={isAdmin}
+          onEditar={abrirEdicao}
+          ehFavorito={ehFavorito}
+          onAlternarFavorito={alternarFavorito}
+        />
+      )}
 
       {formAberto && isAdmin && (
         <ScheduleForm

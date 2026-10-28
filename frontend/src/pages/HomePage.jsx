@@ -56,9 +56,9 @@ export default function HomePage() {
           */}
           {evento && (
             <div className="home-banner__info">
-              <span>📅 {evento.data}</span>
-              <span>🕘 {evento.horarioAbertura} às {evento.horarioFechamento}</span>
-              <span>📍 {evento.local}</span>
+              <span> {evento.data}</span>
+              <span> {evento.horarioAbertura} {evento.horarioFechamento}</span>
+              <span> {evento.local}</span>
             </div>
           )}
         </section>
