@@ -255,7 +255,7 @@ export default function ScheduleForm({
           >
             <div className="schedule-form__field">
               <label htmlFor="titulo">
-                Título
+                Título <span className="required-mark">*</span>
               </label>
 
               <input
@@ -325,7 +325,7 @@ export default function ScheduleForm({
 
             <div className="schedule-form__row">
               <div className="schedule-form__field">
-                <label htmlFor="data">
+                <label htmlFor="data"> <span className="required-mark">*</span>
                   Data
                 </label>
 
@@ -341,7 +341,7 @@ export default function ScheduleForm({
 
               <div className="schedule-form__field">
                 <label htmlFor="horaInicio">
-                  Início
+                  Início <span className="required-mark">*</span>
                 </label>
 
                 <input
@@ -356,7 +356,7 @@ export default function ScheduleForm({
 
               <div className="schedule-form__field">
                 <label htmlFor="horaFim">
-                  Término
+                  Término <span className="required-mark">*</span>
                 </label>
 
                 <input

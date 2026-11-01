@@ -347,3 +347,8 @@
   background-color: #c0392b;
   color: #ffffff;
 }
+
+.required-mark {
+  color: #c0392b;
+  margin-left: 2px;
+}

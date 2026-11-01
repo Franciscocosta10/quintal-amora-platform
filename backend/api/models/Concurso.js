@@ -1,59 +1,39 @@
-/**
- * Concurso.js
- *
- * RF08–RF10: cadastro/gerenciamento de concursos, com limite de
- * participantes e janela própria de inscrição — por isso é modelo
- * separado de Atividade, mesmo aparecendo junto no cronograma público.
- *
- * "Sincronização de Concursos" (regra de negócio): inicioInscricao e
- * fimInscricao existem justamente para o controller (etapa 3) poder
- * validar se as inscrições ainda estão abertas antes de aceitar uma
- * InscricaoConcurso.
- */
-
 module.exports = {
 
   attributes: {
 
-    nome: {
-      type: 'string',
-      required: true
-    },
+    nome: { type: 'string', required: true },
+    categoria: { type: 'string', allowNull: true },
+    descricao: { type: 'string', columnType: 'text', allowNull: true },
 
-    categoria: {
-      type: 'string',
-      allowNull: true
-    },
-
-    descricao: {
-      type: 'string',
-      columnType: 'text',
-      allowNull: true
-    },
-
-    data: {
-      type: 'number', // epoch (ms) do dia do concurso
-      required: true
-    },
-
-    horario: {
-      type: 'string', // texto amigável, ex: "14:00"
-      allowNull: true
-    },
-
-    limiteParticipantes: {
+    dataHoraInicio: {
       type: 'number',
-      allowNull: true // null = sem limite
+      columnType: 'double precision',
+      required: true,
+      description: 'Timestamp (epoch ms) de início do concurso.'
     },
+
+    dataHoraFim: {
+      type: 'number',
+      columnType: 'double precision',
+      required: true,
+      description: 'Timestamp (epoch ms) de término do concurso (mesmo dia de dataHoraInicio).'
+    },
+
+    limiteParticipantes: { type: 'number', allowNull: true },
 
     inicioInscricao: {
       type: 'number',
-      required: true
+      columnType: 'double precision',
+      required: true,
+      description: 'Início do dia (00:00) em que as inscrições abrem.'
     },
 
     fimInscricao: {
       type: 'number',
-      required: true
+      columnType: 'double precision',
+      required: true,
+      description: 'Fim do dia (23:59:59) em que as inscrições encerram.'
     },
 
     status: {
@@ -62,15 +42,11 @@ module.exports = {
       defaultsTo: 'aberto'
     },
 
-    evento: {
-      model: 'evento',
-      required: true
-    },
+    destaque: { type: 'boolean', defaultsTo: false },
 
-    inscricoes: {
-      collection: 'inscricaoconcurso',
-      via: 'concurso'
-    }
+    evento: { model: 'evento', required: true },
+
+    inscricoes: { collection: 'inscricaoconcurso', via: 'concurso' }
 
   }
 

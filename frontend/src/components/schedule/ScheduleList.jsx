@@ -5,14 +5,13 @@ export default function ScheduleList({
   carregando,
   erro,
   isAdmin,
-  onEditar
+  onEditar,
+  ehFavorito,
+  onAlternarFavorito
 }) {
   if (carregando) {
     return (
-      <p
-        className="text-sm"
-        style={{ color: 'var(--text)' }}
-      >
+      <p className="text-sm" style={{ color: 'var(--text)' }}>
         Carregando programação…
       </p>
     );
@@ -20,24 +19,16 @@ export default function ScheduleList({
 
   if (erro) {
     return (
-      <p
-        className="text-sm"
-        style={{ color: 'var(--text)' }}
-      >
-        Não foi possível carregar a programação.
-        Tente novamente.
+      <p className="text-sm" style={{ color: 'var(--text)' }}>
+        Não foi possível carregar a programação. Tente novamente.
       </p>
     );
   }
 
   if (!atividades || atividades.length === 0) {
     return (
-      <p
-        className="text-sm"
-        style={{ color: 'var(--text)' }}
-      >
-        Nenhuma atividade cadastrada para este
-        filtro ainda.
+      <p className="text-sm" style={{ color: 'var(--text)' }}>
+        Nenhuma atividade cadastrada para este filtro ainda.
       </p>
     );
   }
@@ -50,6 +41,8 @@ export default function ScheduleList({
           atividade={atividade}
           isAdmin={isAdmin}
           onEditar={onEditar}
+          favorito={ehFavorito?.(atividade.id)}
+          onToggleFavorito={onAlternarFavorito}
         />
       ))}
     </div>

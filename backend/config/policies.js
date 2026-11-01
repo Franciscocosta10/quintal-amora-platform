@@ -24,13 +24,27 @@ module.exports.policies = {
   'checkin/historico': ['isLoggedIn'],
 
   // Programação do evento (atividade)
-
   'activity': {
   'find': true,
   'create': ['isLoggedIn', 'isAdmin'],
   'update': ['isLoggedIn', 'isAdmin'],
   'delete': ['isLoggedIn', 'isAdmin']
 },
+
+  // Concursos
+    'contest': {
+    'find': true,
+    'create': ['isLoggedIn', 'isAdmin'],
+    'update': ['isLoggedIn', 'isAdmin'],
+    'delete': ['isLoggedIn', 'isAdmin']
+  },
+
+  'registration': {
+    'create': ['isLoggedIn'],
+    'find': ['isLoggedIn', 'isAdmin'],
+    'find-mine': ['isLoggedIn'],
+    'cancel': ['isLoggedIn']
+  },
 
   'event': {
     'actual-find': true      // dado público, usado na Home
