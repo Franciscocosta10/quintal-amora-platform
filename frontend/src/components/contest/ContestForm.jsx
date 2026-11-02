@@ -1,7 +1,14 @@
 import { useState } from 'react';
+import DatePicker from '../DatePicker';
 import './ContestForm.css';
 
-const CATEGORIAS_SUGERIDAS = ['torneio', 'desfile', 'cosplay', 'quiz', 'outro'];
+const CATEGORIAS = [
+  { value: 'torneio', label: 'Torneio' },
+  { value: 'desfile', label: 'Desfile' },
+  { value: 'cosplay', label: 'Cosplay' },
+  { value: 'quiz', label: 'Quiz' },
+  { value: 'outro', label: 'Outro' }
+];
 
 function formatarDataParaInput(timestampMs) {
   if (!timestampMs) return '';
@@ -57,7 +64,7 @@ export default function ContestForm({
 
   const [formData, setFormData] = useState({
     nome: concursoInicial?.nome || '',
-    categoria: concursoInicial?.categoria || '',
+    categoria: concursoInicial?.categoria || 'outro',
     descricao: concursoInicial?.descricao || '',
     limiteParticipantes: concursoInicial?.limiteParticipantes ?? '',
     dataConcurso: formatarDataParaInput(concursoInicial?.dataHoraInicio),
@@ -162,7 +169,7 @@ export default function ContestForm({
 
     const dados = {
       nome: formData.nome.trim(),
-      categoria: formData.categoria.trim() || null,
+      categoria: formData.categoria,
       descricao: formData.descricao.trim() || null,
       dataHoraInicio,
       dataHoraFim,
@@ -302,20 +309,18 @@ export default function ContestForm({
               <div className="contest-form__field">
                 <label htmlFor="categoria">Categoria</label>
 
-                <input
-                  type="text"
+                <select
                   id="categoria"
                   name="categoria"
-                  list="categorias-sugeridas"
                   value={formData.categoria}
                   onChange={handleChange}
-                  placeholder="Ex.: cosplay"
-                />
-                <datalist id="categorias-sugeridas">
-                  {CATEGORIAS_SUGERIDAS.map((c) => (
-                    <option key={c} value={c} />
+                >
+                  {CATEGORIAS.map((c) => (
+                    <option key={c.value} value={c.value}>
+                      {c.label}
+                    </option>
                   ))}
-                </datalist>
+                </select>
               </div>
 
               <div className="contest-form__field">
@@ -341,14 +346,13 @@ export default function ContestForm({
                   Data do concurso <span className="required-mark">*</span>
                 </label>
 
-                <input
-                  type="date"
+                <DatePicker
                   id="dataConcurso"
                   name="dataConcurso"
                   value={formData.dataConcurso}
                   onChange={handleChange}
                   required
-                />
+/>
               </div>
 
               <div className="contest-form__field">
@@ -390,8 +394,7 @@ export default function ContestForm({
                   Data de início <span className="required-mark">*</span>
                 </label>
 
-                <input
-                  type="date"
+                <DatePicker
                   id="inscricaoDataInicio"
                   name="inscricaoDataInicio"
                   value={formData.inscricaoDataInicio}
@@ -405,8 +408,7 @@ export default function ContestForm({
                   Data de término <span className="required-mark">*</span>
                 </label>
 
-                <input
-                  type="date"
+                <DatePicker
                   id="inscricaoDataFim"
                   name="inscricaoDataFim"
                   value={formData.inscricaoDataFim}

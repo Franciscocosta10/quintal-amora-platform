@@ -31,11 +31,11 @@
   line-height: 1.2;
 }
 
-.contest-item__category--cor1 { background-color: #e7f1ff; color: #1769c2; }
-.contest-item__category--cor2 { background-color: #fdeaea; color: #c0392b; }
-.contest-item__category--cor3 { background-color: #e7f7ed; color: #278a4b; }
-.contest-item__category--cor4 { background-color: #f1eafa; color: #7a3db8; }
-.contest-item__category--cor5 { background-color: #eeeeee; color: #666666; }
+.contest-item__category--torneio { background-color: #e7f1ff; color: #1769c2; }
+.contest-item__category--desfile { background-color: #fdeaea; color: #c0392b; }
+.contest-item__category--cosplay { background-color: #e7f7ed; color: #278a4b; }
+.contest-item__category--quiz    { background-color: #f1eafa; color: #7a3db8; }
+.contest-item__category--outro   { background-color: #eeeeee; color: #666666; }
 
 .contest-item__content {
   flex: 1;
@@ -168,4 +168,14 @@
   .contest-item__category { min-width: 80px; }
   .contest-item__content { width: calc(100% - 70px); }
   .contest-item__actions { margin-left: auto; }
+}
+
+.contest-item__status--quase-lotado {
+  color: #b7791f;
+  font-weight: 600;
+}
+
+.contest-item__status--lotado {
+  color: #c0392b;
+  font-weight: 700;
 }

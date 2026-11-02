@@ -65,3 +65,16 @@
   color: var(--text);
   margin: 0;
 }
+
+.home-schedule__dias {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.home-schedule__dia-titulo {
+  margin: 0 0 8px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-h);
+}

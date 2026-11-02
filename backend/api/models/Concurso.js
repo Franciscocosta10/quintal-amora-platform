@@ -3,7 +3,13 @@ module.exports = {
   attributes: {
 
     nome: { type: 'string', required: true },
-    categoria: { type: 'string', allowNull: true },
+
+    categoria: {
+      type: 'string',
+      isIn: ['torneio', 'desfile', 'cosplay', 'quiz', 'outro'],
+      defaultsTo: 'outro'
+    },
+
     descricao: { type: 'string', columnType: 'text', allowNull: true },
 
     dataHoraInicio: {
@@ -49,5 +55,4 @@ module.exports = {
     inscricoes: { collection: 'inscricaoconcurso', via: 'concurso' }
 
   }
-
 };
