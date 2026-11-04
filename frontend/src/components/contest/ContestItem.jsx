@@ -1,17 +1,12 @@
 import './ContestItem.css';
 
-const PALETA_CATEGORIAS = ['cor1', 'cor2', 'cor3', 'cor4', 'cor5'];
-
-function corDaCategoria(categoria) {
-  if (!categoria) return 'cor5';
-
-  let soma = 0;
-  for (let i = 0; i < categoria.length; i++) {
-    soma += categoria.charCodeAt(i);
-  }
-
-  return PALETA_CATEGORIAS[soma % PALETA_CATEGORIAS.length];
-}
+const CATEGORIAS = {
+  torneio: { label: 'Torneio', classe: 'torneio' },
+  desfile: { label: 'Desfile', classe: 'desfile' },
+  cosplay: { label: 'Cosplay', classe: 'cosplay' },
+  quiz: { label: 'Quiz', classe: 'quiz' },
+  outro: { label: 'Outro', classe: 'outro' }
+};
 
 function formatarHora(timestampMs) {
   if (!timestampMs) return '';
@@ -40,9 +35,18 @@ export default function ContestItem({
   onAlternarDestaque,
   onAlternarFavorito
 }) {
-  const corClasse = corDaCategoria(concurso.categoria);
+  const categoria = CATEGORIAS[concurso.categoria] || CATEGORIAS.outro;
   const jaInscrito = Boolean(inscricaoId);
   const inscricoesAbertas = concurso.status === 'aberto';
+
+  const quaseLotado =
+    concurso.limiteParticipantes &&
+    concurso.totalInscritos >= concurso.limiteParticipantes * 0.8 &&
+    concurso.totalInscritos < concurso.limiteParticipantes;
+
+  const lotado =
+    concurso.limiteParticipantes &&
+    concurso.totalInscritos >= concurso.limiteParticipantes;
 
   return (
     <div className="contest-item">
@@ -50,11 +54,9 @@ export default function ContestItem({
         {formatarHora(concurso.dataHoraInicio)}
       </span>
 
-      {concurso.categoria && (
-        <span className={`contest-item__category contest-item__category--${corClasse}`}>
-          {concurso.categoria}
-        </span>
-      )}
+      <span className={`contest-item__category contest-item__category--${categoria.classe}`}>
+        {categoria.label}
+      </span>
 
       <div className="contest-item__content">
         <span className="contest-item__title">{concurso.nome}</span>
@@ -63,14 +65,18 @@ export default function ContestItem({
           <span className="contest-item__description">{concurso.descricao}</span>
         )}
 
-        <span className="contest-item__status">
+        <span
+          className={`contest-item__status ${
+            lotado ? 'contest-item__status--lotado' : quaseLotado ? 'contest-item__status--quase-lotado' : ''
+        }`}
+        >
           {STATUS_LABEL[concurso.status] || concurso.status}
-          {concurso.limiteParticipantes && (
-            <> · limite de {concurso.limiteParticipantes} participantes</>
-          )}
+          {' · '}
+          {concurso.limiteParticipantes
+            ? `${concurso.totalInscritos ?? 0}/${concurso.limiteParticipantes} inscritos`
+            : `${concurso.totalInscritos ?? 0} inscrito(s)`}
         </span>
       </div>
-
       <div className="contest-item__actions">
         {isAdmin ? (
           <>

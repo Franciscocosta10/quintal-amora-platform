@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import DatePicker from '../DatePicker';
 import './ScheduleForm.css';
 
 const TIPOS = [
@@ -329,8 +330,7 @@ export default function ScheduleForm({
                   Data
                 </label>
 
-                <input
-                  type="date"
+                <DatePicker
                   id="data"
                   name="data"
                   value={formData.data}

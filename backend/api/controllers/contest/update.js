@@ -9,7 +9,7 @@ module.exports = {
     id: { type: 'number', required: true },
 
     nome: { type: 'string', maxLength: 120 },
-    categoria: { type: 'string', allowNull: true, maxLength: 60 },
+    categoria: {type: 'string', isIn: ['torneio', 'desfile', 'cosplay', 'quiz', 'outro']},
     descricao: { type: 'string', allowNull: true },
 
     dataHoraInicio: { type: 'number' },

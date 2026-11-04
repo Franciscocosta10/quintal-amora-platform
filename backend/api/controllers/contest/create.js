@@ -16,7 +16,9 @@ module.exports = {
   inputs: {
 
     nome: { type: 'string', required: true, maxLength: 120 },
-    categoria: { type: 'string', allowNull: true, maxLength: 60 },
+    categoria: {type: 'string',isIn: ['torneio', 'desfile', 'cosplay', 'quiz', 'outro'],
+    defaultsTo: 'outro'
+},
     descricao: { type: 'string', allowNull: true },
 
     dataHoraInicio: { type: 'number', required: true },

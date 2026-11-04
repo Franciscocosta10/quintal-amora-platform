@@ -1,14 +1,8 @@
-/**
- * contest/find.js
- *
- * RF08 (parte pública) — lista os concursos disponíveis para o visitante
- * acompanhar datas e se inscrever. Espelha activity/find.js.
- */
 module.exports = {
 
   friendlyName: 'Find contests',
 
-  description: 'Lista os concursos do evento, com filtros opcionais.',
+  description: 'Lista os concursos do evento, com filtros opcionais, incluindo o total de inscritos (exclui cancelados).',
 
   inputs: {
 
@@ -25,7 +19,8 @@ module.exports = {
 
     categoria: {
       type: 'string',
-      description: 'Filtra por categoria (ex: "torneio", "desfile", "cosplay").'
+      isIn: ['torneio', 'desfile', 'cosplay', 'quiz', 'outro'],
+      description: 'Filtra por categoria.'
     }
 
   },
@@ -56,7 +51,18 @@ module.exports = {
       .find(query)
       .sort('dataHoraInicio ASC');
 
-    return concursos;
+    var concursosComContagem = await Promise.all(
+      concursos.map(async function (concurso) {
+        var totalInscritos = await InscricaoConcurso.count({
+          concurso: concurso.id,
+          status: { '!=': 'cancelado' }
+        });
+
+        return _.extend({}, concurso, { totalInscritos: totalInscritos });
+      })
+    );
+
+    return concursosComContagem;
 
   }
 
