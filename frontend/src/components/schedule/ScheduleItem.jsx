@@ -1,5 +1,5 @@
 import './ScheduleItem.css';
-import { editarAtividade } from '../../services/Schedule';
+import { editarAtividade } from '../../services/schedule';
 
 const TIPOS = {
   atracao: {

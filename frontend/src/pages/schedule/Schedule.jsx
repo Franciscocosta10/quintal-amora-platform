@@ -9,8 +9,8 @@ import {
   criarAtividade,
   editarAtividade,
   removerAtividade
-} from '../../services/Schedule';
-import { buscarEventoAtual } from '../../services/Event';
+} from '../../services/schedule';
+import { buscarEventoAtual } from '../../services/event';
 import { useAuth } from '../../hooks/useAuth';
 import { agruparPorDia } from '../../utils/agruparPorDia';
 import './Schedule.css';

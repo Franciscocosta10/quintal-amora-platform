@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { listarAtividades } from '../services/Schedule';
+import { listarAtividades } from '../services/schedule';
 
 /**
  * useAtividades — busca a programação UMA vez e deixa o filtro por dia

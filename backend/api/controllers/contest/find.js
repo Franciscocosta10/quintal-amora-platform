@@ -51,16 +51,33 @@ module.exports = {
       .find(query)
       .sort('dataHoraInicio ASC');
 
-    var concursosComContagem = await Promise.all(
-      concursos.map(async function (concurso) {
-        var totalInscritos = await InscricaoConcurso.count({
-          concurso: concurso.id,
-          status: { '!=': 'cancelado' }
-        });
+    if (concursos.length === 0) {
+      return concursos;
+    }
 
-        return _.extend({}, concurso, { totalInscritos: totalInscritos });
-      })
-    );
+    // Uma única consulta buscando as inscrições de TODOS os concursos da
+    // lista de uma vez, em vez de uma consulta de count por concurso
+    // (N+1). A contagem por concurso é feita em memória depois.
+    var idsDosConcursos = concursos.map(function (concurso) {
+      return concurso.id;
+    });
+
+    var inscricoesAtivas = await InscricaoConcurso.find({
+      concurso: idsDosConcursos,
+      status: { '!=': 'cancelado' }
+    });
+
+    var contagemPorConcurso = {};
+    inscricoesAtivas.forEach(function (inscricao) {
+      contagemPorConcurso[inscricao.concurso] =
+        (contagemPorConcurso[inscricao.concurso] || 0) + 1;
+    });
+
+    var concursosComContagem = concursos.map(function (concurso) {
+      return _.extend({}, concurso, {
+        totalInscritos: contagemPorConcurso[concurso.id] || 0
+      });
+    });
 
     return concursosComContagem;
 

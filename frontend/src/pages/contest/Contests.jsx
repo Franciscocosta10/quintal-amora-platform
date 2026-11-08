@@ -9,7 +9,7 @@ import { useMyRegistrations } from '../../hooks/useMyRegistrations';
 import { useFavoriteContests } from '../../hooks/useFavoriteContests';
 import { criarConcurso, editarConcurso, removerConcurso } from '../../services/Contest';
 import { inscreverEmConcurso, cancelarInscricao } from '../../services/Registration';
-import { buscarEventoAtual } from '../../services/Event';
+import { buscarEventoAtual } from '../../services/event';
 import { useAuth } from '../../hooks/useAuth';
 import { agruparPorCategoria } from '../../utils/agruparPorCategoria';
 import { agruparPorDia } from '../../utils/agruparPorDia';
@@ -151,7 +151,7 @@ export default function Contests() {
       await recarregarInscricoes();
 
       const concurso = concursos.find((c) => c.id === concursoId);
-      setConcursoInscrito(concurso || null);
+      setConcursoInscrito(concurso);
     } catch (error) {
       setErroInscricao(error.message || 'Não foi possível concluir a inscrição.');
     }
@@ -252,7 +252,7 @@ export default function Contests() {
               <h2 className="contests-dia__titulo">{dia.rotulo}</h2>
 
               <ContestList
-                concursos={concursosPorDia[dia.chave] || []}
+                concursos={concursosPorDia[dia.chave]}
                 carregando={false}
                 erro={null}
                 isAdmin={isAdmin}
