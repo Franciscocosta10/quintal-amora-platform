@@ -205,9 +205,7 @@ export default function ContestForm({
   }
 
   function fecharModalExclusao() {
-    if (!excluindo) {
-      setModalExclusaoAberto(false);
-    }
+    setModalExclusaoAberto(false);
   }
 
   async function confirmarExclusao() {

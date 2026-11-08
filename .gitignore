@@ -10,6 +10,9 @@ node_modules/
 dist/
 build/
 
+# Relatórios de cobertura de testes
+coverage/
+
 # Sails.js
 .tmp/
 .sailsrc.local

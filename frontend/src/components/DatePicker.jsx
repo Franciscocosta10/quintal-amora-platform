@@ -19,12 +19,14 @@ function formatarParaExibicao(valorISO) {
   return `${dia}/${mes}/${ano}`;
 }
 
-/**
- * DatePicker — mesmo contrato de um <input type="date">: recebe `value`
- * em formato ISO ('YYYY-MM-DD') e dispara `onChange({ target: { name, value } })`,
- * pra plugar direto no handleChange que ScheduleForm/ContestForm já usam,
- * sem precisar reescrever a lógica de estado desses formulários.
- */
+function formatarParaLeitorDeTela(ano, mes, dia) {
+  return new Date(ano, mes, dia).toLocaleDateString('pt-BR', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric'
+  });
+}
+
 export default function DatePicker({
   id,
   name,
@@ -42,6 +44,8 @@ export default function DatePicker({
   );
 
   const containerRef = useRef(null);
+  const inputRef = useRef(null);
+  const devolvendoFocoRef = useRef(false);
 
   useEffect(() => {
     function aoClicarFora(event) {
@@ -53,6 +57,26 @@ export default function DatePicker({
     return () => document.removeEventListener('mousedown', aoClicarFora);
   }, []);
 
+  // Devolve o foco ao input sem disparar o onFocus, que reabriria o calendário
+  // logo depois de fechá-lo.
+  function fechar() {
+    setAberto(false);
+    devolvendoFocoRef.current = true;
+    inputRef.current?.focus();
+    devolvendoFocoRef.current = false;
+  }
+
+  function aoFocarInput() {
+    if (!devolvendoFocoRef.current) abrirNoMesDoValor();
+  }
+
+  function aoPressionarTecla(event) {
+    if (event.key === 'Escape' && aberto) {
+      event.stopPropagation();
+      fechar();
+    }
+  }
+
   function abrirNoMesDoValor() {
     if (value) {
       setAnoVisivel(Number(value.split('-')[0]));
@@ -63,7 +87,7 @@ export default function DatePicker({
 
   function selecionarDia(dia) {
     onChange({ target: { name, value: paraISO(anoVisivel, mesVisivel, dia) } });
-    setAberto(false);
+    fechar();
   }
 
   function mesAnterior() {
@@ -97,45 +121,69 @@ export default function DatePicker({
   for (let dia = 1; dia <= totalDiasDoMes; dia++) celulas.push(dia);
 
   return (
-    <div className="date-picker" ref={containerRef}>
+    <div className="date-picker" ref={containerRef} onKeyDown={aoPressionarTecla}>
       <input
+        ref={inputRef}
         type="text"
         id={id}
         readOnly
         value={formatarParaExibicao(value)}
         placeholder={placeholder}
         onClick={abrirNoMesDoValor}
-        onFocus={abrirNoMesDoValor}
+        onFocus={aoFocarInput}
         required={required}
+        role="combobox"
+        aria-haspopup="dialog"
+        aria-expanded={aberto}
+        aria-controls={aberto ? `${id}-calendario` : undefined}
+        autoComplete="off"
       />
 
       {aberto && (
-        <div className="date-picker__popover" role="dialog" aria-label="Selecionar data">
+        <div
+          id={`${id}-calendario`}
+          className="date-picker__popover"
+          role="dialog"
+          aria-modal="false"
+          aria-label="Selecionar data"
+        >
           <div className="date-picker__header">
             <button type="button" onClick={mesAnterior} aria-label="Mês anterior">‹</button>
-            <span>{MESES[mesVisivel]} {anoVisivel}</span>
+            <span aria-live="polite">{MESES[mesVisivel]} {anoVisivel}</span>
             <button type="button" onClick={mesSeguinte} aria-label="Próximo mês">›</button>
           </div>
 
-          <div className="date-picker__dias-semana">
+          <div className="date-picker__dias-semana" aria-hidden="true">
             {DIAS_SEMANA.map((d, i) => (
               <span key={i}>{d}</span>
             ))}
           </div>
 
-          <div className="date-picker__grade">
+          <div className="date-picker__grade" role="grid">
             {celulas.map((dia, i) => {
               if (dia === null) {
-                return <span key={`vazio-${i}`} className="date-picker__dia date-picker__dia--vazio" />;
+                return (
+                  <span
+                    key={`vazio-${i}`}
+                    className="date-picker__dia date-picker__dia--vazio"
+                    aria-hidden="true"
+                  />
+                );
               }
 
               const isoDoDia = paraISO(anoVisivel, mesVisivel, dia);
+              const selecionado = isoDoDia === value;
+              const ehHoje = isoDoDia === hojeISO;
 
               return (
                 <button
                   key={isoDoDia}
                   type="button"
-                  className={`date-picker__dia ${isoDoDia === value ? 'is-selected' : ''} ${isoDoDia === hojeISO ? 'is-today' : ''}`}
+                  role="gridcell"
+                  className={`date-picker__dia ${selecionado ? 'is-selected' : ''} ${ehHoje ? 'is-today' : ''}`}
+                  aria-selected={selecionado}
+                  aria-current={ehHoje ? 'date' : undefined}
+                  aria-label={formatarParaLeitorDeTela(anoVisivel, mesVisivel, dia)}
                   onClick={() => selecionarDia(dia)}
                 >
                   {dia}

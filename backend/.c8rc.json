@@ -1,0 +1,6 @@
+{
+  "all": true,
+  "include": ["api/**"],
+  "exclude": ["node_modules/**", "test/**"],
+  "reporter": ["text", "html"]
+}
