@@ -7,6 +7,13 @@
  *
  * For details and more available options, see:
  * https://sailsjs.com/config/blueprints
+ *
+ * SEGURANÇA: todas as rotas automáticas estão desligadas. Com os defaults
+ * do Sails 1 (`rest: true`, `shortcuts: true`), qualquer model ganha rotas
+ * públicas como `GET /usuario` (que devolvia e-mails e tokens de reset de
+ * senha) e `GET /<model>/create|update|destroy`, sem passar pelas policies
+ * do projeto. Toda rota da API deve ser declarada em `config/routes.js`
+ * e ter sua policy em `config/policies.js`.
  */
 
 module.exports.blueprints = {
@@ -17,7 +24,7 @@ module.exports.blueprints = {
   *                                                                          *
   ***************************************************************************/
 
-  // actions: false,
+  actions: false,
 
 
   /***************************************************************************
@@ -26,7 +33,7 @@ module.exports.blueprints = {
   *                                                                          *
   ***************************************************************************/
 
-  // rest: true,
+  rest: false,
 
 
   /***************************************************************************
@@ -36,6 +43,6 @@ module.exports.blueprints = {
   *                                                                          *
   ***************************************************************************/
 
-  // shortcuts: true,
+  shortcuts: false,
 
 };
