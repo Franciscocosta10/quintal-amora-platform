@@ -6,11 +6,14 @@ import ScheduleList from '../components/schedule/ScheduleList';
 import { useAtividades } from '../hooks/useSchedule';
 import { agruparPorDia } from '../utils/agruparPorDia';
 import { buscarEventoAtual } from '../services/event';
+import { useExpositores } from '../hooks/useExpositores';
+import { rotuloDoTipo } from '../components/catalog/tiposExpositor';
 import './HomePage.css';
 
 export default function HomePage() {
   const { usuario, logout } = useAuth();
   const { atividades, carregando, erro } = useAtividades();
+  const { expositores } = useExpositores();
   const [evento, setEvento] = useState(null);
 
   useEffect(() => {
@@ -36,9 +39,23 @@ export default function HomePage() {
           </div>
           <div className="home-card">
             <h3>🏪 Lojas participantes</h3>
-            <p className="home-card__placeholder">
-              Em breve: catálogo de expositores (RF13/RF14).
-            </p>
+            {expositores.length === 0 ? (
+              <p className="home-card__placeholder">
+                O catálogo de lojas e artistas será divulgado em breve.
+              </p>
+            ) : (
+              <ul className="home-expositores">
+                {expositores.slice(0, 5).map((expositor) => (
+                  <li key={expositor.id}>
+                    <strong>{expositor.nome}</strong>
+                    <span>{rotuloDoTipo(expositor.tipo)}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
+            <Link to="/catalogo" className="home-card__link">
+              Ver catálogo completo
+            </Link>
           </div>
         </>
       }

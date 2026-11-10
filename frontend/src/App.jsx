@@ -10,6 +10,7 @@ import Profile from "./components/profile/Profile";
 import ChangePhoto from "./components/profile/ChangePhoto";
 import Contests from "./pages/contest/Contests";
 import HomePage from "./pages/HomePage";
+import Catalog from "./pages/catalog/Catalog";
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
       <Route path="/profile" element={<Profile />} />
       <Route path="/settings" element={<ChangePhoto />} />
       <Route path="/concursos" element={<Contests />} />
+      <Route path="/catalogo" element={<Catalog />} />
     </Routes>
   );
 }
