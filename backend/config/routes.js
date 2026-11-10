@@ -51,4 +51,15 @@ module.exports.routes = {
 
   // Home
   'GET /event/actual-find': { action: 'event/actual-find' },
+
+  // Catálogo de lojas e artistas (lista e detalhe usam a mesma action)
+  'GET /expositor': { action: 'expositor/find' },
+
+  'GET /expositor/:id': { action: 'expositor/find' },
+
+  'POST /expositor/create': { action: 'expositor/create' },
+
+  'PUT /expositor/update/:id': { action: 'expositor/update' },
+
+  'DELETE /expositor/destroy/:id': { action: 'expositor/destroy' },
 };

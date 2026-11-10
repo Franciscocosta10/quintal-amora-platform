@@ -1,0 +1,39 @@
+/* Cabeçalho, botão "+ Adicionar" e avisos vêm de Contests.css / ContestForm.css */
+
+.catalog-filtros {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 4px;
+}
+
+.catalog-filtros .day-tabs {
+  margin-bottom: 12px;
+}
+
+.catalog-filtros__busca {
+  width: 240px;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 8px 14px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--bg);
+  color: var(--text-h);
+  font-family: inherit;
+  font-size: 14px;
+}
+
+.catalog-filtros__busca:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+@media (max-width: 700px) {
+  .catalog-filtros__busca {
+    width: 100%;
+    margin-bottom: 12px;
+  }
+}

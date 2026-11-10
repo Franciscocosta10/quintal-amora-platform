@@ -14,6 +14,7 @@ import './Sidebar.css';
 const ITENS_MENU = [
   { label: 'Início', to: '/home' },
   { label: 'Concursos', to: '/concursos' },
+  { label: 'Catálogo', to: '/catalogo' },
   { label: 'Check-in', to: '/checkin' },
   { label: 'Programação', to: '/schedule' }
 ];

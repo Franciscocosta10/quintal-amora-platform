@@ -49,5 +49,17 @@ module.exports.policies = {
   'event': {
     'actual-find': true      // dado público, usado na Home
   },
+
+  // Catálogo de lojas e artistas (RF13–RF15)
+  'expositor': {
+    // Nega por padrão: além das 4 actions abaixo, o Sails expõe blueprints
+    // automáticos do model (findOne, populate, add, remove...). O '*'
+    // garante que qualquer um deles exija admin; só `find` fica público.
+    '*': ['isLoggedIn', 'isAdmin'],
+    'find': true,            // RF13 (lista) e RF14 (detalhe) — catálogo público
+    'create': ['isLoggedIn', 'isAdmin'],
+    'update': ['isLoggedIn', 'isAdmin'],
+    'destroy': ['isLoggedIn', 'isAdmin']
+  },
 };
 

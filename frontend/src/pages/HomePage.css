@@ -78,3 +78,43 @@
   font-weight: 700;
   color: var(--text-h);
 }
+.home-expositores {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0 0 12px;
+  padding: 0;
+  list-style: none;
+}
+
+.home-expositores li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 13px;
+}
+
+.home-expositores strong {
+  color: var(--text-h);
+  font-weight: 600;
+}
+
+.home-expositores span {
+  flex-shrink: 0;
+  color: var(--text);
+  font-size: 12px;
+}
+
+.home-card__link {
+  display: inline-block;
+  margin-top: 4px;
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.home-card__link:hover {
+  text-decoration: underline;
+}
