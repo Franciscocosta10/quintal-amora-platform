@@ -1,4 +1,4 @@
-import { beforeEach, describe, it, expect, vi } from 'vitest';
+import { afterEach, beforeEach, describe, it, expect, vi } from 'vitest';
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import Catalog from './Catalog';
 import { useAuth } from '../../hooks/useAuth';
@@ -206,6 +206,72 @@ describe('Catalog', () => {
       buscarEventoAtual.mockRejectedValue(new Error(''));
       await renderizar({ isAdmin: true });
       expect(screen.getByText('Não foi possível identificar o evento atual.')).toBeInTheDocument();
+    });
+  });
+
+  describe('paginação', () => {
+    // 30 lojas (01..30) + 1 artista: 31 itens → 3 páginas de 12.
+    const MUITOS = [
+      ...Array.from({ length: 30 }, (_, i) => ({
+        id: i + 1,
+        nome: `Loja ${String(i + 1).padStart(2, '0')}`,
+        tipo: 'loja'
+      })),
+      { id: 99, nome: 'Artista Único', tipo: 'artista' }
+    ];
+
+    afterEach(() => {
+      delete Element.prototype.scrollIntoView;
+    });
+
+    it('não mostra a paginação quando tudo cabe em uma página', async () => {
+      await renderizar();
+      expect(screen.queryByRole('navigation', { name: 'Paginação' })).not.toBeInTheDocument();
+    });
+
+    it('mostra 12 por página, navega e volta ao topo da lista', async () => {
+      Element.prototype.scrollIntoView = vi.fn();
+      await renderizar({ expositores: MUITOS });
+
+      expect(nomesNoGrid()).toHaveLength(12);
+      expect(nomesNoGrid()[0]).toBe('Loja 01');
+      expect(screen.getByRole('button', { name: 'Página 3' })).toBeInTheDocument();
+
+      clicar('Próxima página');
+      expect(nomesNoGrid()[0]).toBe('Loja 13');
+      expect(screen.getByRole('button', { name: 'Página 2' })).toHaveAttribute('aria-current', 'page');
+      expect(Element.prototype.scrollIntoView).toHaveBeenCalled();
+
+      clicar('Página 3');
+      expect(nomesNoGrid()).toEqual(['Loja 25', 'Loja 26', 'Loja 27', 'Loja 28', 'Loja 29', 'Loja 30', 'Artista Único']);
+    });
+
+    it('volta para a primeira página ao trocar a aba ou a busca', async () => {
+      await renderizar({ expositores: MUITOS });
+
+      clicar('Página 3');
+      clicar('Lojas');
+      expect(nomesNoGrid()[0]).toBe('Loja 01');
+
+      clicar('Página 3');
+      fireEvent.change(screen.getByRole('searchbox'), { target: { value: 'loja' } });
+      expect(nomesNoGrid()[0]).toBe('Loja 01');
+    });
+
+    it('não fica numa página que deixou de existir depois de uma exclusão', async () => {
+      const { rerender } = await renderizar({ expositores: MUITOS });
+      clicar('Página 3');
+
+      useExpositores.mockReturnValue({ expositores: MUITOS.slice(0, 20), carregando: false, erro: null, recarregar });
+      rerender(<Catalog />);
+
+      expect(screen.getByRole('button', { name: 'Página 2' })).toHaveAttribute('aria-current', 'page');
+      expect(nomesNoGrid()[0]).toBe('Loja 13');
+    });
+
+    it('esconde a paginação enquanto carrega', async () => {
+      await renderizar({ expositores: MUITOS, carregando: true });
+      expect(screen.queryByRole('navigation', { name: 'Paginação' })).not.toBeInTheDocument();
     });
   });
 

@@ -48,7 +48,7 @@ module.exports = {
 
     // Atributos type:'json' já aceitam null por padrão (Waterline não
     // permite combinar `allowNull` com type:'json'/'ref' — dá erro no lift).
-    // Chaves aceitas: instagram, facebook, tiktok, site (todas URLs http/s).
+    // Chaves aceitas: instagram, youtube, tiktok, site (todas URLs http/s).
     redesSociais: {
       type: 'json' // ex: { instagram: 'https://instagram.com/loja', site: '...' }
     },
