@@ -6,6 +6,19 @@
 module.exports.policies = {
 
   // -------------------------------------------------------------------
+  // Padrão: nega tudo que não estiver mapeado abaixo (403).
+  //
+  // No Sails as policies NÃO são cumulativas: qualquer chave explícita
+  // (ex.: 'contest/find', 'activity/*') substitui este '*' por completo.
+  // Então este padrão só vale para actions esquecidas aqui, como uma action
+  // nova sem policy ou uma action de blueprint (`usuario/find`...) ligada
+  // por engano em routes.js. Toda action nova precisa de uma entrada
+  // explícita: `true` para pública, ['isLoggedIn'] ou
+  // ['isLoggedIn', 'isAdmin'].
+  // -------------------------------------------------------------------
+  '*': false,
+
+  // -------------------------------------------------------------------
   // Autenticação (públicas: cadastro e login não podem exigir login)
   // -------------------------------------------------------------------
   'auth/signup': true,
