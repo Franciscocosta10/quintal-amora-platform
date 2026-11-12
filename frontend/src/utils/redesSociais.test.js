@@ -3,7 +3,7 @@ import { REDES_SOCIAIS, ehLinkSeguro, normalizarLinkRede, rotuloDoLink } from '.
 
 describe('utils/redesSociais', () => {
   it('lista as mesmas redes aceitas pelo backend', () => {
-    expect(REDES_SOCIAIS.map((r) => r.chave)).toEqual(['instagram', 'facebook', 'tiktok', 'site']);
+    expect(REDES_SOCIAIS.map((r) => r.chave)).toEqual(['instagram', 'youtube', 'tiktok', 'site']);
   });
 
   describe('normalizarLinkRede', () => {
@@ -22,12 +22,12 @@ describe('utils/redesSociais', () => {
       expect(normalizarLinkRede('instagram', '@studio.kitsune')).toBe('https://instagram.com/studio.kitsune');
       expect(normalizarLinkRede('instagram', 'lojageek')).toBe('https://instagram.com/lojageek');
       expect(normalizarLinkRede('tiktok', '@rafa')).toBe('https://www.tiktok.com/@rafa');
-      expect(normalizarLinkRede('facebook', 'lojageek')).toBe('https://facebook.com/lojageek');
+      expect(normalizarLinkRede('youtube', '@lojageek')).toBe('https://www.youtube.com/@lojageek');
     });
 
     it('completa o protocolo quando o domínio da rede já foi digitado', () => {
       expect(normalizarLinkRede('instagram', 'Instagram.com/loja')).toBe('https://Instagram.com/loja');
-      expect(normalizarLinkRede('facebook', 'www.facebook.com/loja')).toBe('https://www.facebook.com/loja');
+      expect(normalizarLinkRede('youtube', 'www.youtube.com/@loja')).toBe('https://www.youtube.com/@loja');
     });
 
     it('completa o protocolo do site', () => {

@@ -1,6 +1,7 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import Layout from '../../components/Layout';
 import DayTabs from '../../components/schedule/DayTabs';
+import Pagination from '../../components/Pagination';
 import ExpositorGrid from '../../components/catalog/ExpositorGrid';
 import ExpositorDetailModal from '../../components/catalog/ExpositorDetailModal';
 import ExpositorForm from '../../components/catalog/ExpositorForm';
@@ -20,6 +21,9 @@ const ABAS_TIPO = Object.entries(TIPOS_EXPOSITOR).map(([chave, tipo]) => ({
   rotulo: tipo.plural
 }));
 
+// 12 divide bem as colunas mais comuns do grid (2, 3, 4 ou 6 por linha).
+const EXPOSITORES_POR_PAGINA = 12;
+
 // Busca sem diferenciar maiúsculas nem acentos: "atelie" encontra "Ateliê".
 function normalizarBusca(texto = '') {
   return texto.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().trim();
@@ -34,6 +38,8 @@ export default function Catalog() {
 
   const [tipoSelecionado, setTipoSelecionado] = useState(null);
   const [busca, setBusca] = useState('');
+  const [pagina, setPagina] = useState(1);
+  const filtrosRef = useRef(null);
 
   const [expositorAberto, setExpositorAberto] = useState(null);
   const [formAberto, setFormAberto] = useState(false);
@@ -71,6 +77,35 @@ export default function Catalog() {
   }, [expositores, tipoSelecionado, busca]);
 
   const filtrando = Boolean(tipoSelecionado || busca.trim());
+
+  // A paginação é feita no navegador: o catálogo de um evento tem dezenas
+  // de expositores, não milhares, e a lista completa já vem do backend
+  // (a busca e as abas também filtram aqui). A página é limitada ao total
+  // para não ficar "na página 3 de 2" depois de uma exclusão.
+  const totalPaginas = Math.max(1, Math.ceil(expositoresExibidos.length / EXPOSITORES_POR_PAGINA));
+  const paginaAtual = Math.min(pagina, totalPaginas);
+  const expositoresDaPagina = expositoresExibidos.slice(
+    (paginaAtual - 1) * EXPOSITORES_POR_PAGINA,
+    paginaAtual * EXPOSITORES_POR_PAGINA
+  );
+
+  // Trocar de filtro sempre volta para a primeira página.
+  function selecionarTipo(tipo) {
+    setTipoSelecionado(tipo);
+    setPagina(1);
+  }
+
+  function alterarBusca(texto) {
+    setBusca(texto);
+    setPagina(1);
+  }
+
+  // Ao trocar de página, volta para o topo da lista (os filtros), senão o
+  // usuário continuaria olhando o rodapé da página nova.
+  function mudarPagina(novaPagina) {
+    setPagina(novaPagina);
+    filtrosRef.current?.scrollIntoView?.({ block: 'start', behavior: 'smooth' });
+  }
 
   function abrirNovoExpositor() {
     setAviso('');
@@ -122,12 +157,6 @@ export default function Catalog() {
               Clique em um expositor para ver os detalhes.
             </p>
           </div>
-
-          {isAdmin && (
-            <button type="button" className="contests__btn-adicionar" onClick={abrirNovoExpositor}>
-              + Adicionar expositor
-            </button>
-          )}
         </div>
       </div>
 
@@ -145,25 +174,32 @@ export default function Catalog() {
         </div>
       )}
 
-      <div className="catalog-filtros">
+      <div className="catalog-filtros" ref={filtrosRef}>
         <DayTabs
           dias={ABAS_TIPO}
           diaSelecionado={tipoSelecionado}
-          onSelecionar={setTipoSelecionado}
+          onSelecionar={selecionarTipo}
         />
 
         <input
           type="search"
           className="catalog-filtros__busca"
           value={busca}
-          onChange={(event) => setBusca(event.target.value)}
+          onChange={(event) => alterarBusca(event.target.value)}
           placeholder="Buscar por nome..."
           aria-label="Buscar expositor por nome"
         />
+
+        {/* Busca + botão ficam juntos à direita, alinhados com a última coluna do grid. */}
+        {isAdmin && (
+          <button type="button" className="contests__btn-adicionar" onClick={abrirNovoExpositor}>
+            + Adicionar expositor
+          </button>
+        )}
       </div>
 
       <ExpositorGrid
-        expositores={expositoresExibidos}
+        expositores={expositoresDaPagina}
         carregando={carregando}
         erro={erro}
         mensagemVazio={
@@ -175,6 +211,15 @@ export default function Catalog() {
         onAbrir={setExpositorAberto}
         onEditar={abrirEdicao}
       />
+
+      {!carregando && !erro && (
+        <Pagination
+          className="catalog-paginacao"
+          paginaAtual={paginaAtual}
+          totalPaginas={totalPaginas}
+          onMudarPagina={mudarPagina}
+        />
+      )}
 
       <ExpositorDetailModal
         expositor={expositorAberto}

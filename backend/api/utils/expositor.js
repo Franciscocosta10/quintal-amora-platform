@@ -18,7 +18,7 @@ var _ = require('@sailshq/lodash');
 
 var TIPOS = ['loja', 'artista'];
 
-var REDES_SOCIAIS = ['instagram', 'facebook', 'tiktok', 'site'];
+var REDES_SOCIAIS = ['instagram', 'youtube', 'tiktok', 'site'];
 
 var CAMPOS_TEXTO_OPCIONAIS = ['descricao', 'localizacaoEstande', 'contato', 'imagem'];
 

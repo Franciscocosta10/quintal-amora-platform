@@ -1,16 +1,17 @@
 /* Cabeçalho, botão "+ Adicionar" e avisos vêm de Contests.css / ContestForm.css */
 
+/* Abas à esquerda; busca e botão de adicionar à direita, na mesma linha,
+   logo acima do grid. */
 .catalog-filtros {
   display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
+  align-items: center;
   gap: 12px;
   flex-wrap: wrap;
-  margin-bottom: 4px;
+  margin-bottom: 16px;
 }
 
 .catalog-filtros .day-tabs {
-  margin-bottom: 12px;
+  margin-bottom: 0;
 }
 
 .catalog-filtros__busca {
@@ -31,9 +32,22 @@
   border-color: var(--accent);
 }
 
+/* Empurra a busca (e o botão logo depois dela) para a direita: a linha tem
+   a mesma largura do grid, então o conjunto termina alinhado com a borda
+   direita da última coluna de cards. Sem o botão (visitante), a busca
+   ocupa essa posição sozinha. */
+.catalog-filtros__busca {
+  margin-left: auto;
+}
+
+/* Paginação no fim da página, separada do grid. */
+.catalog-paginacao {
+  margin-top: 24px;
+}
+
 @media (max-width: 700px) {
-  .catalog-filtros__busca {
+  .catalog-filtros__busca,
+  .catalog-filtros .contests__btn-adicionar {
     width: 100%;
-    margin-bottom: 12px;
   }
 }

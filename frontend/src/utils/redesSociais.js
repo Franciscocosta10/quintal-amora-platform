@@ -10,7 +10,7 @@
 
 export const REDES_SOCIAIS = [
   { chave: 'instagram', rotulo: 'Instagram', dominio: 'instagram.com', base: 'https://instagram.com/', placeholder: '@sualoja' },
-  { chave: 'facebook', rotulo: 'Facebook', dominio: 'facebook.com', base: 'https://facebook.com/', placeholder: 'sualoja' },
+  { chave: 'youtube', rotulo: 'YouTube', dominio: 'youtube.com', base: 'https://www.youtube.com/@', placeholder: '@seucanal' },
   { chave: 'tiktok', rotulo: 'TikTok', dominio: 'tiktok.com', base: 'https://www.tiktok.com/@', placeholder: '@sualoja' },
   { chave: 'site', rotulo: 'Site', dominio: null, base: null, placeholder: 'sualoja.com.br' }
 ];

@@ -38,3 +38,5 @@ desktop.ini
 
 # Docker
 docker-compose.override.yml
+# Configurações locais do Claude Code
+.claude/

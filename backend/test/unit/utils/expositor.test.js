@@ -13,7 +13,7 @@ function esperarBadRequest(fn, mensagem) {
 describe('utils/expositor', function () {
   it('expõe os tipos e as redes sociais aceitas', function () {
     expect(TIPOS).to.deep.equal(['loja', 'artista']);
-    expect(REDES_SOCIAIS).to.deep.equal(['instagram', 'facebook', 'tiktok', 'site']);
+    expect(REDES_SOCIAIS).to.deep.equal(['instagram', 'youtube', 'tiktok', 'site']);
   });
 
   describe('ehUrlHttp', function () {
@@ -80,7 +80,7 @@ describe('utils/expositor', function () {
         const resultado = normalizarCampos({
           redesSociais: {
             instagram: ' https://instagram.com/loja ',
-            facebook: '',
+            youtube: '',
             tiktok: null,
             site: 'https://loja.com.br'
           }
