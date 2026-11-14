@@ -1,26 +1,13 @@
-.home-banner {
-  background: linear-gradient(135deg, var(--accent) 0%, #ff9ec7 100%);
-  color: #fff;
-  border-radius: 16px;
-  padding: 32px;
+.home-destaque {
   margin-bottom: 24px;
 }
 
-.home-banner h1 {
-  margin: 0;
-  font-size: 32px;
-  color: #fff;
-}
-
-.home-banner p {
-  margin: 4px 0 16px;
-  opacity: 0.9;
-}
-
-.home-banner__info {
+.home-destaque__info {
   display: flex;
-  gap: 20px;
   flex-wrap: wrap;
+  gap: 8px 20px;
+  margin-top: 10px;
+  color: var(--text);
   font-size: 14px;
 }
 

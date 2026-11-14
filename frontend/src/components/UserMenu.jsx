@@ -1,9 +1,12 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { iniciais } from '../utils/iniciais';
 import './UserMenu.css';
 
 export default function UserMenu({ user, onLogout }) {
   const [isOpen, setIsOpen] = useState(false);
+  // Perfil e Trocar foto abrem como modal por cima da tela atual (ver App.jsx).
+  const location = useLocation();
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
@@ -14,12 +17,15 @@ export default function UserMenu({ user, onLogout }) {
         onClick={toggleMenu} 
         aria-expanded={isOpen}
       >
-        <img
-          src={user?.avatar || 'https://via.placeholder.com/40'}
-          alt="User Profile"
-          className="user-menu__avatar"
-        />
-        <span className="user-menu__name">{user?.name || 'User'}</span>
+        {user?.avatar ? (
+          <img src={user.avatar} alt="Foto de perfil" className="user-menu__avatar" />
+        ) : (
+          <span className="user-menu__avatar user-menu__avatar--iniciais" aria-hidden="true">
+            {iniciais(user?.name)}
+          </span>
+        )}
+        {/* No botão só o primeiro nome; o nome completo aparece no menu aberto. */}
+        <span className="user-menu__name">{user?.name?.split(' ')[0] || 'Usuário'}</span>
       </button>
 
       {isOpen && (
@@ -31,13 +37,13 @@ export default function UserMenu({ user, onLogout }) {
           
           <ul className="user-menu__list">
             <li>
-              <Link to="/profile" className="user-menu__link" onClick={() => setIsOpen(false)}>
-                My Account
+              <Link to="/profile" state={{ background: location }} className="user-menu__link" onClick={() => setIsOpen(false)}>
+                Minha conta
               </Link>
             </li>
             <li>
-              <Link to="/settings" className="user-menu__link" onClick={() => setIsOpen(false)}>
-                Change Photo
+              <Link to="/settings" state={{ background: location }} className="user-menu__link" onClick={() => setIsOpen(false)}>
+                Trocar foto
               </Link>
             </li>
             
@@ -46,9 +52,12 @@ export default function UserMenu({ user, onLogout }) {
             <li>
               <button 
                 className="user-menu__link user-menu__link--logout" 
-                onClick={onLogout}
+                onClick={() => {
+                  setIsOpen(false);
+                  onLogout();
+                }}
               >
-                Logout
+                Sair
               </button>
             </li>
           </ul>
