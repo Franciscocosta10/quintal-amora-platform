@@ -1,0 +1,124 @@
+.carrossel {
+  position: relative;
+  height: 300px;
+  overflow: hidden;
+  border-radius: 16px;
+  background: var(--accent-bg);
+  touch-action: pan-y;
+}
+
+.carrossel__trilho {
+  display: flex;
+  height: 100%;
+  transition: transform 0.5s ease;
+}
+
+.carrossel__slide {
+  position: relative;
+  flex: 0 0 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* A própria foto, ampliada e desfocada, preenche as laterais. */
+.carrossel__fundo {
+  position: absolute;
+  inset: -24px;
+  background-size: cover;
+  background-position: center;
+  filter: blur(20px) saturate(1.2);
+  opacity: 0.85;
+}
+
+.carrossel__imagem {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  user-select: none;
+}
+
+.carrossel__seta {
+  position: absolute;
+  top: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.85);
+  color: var(--accent);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  transform: translateY(-50%);
+  transition: background 0.2s;
+}
+
+.carrossel__seta:hover {
+  background: #ffffff;
+}
+
+.carrossel__seta--anterior {
+  left: 12px;
+}
+
+.carrossel__seta--proxima {
+  right: 12px;
+}
+
+.carrossel__bolinhas {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  display: flex;
+  gap: 6px;
+  padding: 5px 8px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.25);
+  transform: translateX(-50%);
+}
+
+.carrossel__bolinha {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  transition: width 0.3s, background 0.3s;
+}
+
+.carrossel__bolinha--ativa {
+  width: 22px;
+  background: #ffffff;
+}
+
+.carrossel__seta:focus-visible,
+.carrossel__bolinha:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px var(--accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carrossel__trilho,
+  .carrossel__bolinha {
+    transition: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .carrossel {
+    height: 220px;
+  }
+
+  .carrossel__seta {
+    width: 32px;
+    height: 32px;
+  }
+}

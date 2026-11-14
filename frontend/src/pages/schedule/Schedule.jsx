@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import { CalendarDays, Star } from 'lucide-react';
 import Layout from '../../components/Layout';
 import DayTabs from '../../components/schedule/DayTabs';
 import ScheduleList from '../../components/schedule/ScheduleList';
@@ -129,7 +130,7 @@ export default function Schedule() {
     <Layout
       rightRail={
         <div className="programacao-destaque">
-          <h3>⭐ Destaques</h3>
+          <h3 className="com-icone"><Star size="1em" aria-hidden="true" /> Destaques</h3>
 
           {destaques.length === 0 ? (
             <p className="programacao-destaque__vazio">
@@ -157,7 +158,7 @@ export default function Schedule() {
       <div className="programacao-header">
         <div className="programacao-header__top">
           <div>
-            <h1>📅 Programação</h1>
+            <h1 className="com-icone"><CalendarDays size="1em" aria-hidden="true" /> Programação</h1>
 
             <p>
               Confira todos os horários, painéis,
@@ -166,16 +167,6 @@ export default function Schedule() {
               monte sua programação!
             </p>
           </div>
-
-          {isAdmin && (
-            <button
-              type="button"
-              className="programacao__btn-adicionar"
-              onClick={abrirNovaAtividade}
-            >
-              + Adicionar atividade
-            </button>
-          )}
         </div>
       </div>
 
@@ -186,15 +177,28 @@ export default function Schedule() {
         </div>
       )}
 
-      <DayTabs
-        dias={dias}
-        diaSelecionado={diaSelecionado}
-        onSelecionar={selecionarDia}
-        favoritosSelecionado={favoritosSelecionado}
-        onSelecionarFavoritos={selecionarFavoritos}
-        isAdmin={isAdmin}
-        temFavoritos={favoritos.length > 0}
-      />
+      {/* Botão na mesma linha das abas, alinhado à direita (mesmo padrão do Catálogo). */}
+      <div className="filtros-linha">
+        <DayTabs
+          dias={dias}
+          diaSelecionado={diaSelecionado}
+          onSelecionar={selecionarDia}
+          favoritosSelecionado={favoritosSelecionado}
+          onSelecionarFavoritos={selecionarFavoritos}
+          isAdmin={isAdmin}
+          temFavoritos={favoritos.length > 0}
+        />
+
+        {isAdmin && (
+          <button
+            type="button"
+            className="programacao__btn-adicionar filtros-linha__direita"
+            onClick={abrirNovaAtividade}
+          >
+            + Adicionar atividade
+          </button>
+        )}
+      </div>
 
       {favoritosSelecionado ? (
         <ScheduleList

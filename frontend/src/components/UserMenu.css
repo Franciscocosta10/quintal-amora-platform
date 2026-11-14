@@ -100,3 +100,14 @@
   background-color: var(--border);
   margin: 4px 0;
 }
+/* Sem foto de perfil: círculo com as iniciais no mesmo tamanho do avatar. */
+.user-menu__avatar--iniciais {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  background: linear-gradient(135deg, var(--accent) 0%, #ff9ec7 100%);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+}

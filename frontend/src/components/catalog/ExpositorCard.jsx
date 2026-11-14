@@ -1,4 +1,5 @@
 import ExpositorImagem from './ExpositorImagem';
+import { MapPin } from 'lucide-react';
 import { rotuloDoTipo } from './tiposExpositor';
 import './ExpositorCard.css';
 
@@ -26,7 +27,7 @@ export default function ExpositorCard({ expositor, isAdmin = false, onAbrir, onE
           <span className="expositor-card__nome">{expositor.nome}</span>
 
           {expositor.localizacaoEstande && (
-            <span className="expositor-card__estande">📍 {expositor.localizacaoEstande}</span>
+            <span className="expositor-card__estande com-icone"><MapPin size="1em" aria-hidden="true" /> {expositor.localizacaoEstande}</span>
           )}
         </div>
       </button>

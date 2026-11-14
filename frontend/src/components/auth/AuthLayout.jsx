@@ -11,6 +11,7 @@
  */
 
 import SakuraDecoration from './decoration';
+import { Flower2 } from 'lucide-react';
 
 const DESTAQUES = [
   {
@@ -50,7 +51,7 @@ export default function AuthLayout({ children }) {
         <div className="relative z-10">
           <div className="flex items-baseline gap-1.5">
             <h2 className="text-xl font-bold text-plum-900">Quintal</h2>
-            <h2 className="text-xl font-bold text-amora-500">da Amora 🌸</h2>
+            <h2 className="com-icone text-xl font-bold text-amora-500">da Amora <Flower2 size="1em" aria-hidden="true" /></h2>
           </div>
           <p className="mt-0.5 text-xs text-gray-500">Cultura geek e otaku</p>
 

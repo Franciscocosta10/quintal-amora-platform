@@ -30,7 +30,7 @@ describe('ExpositorDetailModal', () => {
 
     expect(screen.getByRole('dialog', { name: 'Loja Geek' })).toBeInTheDocument();
     expect(screen.getByText('Loja')).toBeInTheDocument();
-    expect(screen.getByText('📍 Estande 12')).toBeInTheDocument();
+    expect(screen.getByText('Estande 12')).toBeInTheDocument();
     expect(screen.getByText('Mangás e action figures.')).toBeInTheDocument();
     expect(screen.getByText('(47) 99999-0000')).toBeInTheDocument();
 
