@@ -28,6 +28,8 @@ module.exports.policies = {
   'auth/reset-password': true,
   'auth/me': ['isLoggedIn'],
   'auth/change-profile': ['isLoggedIn'],
+  'auth/change-photo': ['isLoggedIn'],
+  'auth/update-profile': ['isLoggedIn'],
 
   // -------------------------------------------------------------------
   // Check-in

@@ -1,17 +1,33 @@
+/* Mesmo gradiente rosa do card de destaque da Home (.home-hero). */
 .sidebar {
   width: 200px;
   flex-shrink: 0;
   padding: 24px 16px;
-  border-right: 1px solid var(--border);
+  background: linear-gradient(160deg, var(--accent) 0%, #ff9ec7 100%);
+  color: #ffffff;
   display: flex;
   flex-direction: column;
   gap: 24px;
 }
 
 .sidebar__logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   font-weight: 700;
-  color: var(--accent);
+  color: #ffffff;
   line-height: 1.2;
+}
+
+/* Logo da Amora Book Store em círculo, com aro branco para destacar do rosa. */
+.sidebar__logo-imagem {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 .sidebar__nav {
@@ -25,18 +41,24 @@
   display: block;
   padding: 10px 12px;
   border-radius: 8px;
-  color: var(--text-h);
+  color: #ffffff;
   text-decoration: none;
   font-size: 15px;
 }
 
+/* Sobre o rosa, os estados usam branco translúcido em vez do rosa claro. */
 .sidebar__link:hover {
-  background: var(--accent-bg);
+  background: rgba(255, 255, 255, 0.16);
 }
 
 .sidebar__link.is-active {
-  background: var(--accent-bg);
-  color: var(--accent);
+  background: rgba(255, 255, 255, 0.26);
+  color: #ffffff;
   font-weight: 600;
+}
+
+.sidebar__link:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
 }
 

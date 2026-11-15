@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 
 import LoginPage from "./pages/auth/LoginPage";
 import SignupPage from "./pages/auth/SignupPage";
@@ -15,9 +15,21 @@ import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminRoute from "./components/AdminRoute";
 
 
+// Telas que abrem como modal por cima de outra (ver ModalPagina).
+const ROTAS_MODAL = ["/profile", "/settings"];
+
 function App() {
+  const location = useLocation();
+  const ehModal = ROTAS_MODAL.includes(location.pathname);
+
+  // Perfil e Trocar foto abrem por cima de outra tela, que fica desfocada ao
+  // fundo. Vindo do menu do usuário, é a tela onde ele estava
+  // (state.background); acessando direto pela URL, a Home.
+  const fundo = ehModal ? location.state?.background ?? "/home" : location;
+
   return (
-    <Routes>
+    <>
+    <Routes location={fundo}>
       <Route path="/" element={<LoginPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/cadastro" element={<SignupPage />} />
@@ -26,12 +38,18 @@ function App() {
       <Route path="/checkin" element={<CheckIn />} />
       <Route path="/home" element={<HomePage />} />
       <Route path="/schedule" element={<Schedule />} />
-      <Route path="/profile" element={<Profile />} />
-      <Route path="/settings" element={<ChangePhoto />} />
       <Route path="/concursos" element={<Contests />} />
       <Route path="/catalogo" element={<Catalog />} />
       <Route path="/admin" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
     </Routes>
+
+    {ehModal && (
+      <Routes>
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/settings" element={<ChangePhoto />} />
+      </Routes>
+    )}
+    </>
   );
 }
 

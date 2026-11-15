@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { Store } from 'lucide-react';
 import Layout from '../../components/Layout';
 import DayTabs from '../../components/schedule/DayTabs';
 import Pagination from '../../components/Pagination';
@@ -151,7 +152,7 @@ export default function Catalog() {
       <div className="contests-header">
         <div className="contests-header__top">
           <div>
-            <h1>🏪 Catálogo</h1>
+            <h1 className="com-icone"><Store size="1em" aria-hidden="true" /> Lojas & Influenciadores</h1>
             <p>
               Conheça as lojas e os artistas participantes do Quintal da Amora.
               Clique em um expositor para ver os detalhes.
@@ -174,7 +175,7 @@ export default function Catalog() {
         </div>
       )}
 
-      <div className="catalog-filtros" ref={filtrosRef}>
+      <div className="filtros-linha" ref={filtrosRef}>
         <DayTabs
           dias={ABAS_TIPO}
           diaSelecionado={tipoSelecionado}
@@ -183,7 +184,7 @@ export default function Catalog() {
 
         <input
           type="search"
-          className="catalog-filtros__busca"
+          className="catalog-filtros__busca filtros-linha__direita"
           value={busca}
           onChange={(event) => alterarBusca(event.target.value)}
           placeholder="Buscar por nome..."

@@ -8,10 +8,20 @@
 }
 
 .app-header__bell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border-radius: 8px;
   background: none;
   border: none;
-  font-size: 18px;
+  color: var(--text-h);
   cursor: pointer;
+}
+
+.app-header__bell:hover {
+  background: var(--accent-bg);
+  color: var(--accent);
 }
 
 .app-header__btn {

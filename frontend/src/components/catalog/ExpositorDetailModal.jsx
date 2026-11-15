@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { MapPin } from 'lucide-react';
 import ExpositorImagem from './ExpositorImagem';
 import { rotuloDoTipo } from './tiposExpositor';
 import { REDES_SOCIAIS, ehLinkSeguro, rotuloDoLink } from '../../utils/redesSociais';
@@ -59,7 +60,7 @@ export default function ExpositorDetailModal({ expositor, isAdmin = false, onFec
           <h2 id="expositor-detail-title">{expositor.nome}</h2>
 
           {expositor.localizacaoEstande && (
-            <p className="expositor-detail__estande">📍 {expositor.localizacaoEstande}</p>
+            <p className="expositor-detail__estande com-icone"><MapPin size="1em" aria-hidden="true" /> {expositor.localizacaoEstande}</p>
           )}
 
           {expositor.descricao ? (

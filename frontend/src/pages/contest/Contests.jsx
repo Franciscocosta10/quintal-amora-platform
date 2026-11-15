@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import { Star, Trophy } from 'lucide-react';
 import Layout from '../../components/Layout';
 import DayTabs from '../../components/schedule/DayTabs';
 import ContestList from '../../components/contest/ContestList';
@@ -172,7 +173,7 @@ export default function Contests() {
     <Layout
       rightRail={
         <div className="contests-highlight">
-          <h3>⭐ Destaques</h3>
+          <h3 className="com-icone"><Star size="1em" aria-hidden="true" /> Destaques</h3>
 
           {destaques.length === 0 ? (
             <p className="contests-highlight__vazio">Nenhum destaque marcado ainda.</p>
@@ -192,18 +193,12 @@ export default function Contests() {
       <div className="contests-header">
         <div className="contests-header__top">
           <div>
-            <h1>🏆 Concursos</h1>
+            <h1 className="com-icone"><Trophy size="1em" aria-hidden="true" /> Concursos</h1>
             <p>
               Confira os concursos do Quintal da Amora, acompanhe datas e
               inscreva-se nos que quiser participar!
             </p>
           </div>
-
-          {isAdmin && (
-            <button type="button" className="contests__btn-adicionar" onClick={abrirNovoConcurso}>
-              + Adicionar concurso
-            </button>
-          )}
         </div>
       </div>
 
@@ -221,15 +216,28 @@ export default function Contests() {
         </div>
       )}
 
-      <DayTabs
-        dias={categorias}
-        diaSelecionado={categoriaSelecionada}
-        onSelecionar={selecionarCategoria}
-        favoritosSelecionado={favoritosSelecionado}
-        onSelecionarFavoritos={selecionarFavoritos}
-        isAdmin={isAdmin}
-        temFavoritos={favoritos.length > 0}
-      />
+      {/* Botão na mesma linha das abas, alinhado à direita (mesmo padrão do Catálogo). */}
+      <div className="filtros-linha">
+        <DayTabs
+          dias={categorias}
+          diaSelecionado={categoriaSelecionada}
+          onSelecionar={selecionarCategoria}
+          favoritosSelecionado={favoritosSelecionado}
+          onSelecionarFavoritos={selecionarFavoritos}
+          isAdmin={isAdmin}
+          temFavoritos={favoritos.length > 0}
+        />
+
+        {isAdmin && (
+          <button
+            type="button"
+            className="contests__btn-adicionar filtros-linha__direita"
+            onClick={abrirNovoConcurso}
+          >
+            + Adicionar concurso
+          </button>
+        )}
+      </div>
 
       {carregando || erro || concursosExibidos.length === 0 ? (
         <ContestList

@@ -15,6 +15,10 @@ module.exports.routes = {
 
   'PUT /auth/change-profile': { action: 'auth/change-profile'},
 
+  'PUT /auth/change-photo': { action: 'auth/change-photo' },
+
+  'PUT /auth/update-profile': { action: 'auth/update-profile' },
+
   // Check-in
   'POST /checkin': { action: 'checkin/create' },
 
