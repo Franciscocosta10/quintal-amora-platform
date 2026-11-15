@@ -62,4 +62,12 @@ module.exports.routes = {
   'PUT /expositor/update/:id': { action: 'expositor/update' },
 
   'DELETE /expositor/destroy/:id': { action: 'expositor/destroy' },
+
+  // Painel administrativo (RF16)
+  'GET /admin/dashboard': { action: 'admin/dashboard' },
+
+  // Notificações (RF11 / RF12)
+  'GET /notificacao': { action: 'notificacao/find' },
+
+  'POST /notificacao/create': { action: 'notificacao/create' },
 };

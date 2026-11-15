@@ -55,3 +55,28 @@
 body {
   margin: 0;
 }
+
+/* Ícone (lucide-react, size="1em") ao lado de um texto: alinha pelo centro
+   e acompanha o tamanho da fonte do título/texto em que está. */
+.com-icone {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+}
+
+.com-icone > svg {
+  flex-shrink: 0;
+}
+
+/* Some da tela mas continua sendo lido por leitores de tela. */
+.apenas-leitor-de-tela {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}

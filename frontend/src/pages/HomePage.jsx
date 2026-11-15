@@ -2,6 +2,7 @@ import { useAuth } from '../hooks/useAuth';
 import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Layout from '../components/Layout';
+import AvisosCard from '../components/home/AvisosCard';
 import ScheduleList from '../components/schedule/ScheduleList';
 import { useAtividades } from '../hooks/useSchedule';
 import { agruparPorDia } from '../utils/agruparPorDia';
@@ -31,12 +32,7 @@ export default function HomePage() {
     <Layout
       rightRail={
         <>
-          <div className="home-card">
-            <h3>🔔 Avisos Importantes</h3>
-            <p className="home-card__placeholder">
-              Em breve: alertas de check-in e chamadas para concursos (RF11/RF12).
-            </p>
-          </div>
+          <AvisosCard />
           <div className="home-card">
             <h3>🏪 Lojas participantes</h3>
             {expositores.length === 0 ? (

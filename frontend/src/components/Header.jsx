@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import UserMenu from './UserMenu';
+import NotificationBell from './NotificationBell';
 import './Header.css';
 
 /**
@@ -24,7 +25,7 @@ export default function Header() {
 
   return (
     <header className="app-header">
-      <button type="button" className="app-header__bell" aria-label="Notificações">🔔</button>
+      <NotificationBell />
       
       {isAuthenticated ? (
         <UserMenu user={userMock} onLogout={handleLogout} />

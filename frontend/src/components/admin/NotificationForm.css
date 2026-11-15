@@ -1,0 +1,61 @@
+/* Caixas de erro/sucesso vêm de ContestForm.css; botão de Contests.css. */
+
+.notification-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.notification-form__linha {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.notification-form__campo {
+  flex: 1;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-h);
+}
+
+.notification-form__campo--tipo {
+  flex: 0 1 220px;
+}
+
+.notification-form__campo input,
+.notification-form__campo select,
+.notification-form__campo textarea {
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--text-h);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.notification-form__campo textarea {
+  resize: vertical;
+}
+
+.notification-form__campo input:focus,
+.notification-form__campo select:focus,
+.notification-form__campo textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.notification-form__enviar {
+  align-self: flex-end;
+}
+
+.notification-form__enviar:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}

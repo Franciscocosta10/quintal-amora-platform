@@ -1,0 +1,111 @@
+.notification-bell {
+  position: relative;
+}
+
+/* O botão reaproveita .app-header__bell (Header.css); aqui só o que o
+   contador precisa. */
+.notification-bell__botao {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border-radius: 8px;
+  color: var(--text-h);
+}
+
+.notification-bell__botao:hover {
+  background: var(--accent-bg);
+  color: var(--accent);
+}
+
+.notification-bell__contador {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  box-sizing: border-box;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 16px;
+  text-align: center;
+}
+
+.notification-bell__painel {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  z-index: 100;
+  width: 320px;
+  max-width: calc(100vw - 32px);
+  max-height: 420px;
+  overflow-y: auto;
+  padding: 12px 16px;
+  box-sizing: border-box;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  text-align: left;
+}
+
+.notification-bell__titulo {
+  margin: 0 0 8px;
+  font-size: 15px;
+  color: var(--text-h);
+}
+
+.notification-bell__vazio {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text);
+}
+
+.notification-bell__lista {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.notification-bell__item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.notification-bell__item:last-child {
+  border-bottom: none;
+}
+
+/* Avisos que chegaram desde a última vez que o sino foi aberto. */
+.notification-bell__item.is-nova {
+  margin: 0 -16px;
+  padding: 10px 16px;
+  background: var(--accent-bg);
+}
+
+.notification-bell__tipo {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.notification-bell__item strong {
+  font-size: 14px;
+  color: var(--text-h);
+}
+
+.notification-bell__item p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--text);
+  white-space: pre-line;
+}
