@@ -79,7 +79,7 @@ describe('ExpositorGrid', () => {
 
     expect(screen.getByText('Loja Geek')).toBeInTheDocument();
     expect(screen.getByText('Loja')).toBeInTheDocument();
-    expect(screen.getByText('📍 Estande 12')).toBeInTheDocument();
+    expect(screen.getByText('Estande 12')).toBeInTheDocument();
     expect(screen.getByText('Artista')).toBeInTheDocument();
   });
 

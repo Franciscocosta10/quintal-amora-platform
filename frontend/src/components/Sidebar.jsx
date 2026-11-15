@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom';
+import logoAmora from '../assets/quintal/logo-amora.webp';
 import './Sidebar.css';
 
 /**
@@ -13,16 +14,19 @@ import './Sidebar.css';
  */
 const ITENS_MENU = [
   { label: 'Início', to: '/home' },
-  { label: 'Concursos', to: '/concursos' },
-  { label: 'Catálogo', to: '/catalogo' },
   { label: 'Check-in', to: '/checkin' },
-  { label: 'Programação', to: '/schedule' }
+  { label: 'Programação', to: '/schedule' },
+  { label: 'Concursos', to: '/concursos' },
+  { label: 'Lojas & Influenciadores', to: '/catalogo' }
 ];
 
 export default function Sidebar() {
   return (
     <aside className="sidebar">
-      <div className="sidebar__logo">Quintal<br />Amora</div>
+      <div className="sidebar__logo">
+        <img src={logoAmora} alt="" className="sidebar__logo-imagem" />
+        <span>Quintal<br />Amora</span>
+      </div>
       <nav className="sidebar__nav">
         {ITENS_MENU.map((item) => (
           <NavLink

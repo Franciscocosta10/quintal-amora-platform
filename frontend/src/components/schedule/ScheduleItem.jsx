@@ -1,4 +1,5 @@
 import './ScheduleItem.css';
+import { MapPin } from 'lucide-react';
 import { editarAtividade } from '../../services/schedule';
 
 const TIPOS = {
@@ -80,8 +81,8 @@ export default function ScheduleItem({
         )}
 
         {atividade.local && (
-          <span className="schedule-item__location">
-            📍 {atividade.local}
+          <span className="schedule-item__location com-icone">
+            <MapPin size="1em" aria-hidden="true" /> {atividade.local}
           </span>
         )}
       </div>

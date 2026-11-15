@@ -1,19 +1,6 @@
-.profile {
-  display: flex;
-  justify-content: center;
-  padding: 40px 24px;
-  background-color: #fffafb; /* Fundo suave combinando com o tema */
-  min-height: calc(100vh - 70px); /* Desconta o tamanho do header */
-}
-
+/* O cartão, a borda e o fundo desfocado vêm de ModalPagina.css. */
 .profile__container {
-  width: 100%;
-  max-width: 500px;
-  background-color: #ffffff;
   padding: 32px;
-  border-radius: 12px;
-  border: 1px solid var(--border);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
 }
 
 .profile__title {
@@ -71,6 +58,7 @@
   font-size: 14px;
   font-weight: 600;
   text-align: center;
+  font-family: inherit;
   text-decoration: none;
   cursor: pointer;
   border: none;
@@ -180,7 +168,10 @@
 }
 
 .profile__home {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
   margin-top: 20px;
   text-align: center;
   color: var(--accent);

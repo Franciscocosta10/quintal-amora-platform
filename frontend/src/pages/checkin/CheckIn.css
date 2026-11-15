@@ -1,18 +1,18 @@
 .checkin-page {
-  max-width: 640px;
+  max-width: 720px;
   margin: 0 auto;
-  padding: 24px 20px 48px;
+  padding: 0 0 48px;
   text-align: left;
 }
 
 .checkin-hero h1 {
   font-size: 28px;
   margin: 0 0 8px;
-  color: #08060d;
+  color: var(--accent);
 }
 
 .checkin-hero p {
-  color: #6b6375;
+  color: var(--text);
   margin: 0 0 24px;
 }
 
@@ -26,38 +26,121 @@
   border: none;
   border-radius: 999px;
   padding: 8px 18px;
+  font-family: inherit;
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
-  background: rgba(233, 30, 99, 0.08);
+  background: var(--accent-bg);
   color: #c2185b;
   transition: background 0.2s;
 }
 
 .checkin-tabs button.active {
-  background: #e91e63;
+  background: var(--accent);
   color: #fff;
 }
 
-.checkin-card {
+/* ---------- Card de status ---------- */
+
+.checkin-status {
+  margin-bottom: 20px;
+  padding: 20px 24px 28px;
   border: 1px solid #f3d3e0;
   border-radius: 16px;
-  padding: 24px;
-  background: #fff8fb;
+  background: linear-gradient(180deg, #fff1f6 0%, #ffffff 100%);
+  text-align: center;
 }
 
-.checkin-card h2 {
-  margin: 0 0 16px;
-  font-size: 18px;
-  color: #08060d;
+.checkin-status--feito {
+  border-color: #b7dfc5;
+  background: linear-gradient(180deg, #eaf7ee 0%, #ffffff 100%);
+}
+
+.checkin-evento {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 20px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: #ffffff;
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-size: 13px;
+}
+
+.checkin-evento svg {
+  color: var(--accent);
+}
+
+.checkin-evento strong {
+  color: var(--text-h);
+}
+
+.checkin-status__corpo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.checkin-status__icone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  margin-bottom: 4px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #ffffff;
+  box-shadow: 0 8px 20px rgba(233, 30, 99, 0.25);
+}
+
+.checkin-status--feito .checkin-status__icone {
+  background: #2e7d32;
+  box-shadow: 0 8px 20px rgba(46, 125, 50, 0.25);
+}
+
+.checkin-status h2 {
+  margin: 0;
+  font-size: 20px;
+  color: var(--text-h);
+}
+
+.checkin-status__texto {
+  margin: 0 0 8px;
+  color: var(--text);
+  font-size: 14px;
+}
+
+.checkin-status__detalhes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.checkin-status__detalhes span {
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: #ffffff;
+  border: 1px solid #b7dfc5;
+  color: #287a3d;
+  font-size: 13px;
+  font-weight: 600;
 }
 
 .checkin-scan-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   border: none;
   border-radius: 999px;
   padding: 12px 24px;
-  background: #e91e63;
+  background: var(--accent);
   color: #fff;
+  font-family: inherit;
   font-weight: 600;
   font-size: 15px;
   cursor: pointer;
@@ -65,6 +148,16 @@
 
 .checkin-scan-btn:hover {
   background: #c2185b;
+}
+
+.checkin-status__cancelar {
+  border: none;
+  background: transparent;
+  color: var(--accent);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
 }
 
 .qr-scanner {
@@ -75,38 +168,173 @@
   overflow: hidden;
 }
 
-.checkin-sucesso {
-  color: #2e7d32;
-  font-weight: 600;
-  background: rgba(46, 125, 50, 0.08);
-  padding: 12px 16px;
-  border-radius: 10px;
-}
-
 .checkin-erro {
   color: #c62828;
   background: rgba(198, 40, 40, 0.08);
   padding: 10px 14px;
   border-radius: 10px;
-  margin-top: 12px;
+  margin: 16px 0 0;
 }
 
-.checkin-como-funciona {
-  margin-top: 24px;
-  padding-top: 20px;
-  border-top: 1px solid #f3d3e0;
+/* ---------- Cards genéricos (Como funciona / Histórico) ---------- */
+
+.checkin-card {
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  background: var(--bg);
 }
 
-.checkin-como-funciona h3 {
-  font-size: 15px;
-  margin: 0 0 10px;
-  color: #08060d;
+.checkin-card h2 {
+  margin: 0 0 20px;
+  font-size: 18px;
+  color: var(--text-h);
 }
 
-.checkin-como-funciona ol {
+.checkin-card__texto {
   margin: 0;
-  padding-left: 20px;
-  color: #6b6375;
+  color: var(--text);
   font-size: 14px;
-  line-height: 1.6;
+}
+
+/* ---------- Como funciona ---------- */
+
+.checkin-passos {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.checkin-passo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+}
+
+.checkin-passo__icone {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  margin-bottom: 4px;
+  border-radius: 14px;
+  background: var(--accent-bg);
+  color: var(--accent);
+}
+
+.checkin-passo__numero {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.checkin-passo strong {
+  color: var(--text-h);
+  font-size: 14px;
+}
+
+.checkin-passo > span:last-child {
+  color: var(--text);
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+/* ---------- Histórico em linha do tempo ---------- */
+
+.checkin-timeline {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.checkin-timeline__item {
+  position: relative;
+  display: flex;
+  gap: 14px;
+  padding-bottom: 20px;
+}
+
+/* Linha vertical ligando os marcadores (some no último item). */
+.checkin-timeline__item:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  top: 28px;
+  bottom: 0;
+  left: 13px;
+  width: 2px;
+  background: var(--border);
+}
+
+.checkin-timeline__item:last-child {
+  padding-bottom: 0;
+}
+
+.checkin-timeline__marcador {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--accent-bg);
+  color: var(--accent);
+}
+
+.checkin-timeline__conteudo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-top: 4px;
+}
+
+.checkin-timeline__data {
+  color: var(--text);
+  font-size: 12px;
+}
+
+/* "Quinta-feira, 12 de novembro de 2026": só a primeira letra maiúscula. */
+.checkin-timeline__data::first-letter {
+  text-transform: uppercase;
+}
+
+.checkin-timeline__conteudo strong {
+  color: var(--text-h);
+  font-size: 15px;
+}
+
+.checkin-timeline__detalhes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  color: var(--text);
+  font-size: 13px;
+}
+
+@media (max-width: 640px) {
+  .checkin-passos {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 20px;
+  }
+
+  .checkin-status {
+    padding: 16px 16px 24px;
+  }
 }

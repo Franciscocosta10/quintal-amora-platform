@@ -21,3 +21,37 @@
   color: #fff;
   font-weight: 600;
 }
+
+/* Linha de filtros compartilhada por Concursos, Programação e Catálogo:
+   abas à esquerda e ações (busca, "+ Adicionar") à direita, na mesma linha.
+   O primeiro item da direita recebe .filtros-linha__direita, que o empurra
+   (e o que vier depois dele) até a borda direita do conteúdo. */
+.filtros-linha {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.filtros-linha .day-tabs {
+  margin-bottom: 0;
+}
+
+.filtros-linha__direita {
+  margin-left: auto;
+}
+
+/* Botões de ação com a mesma altura das abas: as abas têm 1px de borda +
+   8px de padding; o botão não tem borda, então leva 9px. */
+.filtros-linha button.filtros-linha__direita,
+.filtros-linha .filtros-linha__direita ~ button {
+  padding: 9px 16px;
+}
+
+@media (max-width: 700px) {
+  .filtros-linha > .filtros-linha__direita,
+  .filtros-linha .filtros-linha__direita ~ button {
+    width: 100%;
+  }
+}
