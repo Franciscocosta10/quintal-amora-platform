@@ -76,5 +76,13 @@ module.exports.policies = {
     'update': ['isLoggedIn', 'isAdmin'],
     'destroy': ['isLoggedIn', 'isAdmin']
   },
+
+  // Painel administrativo (RF16 / RNF07)
+  'admin/dashboard': ['isLoggedIn', 'isAdmin'],
+
+  // Notificações: todos leem; só administradores enviam
+  // (regra de negócio "Permissões de Disparo").
+  'notificacao/find': true,
+  'notificacao/create': ['isLoggedIn', 'isAdmin'],
 };
 

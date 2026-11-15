@@ -11,6 +11,8 @@ import ChangePhoto from "./components/profile/ChangePhoto";
 import Contests from "./pages/contest/Contests";
 import HomePage from "./pages/HomePage";
 import Catalog from "./pages/catalog/Catalog";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdminRoute from "./components/AdminRoute";
 
 
 // Telas que abrem como modal por cima de outra (ver ModalPagina).
@@ -38,6 +40,7 @@ function App() {
       <Route path="/schedule" element={<Schedule />} />
       <Route path="/concursos" element={<Contests />} />
       <Route path="/catalogo" element={<Catalog />} />
+      <Route path="/admin" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
     </Routes>
 
     {ehModal && (

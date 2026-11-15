@@ -1,7 +1,8 @@
-import { Bell, CalendarDays, Store } from 'lucide-react';
+import { CalendarDays, Store } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Layout from '../components/Layout';
+import AvisosCard from '../components/home/AvisosCard';
 import Carrossel from '../components/home/Carrossel';
 import ScheduleList from '../components/schedule/ScheduleList';
 import { useAtividades } from '../hooks/useSchedule';
@@ -39,12 +40,7 @@ export default function HomePage() {
     <Layout
       rightRail={
         <>
-          <div className="home-card">
-            <h3 className="com-icone"><Bell size="1em" aria-hidden="true" /> Avisos Importantes</h3>
-            <p className="home-card__placeholder">
-              Em breve: alertas de check-in e chamadas para concursos (RF11/RF12).
-            </p>
-          </div>
+          <AvisosCard />
           <div className="home-card">
             <h3 className="com-icone"><Store size="1em" aria-hidden="true" /> Lojas participantes</h3>
             {expositores.length === 0 ? (

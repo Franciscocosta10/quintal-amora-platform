@@ -1,5 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { Bell } from 'lucide-react';
+import NotificationBell from './NotificationBell';
 import UserMenu from './UserMenu';
 import { useAuth } from '../hooks/useAuth';
 import './Header.css';
@@ -28,9 +28,7 @@ export default function Header() {
 
   return (
     <header className="app-header">
-      <button type="button" className="app-header__bell" aria-label="Notificações">
-        <Bell size={20} aria-hidden="true" />
-      </button>
+      <NotificationBell />
       
       {/* Enquanto o /auth/me não responde, não mostra nem o menu nem
           "Entrar/Cadastrar", para não piscar a opção errada. */}

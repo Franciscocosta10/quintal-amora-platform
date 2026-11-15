@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom';
+import { useAuth } from '../hooks/useAuth';
 import logoAmora from '../assets/quintal/logo-amora.webp';
 import './Sidebar.css';
 
@@ -20,7 +21,13 @@ const ITENS_MENU = [
   { label: 'Lojas & Influenciadores', to: '/catalogo' }
 ];
 
+// Só aparece para administradores (RNF07).
+const ITEM_ADMIN = { label: 'Painel admin', to: '/admin' };
+
 export default function Sidebar() {
+  const { isAdmin } = useAuth();
+  const itens = isAdmin ? [...ITENS_MENU, ITEM_ADMIN] : ITENS_MENU;
+
   return (
     <aside className="sidebar">
       <div className="sidebar__logo">
@@ -28,7 +35,7 @@ export default function Sidebar() {
         <span>Quintal<br />Amora</span>
       </div>
       <nav className="sidebar__nav">
-        {ITENS_MENU.map((item) => (
+        {itens.map((item) => (
           <NavLink
             key={item.to}
             to={item.to}
