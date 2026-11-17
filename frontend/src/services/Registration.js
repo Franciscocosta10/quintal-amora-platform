@@ -17,6 +17,15 @@ export function listarMinhasInscricoes() {
   return apiFetch('/registration/mine');
 }
 
+// RF10 — lista de participantes de um concurso (somente admin).
 export function listarInscritosDoConcurso(concursoId) {
   return apiFetch(`/contest/${concursoId}/registrations`);
+}
+
+// RF10 — admin marca/desmarca quem compareceu ao concurso.
+export function marcarPresenca(id, presencaConfirmada) {
+  return apiFetch(`/registration/${id}/presence`, {
+    method: 'PUT',
+    body: { presencaConfirmada },
+  });
 }

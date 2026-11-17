@@ -5,6 +5,8 @@
  * Protegida pela policy `isAdmin`.
  */
 
+var avisoAutomatico = require('../../utils/avisoAutomatico');
+
 module.exports = {
 
   friendlyName: 'Update atividade',
@@ -110,6 +112,17 @@ module.exports = {
     var atividadeAtualizada =
       await Atividade.updateOne({ id: id })
         .set(camposParaAtualizar);
+
+    // RF09 — se o horário mudou, os participantes recebem um aviso.
+    if (avisoAutomatico.mudouHorario(atividadeExistente, camposParaAtualizar)) {
+      await avisoAutomatico.avisarMudancaDeHorario({
+        tipo: 'alteracao_programacao',
+        nome: atividadeAtualizada.titulo,
+        inicio: inicioFinal,
+        autor: this.req.usuario.id,
+        vinculo: { atividade: id, evento: atividadeAtualizada.evento }
+      });
+    }
 
     return atividadeAtualizada;
   }

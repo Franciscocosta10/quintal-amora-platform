@@ -1,4 +1,4 @@
-import { CalendarDays, Store } from 'lucide-react';
+import { CalendarDays, Clock, MapPin, Store } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Layout from '../components/Layout';
@@ -7,6 +7,7 @@ import Carrossel from '../components/home/Carrossel';
 import ScheduleList from '../components/schedule/ScheduleList';
 import { useAtividades } from '../hooks/useSchedule';
 import { agruparPorDia } from '../utils/agruparPorDia';
+import { formatarHorario, formatarPeriodo } from '../utils/dataEvento';
 import { buscarEventoAtual } from '../services/event';
 import { useExpositores } from '../hooks/useExpositores';
 import { rotuloDoTipo } from '../components/catalog/tiposExpositor';
@@ -67,12 +68,24 @@ export default function HomePage() {
       <section className="home-destaque">
         <h1 className="apenas-leitor-de-tela">Quintal da Amora</h1>
         <Carrossel imagens={FOTOS_QUINTAL} rotulo="Fotos do Quintal da Amora" />
+        {/* Dados do evento atual (cadastrados no Painel admin). */}
         {evento && (
-          <div className="home-destaque__info">
-            <span>{evento.data}</span>
-            <span>{evento.horarioAbertura} {evento.horarioFechamento}</span>
-            <span>{evento.local}</span>
-          </div>
+          <ul className="home-destaque__info" aria-label="Informações do evento">
+            <li className="com-icone">
+              <CalendarDays size="1em" aria-hidden="true" />
+              {formatarPeriodo(evento.dataHoraInicio, evento.dataHoraFim)}
+            </li>
+            <li className="com-icone">
+              <Clock size="1em" aria-hidden="true" />
+              {formatarHorario(evento.dataHoraInicio, evento.dataHoraFim)}
+            </li>
+            {evento.localizacao && (
+              <li className="com-icone">
+                <MapPin size="1em" aria-hidden="true" />
+                {evento.localizacao}
+              </li>
+            )}
+          </ul>
         )}
       </section>
 

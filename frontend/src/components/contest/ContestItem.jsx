@@ -30,6 +30,7 @@ export default function ContestItem({
   inscricaoId,
   favorito = false,
   onEditar,
+  onVerInscritos,
   onInscrever,
   onCancelar,
   onAlternarDestaque,
@@ -88,6 +89,14 @@ export default function ContestItem({
               onClick={() => onAlternarDestaque?.(concurso)}
             >
               {concurso.destaque ? '★' : '☆'}
+            </button>
+
+            <button
+              type="button"
+              className="contest-item__edit"
+              onClick={() => onVerInscritos?.(concurso)}
+            >
+              Inscritos
             </button>
 
             <button

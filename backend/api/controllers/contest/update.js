@@ -1,3 +1,5 @@
+var avisoAutomatico = require('../../utils/avisoAutomatico');
+
 module.exports = {
 
   friendlyName: 'Update contest',
@@ -76,6 +78,17 @@ module.exports = {
 
     var concursoAtualizado =
       await Concurso.updateOne({ id: id }).set(camposParaAtualizar);
+
+    // RF09 / RF12 — se o horário mudou, os participantes recebem um aviso.
+    if (avisoAutomatico.mudouHorario(concursoExistente, camposParaAtualizar)) {
+      await avisoAutomatico.avisarMudancaDeHorario({
+        tipo: 'chamada_concurso',
+        nome: concursoAtualizado.nome,
+        inicio: dataHoraInicioFinal,
+        autor: this.req.usuario.id,
+        vinculo: { concurso: id, evento: concursoAtualizado.evento }
+      });
+    }
 
     return concursoAtualizado;
 

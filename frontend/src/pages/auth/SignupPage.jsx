@@ -3,7 +3,7 @@
  */
 
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import AuthLayout from '../../components/auth/AuthLayout';
 import FormField from '../../components/auth/FormField';
 import { useAuth } from '../../hooks/useAuth';
@@ -13,6 +13,10 @@ const SENHA_MIN_LENGTH = 8; // mesmo mínimo validado no backend (auth/signup.js
 export default function SignupPage() {
   const { cadastrar } = useAuth();
   const navigate = useNavigate();
+  // Repassado pelo login: página para onde voltar depois do cadastro
+  // (ex: link do QR do check-in).
+  const location = useLocation();
+  const voltarPara = location.state?.voltarPara;
 
   const [nomeCompleto, setNomeCompleto] = useState('');
   const [email, setEmail] = useState('');
@@ -37,7 +41,7 @@ export default function SignupPage() {
     setEnviando(true);
     try {
       await cadastrar({ nomeCompleto, email, senha });
-      navigate('/', { replace: true });
+      navigate(voltarPara ?? '/', { replace: true });
     } catch (err) {
       setErro(err.message);
     } finally {
@@ -125,7 +129,7 @@ export default function SignupPage() {
 
       <p className="mt-5 text-center text-sm text-gray-500">
         Já tem conta?{' '}
-        <Link to="/login" className="font-medium text-amora-500 hover:text-amora-600">
+        <Link to="/login" state={{ voltarPara }} className="font-medium text-amora-500 hover:text-amora-600">
           Fazer login
         </Link>
       </p>

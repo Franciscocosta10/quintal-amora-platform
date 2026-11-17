@@ -12,7 +12,9 @@ import Contests from "./pages/contest/Contests";
 import HomePage from "./pages/HomePage";
 import Catalog from "./pages/catalog/Catalog";
 import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdminUsers from "./pages/admin/AdminUsers";
 import AdminRoute from "./components/AdminRoute";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 
 // Telas que abrem como modal por cima de outra (ver ModalPagina).
@@ -35,12 +37,14 @@ function App() {
       <Route path="/cadastro" element={<SignupPage />} />
       <Route path="/esqueci-senha" element={<ForgotPasswordPage />} />
       <Route path="/redefinir-senha" element={<RedefinirSenha />} />
-      <Route path="/checkin" element={<CheckIn />} />
+      {/* Protegida: quem abre o link do QR sem estar logado faz login e volta. */}
+      <Route path="/checkin" element={<ProtectedRoute><CheckIn /></ProtectedRoute>} />
       <Route path="/home" element={<HomePage />} />
       <Route path="/schedule" element={<Schedule />} />
       <Route path="/concursos" element={<Contests />} />
       <Route path="/catalogo" element={<Catalog />} />
       <Route path="/admin" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
+      <Route path="/admin/usuarios" element={<AdminRoute><AdminUsers /></AdminRoute>} />
     </Routes>
 
     {ehModal && (

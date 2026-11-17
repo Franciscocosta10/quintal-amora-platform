@@ -2,7 +2,7 @@
  * RF02 — login.
  */
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import AuthLayout from '../../components/auth/AuthLayout';
 import FormField from '../../components/auth/FormField';
 import { useAuth } from '../../hooks/useAuth';
@@ -10,6 +10,9 @@ import { useAuth } from '../../hooks/useAuth';
 export default function LoginPage() {
   const { login } = useAuth();
   const navigate = useNavigate();
+  // Veio de uma página protegida (ex: link do QR do check-in)? Volta para ela.
+  const location = useLocation();
+  const voltarPara = location.state?.voltarPara;
 
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
@@ -22,7 +25,7 @@ export default function LoginPage() {
     setEnviando(true);
     try {
       await login(email, senha);
-      navigate('/home', { replace: true });
+      navigate(voltarPara ?? '/home', { replace: true });
     } catch (err) {
       setErro(err.message);
     } finally {
@@ -91,7 +94,7 @@ export default function LoginPage() {
         </Link>
         <p className="text-gray-500">
           Não tem conta?{' '}
-          <Link to="/cadastro" className="font-medium text-amora-500 hover:text-amora-600">
+          <Link to="/cadastro" state={{ voltarPara }} className="font-medium text-amora-500 hover:text-amora-600">
             Cadastre-se
           </Link>
         </p>

@@ -8,6 +8,7 @@ export default function ContestList({
   minhasInscricoesPorConcurso,
   ehFavorito,
   onEditar,
+  onVerInscritos,
   onInscrever,
   onCancelar,
   onAlternarDestaque,
@@ -47,6 +48,7 @@ export default function ContestList({
           inscricaoId={minhasInscricoesPorConcurso[concurso.id]}
           favorito={ehFavorito?.(concurso.id)}
           onEditar={onEditar}
+          onVerInscritos={onVerInscritos}
           onInscrever={onInscrever}
           onCancelar={onCancelar}
           onAlternarDestaque={onAlternarDestaque}

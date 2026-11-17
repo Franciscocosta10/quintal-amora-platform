@@ -97,6 +97,15 @@ describe('ContestItem', () => {
       expect(onEditar).toHaveBeenCalledWith(concurso);
     });
 
+    it('chama onVerInscritos ao clicar em Inscritos (RF10)', () => {
+      const onVerInscritos = vi.fn();
+      const concurso = criarConcurso({ id: 4 });
+      render(<ContestItem concurso={concurso} isAdmin={true} onVerInscritos={onVerInscritos} />);
+
+      fireEvent.click(screen.getByRole('button', { name: 'Inscritos' }));
+      expect(onVerInscritos).toHaveBeenCalledWith(concurso);
+    });
+
     it('chama onAlternarDestaque com o concurso ao clicar na estrela', () => {
       const onAlternarDestaque = vi.fn();
       const concurso = criarConcurso();

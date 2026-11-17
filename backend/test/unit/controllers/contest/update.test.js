@@ -20,10 +20,13 @@ describe('contest/update', function () {
       findOne: sinon.stub().resolves(concursoExistente),
       updateOne: sinon.stub().returns({ set: sinon.stub().resolves({ id: 1 }) })
     };
+
+    global.Notificacao = { create: sinon.stub().resolves() };
   });
 
   afterEach(function () {
     delete global.Concurso;
+    delete global.Notificacao;
     delete global._;
   });
 
@@ -73,11 +76,35 @@ describe('contest/update', function () {
   it('usa o novo dataHoraInicio quando ele é informado na edição', async function () {
   const novoInicio = concursoExistente.dataHoraInicio + 60 * 60 * 1000; // 1h depois
 
-  await contestUpdate.fn({ id: 1, dataHoraInicio: novoInicio });
+  await contestUpdate.fn.call({ req: { usuario: { id: 7 } } }, { id: 1, dataHoraInicio: novoInicio });
 
   const camposEnviados = global.Concurso.updateOne().set.firstCall.args[0];
   expect(camposEnviados.dataHoraInicio).to.equal(novoInicio);
 });
+
+  it('avisa os participantes quando o horário do concurso muda (RF09)', async function () {
+    const novoInicio = new Date('2026-11-20T15:00:00-03:00').getTime();
+    global.Concurso.updateOne.returns({
+      set: sinon.stub().resolves({ id: 1, nome: 'Concurso Cosplay', dataHoraInicio: novoInicio, evento: 3 })
+    });
+
+    await contestUpdate.fn.call({ req: { usuario: { id: 7 } } }, { id: 1, dataHoraInicio: novoInicio });
+
+    expect(global.Notificacao.create.firstCall.args[0]).to.deep.equal({
+      titulo: 'Mudança de horário: Concurso Cosplay',
+      mensagem: 'Concurso Cosplay agora começa em 20/11 às 15:00.',
+      tipo: 'chamada_concurso',
+      autor: 7,
+      concurso: 1,
+      evento: 3
+    });
+  });
+
+  it('não avisa ninguém quando a edição não muda o horário', async function () {
+    await contestUpdate.fn({ id: 1, nome: 'Novo nome', dataHoraInicio: concursoExistente.dataHoraInicio });
+
+    expect(global.Notificacao.create.called).to.equal(false);
+  });
 
   it('permite editar um concurso cuja data já passou (não revalida "no passado" no update)', async function () {
   concursoExistente.inicioInscricao = new Date('2019-12-20T00:00:00-03:00').getTime();
