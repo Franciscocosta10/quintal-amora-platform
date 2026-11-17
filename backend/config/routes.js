@@ -53,8 +53,13 @@ module.exports.routes = {
 
   'DELETE /registration/:id': { action: 'registration/cancel' },
 
+  // RF10: admin marca quem compareceu ao concurso
+  'PUT /registration/:id/presence': { action: 'registration/presence' },
+
   // Home
   'GET /event/actual-find': { action: 'event/actual-find' },
+
+  'PUT /event/save': { action: 'event/save' },
 
   // Catálogo de lojas e artistas (lista e detalhe usam a mesma action)
   'GET /expositor': { action: 'expositor/find' },
@@ -69,6 +74,13 @@ module.exports.routes = {
 
   // Painel administrativo (RF16)
   'GET /admin/dashboard': { action: 'admin/dashboard' },
+
+  // Gerenciamento de usuários (RF17)
+  'GET /admin/users': { action: 'admin/user-find' },
+
+  'POST /admin/users': { action: 'admin/user-create' },
+
+  'PUT /admin/users/:id': { action: 'admin/user-update' },
 
   // Notificações (RF11 / RF12)
   'GET /notificacao': { action: 'notificacao/find' },

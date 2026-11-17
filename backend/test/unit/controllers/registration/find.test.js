@@ -4,18 +4,26 @@ const registrationFind = require('../../../../api/controllers/registration/find'
 
 describe('registration/find', function () {
   beforeEach(function () {
+    global._ = require('@sailshq/lodash');
     global.Concurso = { findOne: sinon.stub().resolves({ id: 1 }) };
 
     const queryFalsa = {
-      populate: sinon.stub().returnsThis(),
-      sort: sinon.stub().resolves([{ id: 1, status: 'inscrito' }])
+      sort: sinon.stub().resolves([
+        { id: 1, status: 'inscrito', usuario: 7 },
+        { id: 2, status: 'inscrito', usuario: 9 }
+      ])
     };
     global.InscricaoConcurso = { find: sinon.stub().returns(queryFalsa) };
+    global.Usuario = {
+      find: sinon.stub().resolves([{ id: 7, nomeCompleto: 'Ana', email: 'ana@x.com' }])
+    };
   });
 
   afterEach(function () {
+    delete global._;
     delete global.Concurso;
     delete global.InscricaoConcurso;
+    delete global.Usuario;
   });
 
   it('retorna notFound quando o concurso não existe', async function () {
@@ -29,9 +37,26 @@ describe('registration/find', function () {
     }
   });
 
-  it('retorna as inscrições do concurso quando ele existe', async function () {
+  it('retorna as inscrições com nome e e-mail de cada inscrito', async function () {
     const resultado = await registrationFind.fn({ concursoId: 1 });
-    expect(resultado).to.deep.equal([{ id: 1, status: 'inscrito' }]);
+
+    expect(global.Usuario.find.firstCall.args[0]).to.deep.equal({
+      where: { id: { in: [7, 9] } },
+      select: ['nomeCompleto', 'email']
+    });
+    expect(resultado).to.deep.equal([
+      { id: 1, status: 'inscrito', usuario: { id: 7, nomeCompleto: 'Ana', email: 'ana@x.com' } },
+      { id: 2, status: 'inscrito', usuario: null }
+    ]);
+  });
+
+  it('não consulta usuários quando o concurso não tem inscrições', async function () {
+    global.InscricaoConcurso.find.returns({ sort: sinon.stub().resolves([]) });
+
+    const resultado = await registrationFind.fn({ concursoId: 1 });
+
+    expect(resultado).to.deep.equal([]);
+    expect(global.Usuario.find.called).to.equal(false);
   });
 
   it('não filtra por status quando o filtro não é informado', async function () {

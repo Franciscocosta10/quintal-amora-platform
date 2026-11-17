@@ -58,11 +58,13 @@ module.exports.policies = {
     'create': ['isLoggedIn'],
     'find': ['isLoggedIn', 'isAdmin'],
     'find-mine': ['isLoggedIn'],
-    'cancel': ['isLoggedIn']
+    'cancel': ['isLoggedIn'],
+    'presence': ['isLoggedIn', 'isAdmin']   // RF10
   },
 
   'event': {
-    'actual-find': true      // dado público, usado na Home
+    'actual-find': true,     // dado público, usado na Home
+    'save': ['isLoggedIn', 'isAdmin']
   },
 
   // Catálogo de lojas e artistas (RF13–RF15)
@@ -79,6 +81,9 @@ module.exports.policies = {
 
   // Painel administrativo (RF16 / RNF07)
   'admin/dashboard': ['isLoggedIn', 'isAdmin'],
+  'admin/user-find': ['isLoggedIn', 'isAdmin'],     // RF17
+  'admin/user-create': ['isLoggedIn', 'isAdmin'],
+  'admin/user-update': ['isLoggedIn', 'isAdmin'],
 
   // Notificações: todos leem; só administradores enviam
   // (regra de negócio "Permissões de Disparo").

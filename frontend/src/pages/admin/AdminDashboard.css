@@ -135,3 +135,78 @@
   font-size: 13px;
   color: var(--accent);
 }
+
+/* Tela de usuários (RF17) */
+
+.admin-voltar {
+  display: flex;
+  width: fit-content;
+  margin-bottom: 12px;
+  font-size: 13px;
+  color: var(--accent);
+}
+
+.admin-busca {
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 12px;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--text-h);
+  font-family: inherit;
+  font-size: 14px;
+}
+
+.admin-busca:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.admin-lista__acoes {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.admin-botao {
+  border: 1px solid var(--accent);
+  background: transparent;
+  color: var(--accent);
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.admin-botao:hover:not(:disabled) {
+  background-color: var(--accent);
+  color: #ffffff;
+}
+
+.admin-botao--perigo {
+  border-color: #c0392b;
+  color: #c0392b;
+}
+
+.admin-botao--perigo:hover:not(:disabled) {
+  background-color: #c0392b;
+}
+
+.admin-botao:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+/* No celular: nome em cima, selo e botões na linha de baixo. */
+@media (max-width: 640px) {
+  .admin-lista__item--usuario {
+    flex-wrap: wrap;
+  }
+
+  .admin-lista__item--usuario .admin-lista__texto {
+    flex-basis: 100%;
+  }
+}

@@ -9,21 +9,37 @@ import {
   ScanLine,
   UserCheck
 } from 'lucide-react';
+import { useSearchParams } from 'react-router-dom';
 import QrScanner from '../../components/checkin/QrScanner';
 import { registrarCheckin, consultarStatusCheckin, consultarHistoricoCheckins } from '../../services/checkinApi';
+import { buscarEventoAtual } from '../../services/event';
 import Layout from '../../components/Layout';
 import './CheckIn.css';
 
-// TODO: substituir pela lógica real de "evento ativo no momento"
-const EVENTO_ID_ATUAL = 1;
-const NOME_EVENTO = 'Quintal da Amora';
-
 const PASSOS = [
   { Icone: MapPin, titulo: 'Encontre um totem', texto: 'Procure o QR Code mais próximo no evento.' },
-  { Icone: ScanLine, titulo: 'Escaneie o QR Code', texto: 'Toque em "Escanear QR Code" e aponte a câmera.' },
+  { Icone: ScanLine, titulo: 'Escaneie o QR Code', texto: 'Aponte a câmera do celular e abra o link que aparecer.' },
   { Icone: UserCheck, titulo: 'Confirme seus dados', texto: 'Validamos sua entrada automaticamente.' },
   { Icone: PartyPopper, titulo: 'Pronto!', texto: 'Seu check-in fica registrado no histórico.' }
 ];
+
+const MENSAGEM_QR_INVALIDO = 'Não foi possível validar esse QR Code. Tente novamente.';
+
+/**
+ * O QR do totem guarda um link para esta tela, com o código no `?qr=`:
+ *   https://<site>/checkin?qr=checkin:evento:3:ponto:Entrada Principal
+ * A câmera do celular abre o link e a tela faz o check-in sozinha.
+ * Se o QR for lido pelo botão "Escanear QR Code" do app, o texto lido é
+ * esse link inteiro: aqui tiramos só o código. Texto que não é link
+ * (QR antigo, só com o código) passa direto.
+ */
+function extrairCodigoDoQr(textoLido) {
+  try {
+    return new URL(textoLido).searchParams.get('qr') ?? textoLido;
+  } catch {
+    return textoLido;
+  }
+}
 
 function formatarHora(epoch) {
   return new Date(epoch).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
@@ -40,6 +56,9 @@ function formatarData(epoch) {
 
 export default function CheckIn() {
   const [aba, setAba] = useState('meu-checkin');
+  // Evento atual (o mais recente cadastrado no Painel admin): o status do
+  // check-in é sempre consultado para ele. undefined = ainda carregando.
+  const [evento, setEvento] = useState(undefined);
   const [status, setStatus] = useState(null);
   const [escaneando, setEscaneando] = useState(false);
   const [erro, setErro] = useState(null);
@@ -47,27 +66,54 @@ export default function CheckIn() {
   const [historico, setHistorico] = useState([]);
   const [carregandoHistorico, setCarregandoHistorico] = useState(false);
   const [erroHistorico, setErroHistorico] = useState(null);
+  // Código do QR quando a tela foi aberta pelo link do totem (?qr=...).
+  const [searchParams] = useSearchParams();
+  const qrDoLink = searchParams.get('qr');
 
   // Recarrega o status depois de uma leitura de QR Code bem-sucedida.
   const carregarStatus = useCallback(async () => {
+    if (!evento) return;
+
     try {
-      const resultado = await consultarStatusCheckin(EVENTO_ID_ATUAL);
+      const resultado = await consultarStatusCheckin(evento.id);
       setStatus(resultado);
       setErro(null);
     } catch {
       setErro('Não foi possível carregar seu status de check-in.');
     }
-  }, []);
+  }, [evento]);
 
-  // Carga inicial com os setState dentro do .then (fora do corpo do efeito)
-  // e ignorando a resposta se a tela já foi fechada.
+  // Carga inicial, com os setState depois dos await (fora do corpo do
+  // efeito) e ignorando as respostas se a tela já foi fechada.
   useEffect(() => {
     let cancelado = false;
 
-    consultarStatusCheckin(EVENTO_ID_ATUAL)
-      .then((resultado) => {
-        if (!cancelado) setStatus(resultado);
-      })
+    async function carregar() {
+      // Primeiro descobre o evento atual; sem evento cadastrado não há status.
+      const eventoAtual = await buscarEventoAtual();
+      if (cancelado) return;
+      setEvento(eventoAtual);
+      if (!eventoAtual) return;
+
+      // Aberta pelo link do QR: registra o check-in antes de ver o status.
+      // Se falhar, o status decide a mensagem: quem já tinha feito check-in
+      // (ex: abriu o link de novo) só vê o "Check-in confirmado!".
+      let falhouNoLink = false;
+      if (qrDoLink) {
+        try {
+          await registrarCheckin(qrDoLink);
+        } catch {
+          falhouNoLink = true;
+        }
+      }
+
+      const resultado = await consultarStatusCheckin(eventoAtual.id);
+      if (cancelado) return;
+      setStatus(resultado);
+      if (falhouNoLink && !resultado.fezCheckin) setErro(MENSAGEM_QR_INVALIDO);
+    }
+
+    carregar()
       .catch(() => {
         if (!cancelado) setErro('Não foi possível carregar seu status de check-in.');
       })
@@ -78,21 +124,27 @@ export default function CheckIn() {
     return () => {
       cancelado = true;
     };
-  }, []);
+  }, [qrDoLink]);
 
-  const handleScan = useCallback(async (qrCode) => {
+  const handleScan = useCallback(async (textoLido) => {
     setEscaneando(false);
 
     try {
-      await registrarCheckin(qrCode);
+      await registrarCheckin(extrairCodigoDoQr(textoLido));
       await carregarStatus();
     } catch {
-      setErro('Não foi possível validar esse QR Code. Tente novamente.');
+      setErro(MENSAGEM_QR_INVALIDO);
     }
   }, [carregarStatus]);
 
+  // O navegador só libera a câmera em conexão segura (https ou localhost).
+  // No celular, abrindo pelo IP da rede (http://192.168...), cai aqui.
   const handleScannerError = useCallback(() => {
-    setErro('Não foi possível acessar a câmera.');
+    setErro(
+      window.isSecureContext
+        ? 'Não foi possível acessar a câmera. Verifique se o navegador tem permissão para usá-la.'
+        : 'Não foi possível acessar a câmera: o navegador só libera a câmera em sites com https.'
+    );
   }, []);
 
   const carregarHistorico = useCallback(async () => {
@@ -148,7 +200,7 @@ export default function CheckIn() {
               <div className="checkin-evento">
                 <CalendarHeart size={18} aria-hidden="true" />
                 <span>Evento</span>
-                <strong>{NOME_EVENTO}</strong>
+                <strong>{evento?.nome ?? 'Quintal da Amora'}</strong>
               </div>
 
               {carregando && <p className="checkin-status__texto">Carregando seu status…</p>}
@@ -178,7 +230,13 @@ export default function CheckIn() {
                 </div>
               )}
 
-              {!carregando && !status?.fezCheckin && (
+              {!carregando && !evento && !erro && (
+                <p className="checkin-status__texto">
+                  Nenhum evento cadastrado ainda. O check-in abre quando a organização cadastrar o evento.
+                </p>
+              )}
+
+              {!carregando && evento && !status?.fezCheckin && (
                 <div className="checkin-status__corpo">
                   {escaneando ? (
                     <>

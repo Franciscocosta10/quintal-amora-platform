@@ -13,6 +13,7 @@ module.exports = {
 
     dataHoraEntrada: {
       type: 'number', // epoch (ms) — RF05
+      columnType: 'double precision', // "real" (padrão) perde ~1 min de precisão em epoch ms
       required: true
     },
 

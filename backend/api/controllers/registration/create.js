@@ -4,8 +4,8 @@
  * RF08 — inscrição em concurso. "Confirmação de presença" é o próprio
  * ato de se inscrever (decisão confirmada em conversa) — não existe uma
  * etapa separada de confirmação; o registro já nasce com status
- * 'inscrito'. O campo `presencaConfirmada` do model fica sem uso por
- * enquanto (fica pronto caso um dia vire um check-in físico no dia).
+ * 'inscrito'. O campo `presencaConfirmada` é marcado pelo admin no dia,
+ * na lista de inscritos do concurso (RF10, registration/presence).
  *
  * Protegida por isLoggedIn — qualquer usuário autenticado pode se
  * inscrever (ver config/policies.js).

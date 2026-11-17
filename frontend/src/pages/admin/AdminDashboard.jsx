@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
+  CalendarCog,
   CalendarDays,
   ClipboardList,
   LayoutDashboard,
@@ -11,6 +12,7 @@ import {
   Users
 } from 'lucide-react';
 import Layout from '../../components/Layout';
+import EventForm from '../../components/admin/EventForm';
 import NotificationForm from '../../components/admin/NotificationForm';
 import { buscarPainelAdmin } from '../../services/Admin';
 import '../contest/Contests.css';
@@ -25,7 +27,7 @@ import './AdminDashboard.css';
  */
 
 const CARTOES = [
-  { chave: 'participantes', rotulo: 'Participantes cadastrados', Icone: Users },
+  { chave: 'participantes', rotulo: 'Participantes cadastrados', Icone: Users, to: '/admin/usuarios' },
   { chave: 'checkins', rotulo: 'Check-ins realizados', Icone: QrCode, to: '/checkin' },
   { chave: 'atividades', rotulo: 'Atividades programadas', Icone: CalendarDays, to: '/schedule' },
   { chave: 'concursosAbertos', rotulo: 'Concursos abertos', Icone: Trophy, to: '/concursos' },
@@ -129,7 +131,8 @@ export default function AdminDashboard() {
 
       {!erro && dados && !evento && (
         <p className="admin-aviso">
-          Nenhum evento cadastrado ainda — os números do evento aparecem zerados.
+          Nenhum evento cadastrado ainda. Cadastre em "Dados do evento" logo abaixo para
+          liberar o check-in e mostrar data e local na Home.
         </p>
       )}
 
@@ -147,6 +150,12 @@ export default function AdminDashboard() {
                 valor={dados.totais[cartao.chave] ?? 0}
               />
             ))}
+          </section>
+
+          <section className="contests-highlight admin-aviso-form">
+            <h3 className="com-icone"><CalendarCog size="1em" aria-hidden="true" /> Dados do evento</h3>
+            {/* Depois de salvar, recarrega o painel para o resumo mostrar os novos dados. */}
+            <EventForm evento={evento} onSalvo={carregar} />
           </section>
 
           <section className="contests-highlight admin-aviso-form">
@@ -197,6 +206,7 @@ export default function AdminDashboard() {
                   ))}
                 </ul>
               )}
+              <Link to="/admin/usuarios" className="admin-listas__ver-mais">Gerenciar usuários</Link>
             </section>
           </div>
         </>

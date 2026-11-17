@@ -1,10 +1,11 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Star, Trophy } from 'lucide-react';
 import Layout from '../../components/Layout';
 import DayTabs from '../../components/schedule/DayTabs';
 import ContestList from '../../components/contest/ContestList';
 import ContestForm from '../../components/contest/ContestForm';
 import RegistrationConfirmedModal from '../../components/contest/RegistrationConfirmedModal';
+import RegistrationsModal from '../../components/contest/RegistrationsModal';
 import { useContests } from '../../hooks/useContests';
 import { useMyRegistrations } from '../../hooks/useMyRegistrations';
 import { useFavoriteContests } from '../../hooks/useFavoriteContests';
@@ -33,6 +34,7 @@ export default function Contests() {
   const [formAberto, setFormAberto] = useState(false);
   const [concursoEditando, setConcursoEditando] = useState(null);
   const [concursoInscrito, setConcursoInscrito] = useState(null);
+  const [concursoInscritos, setConcursoInscritos] = useState(null);
 
   const { categorias, porCategoria } = useMemo(
     () => agruparPorCategoria(concursos),
@@ -113,6 +115,13 @@ export default function Contests() {
     setConcursoEditando(concurso);
     setFormAberto(true);
   }
+
+  // RF10: se o admin removeu alguém, recarrega para o card mostrar o novo
+  // total de inscritos (mesmo padrão de salvar/excluir concurso).
+  const fecharInscritos = useCallback((houveRemocao) => {
+    setConcursoInscritos(null);
+    if (houveRemocao) window.location.reload();
+  }, []);
 
   function fecharFormulario() {
     setFormAberto(false);
@@ -248,6 +257,7 @@ export default function Contests() {
           minhasInscricoesPorConcurso={minhasInscricoesPorConcurso}
           ehFavorito={ehFavorito}
           onEditar={abrirEdicao}
+          onVerInscritos={setConcursoInscritos}
           onInscrever={inscrever}
           onCancelar={cancelar}
           onAlternarDestaque={alternarDestaque}
@@ -267,6 +277,7 @@ export default function Contests() {
                 minhasInscricoesPorConcurso={minhasInscricoesPorConcurso}
                 ehFavorito={ehFavorito}
                 onEditar={abrirEdicao}
+                onVerInscritos={setConcursoInscritos}
                 onInscrever={inscrever}
                 onCancelar={cancelar}
                 onAlternarDestaque={alternarDestaque}
@@ -285,6 +296,10 @@ export default function Contests() {
           onExcluir={excluirConcurso}
           onCancelar={fecharFormulario}
         />
+      )}
+
+      {isAdmin && (
+        <RegistrationsModal concurso={concursoInscritos} onFechar={fecharInscritos} />
       )}
 
       <RegistrationConfirmedModal

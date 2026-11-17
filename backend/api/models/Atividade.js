@@ -31,11 +31,13 @@ module.exports = {
 
     dataHoraInicio: {
       type: 'number',
+      columnType: 'double precision', // "real" (padrão) perde ~1 min de precisão em epoch ms
       required: true
     },
 
     dataHoraFim: {
       type: 'number',
+      columnType: 'double precision', // "real" (padrão) perde ~1 min de precisão em epoch ms
       allowNull: true
     },
 

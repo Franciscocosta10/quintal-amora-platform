@@ -3,8 +3,8 @@
  *
  * RF01 – O sistema deve permitir o cadastro de usuários.
  * Todo novo cadastro nasce com perfil "visitante" (RF03); promover a
- * "administrador" é uma ação manual (banco de dados) ou, futuramente,
- * feita via painel administrativo por outro admin (RF17).
+ * "administrador" é feito por outro admin na tela "Usuários" do painel
+ * (RF17, admin/user-update).
  *
  * POST /api/v1/auth/signup
  * body: { nomeCompleto, email, senha }
