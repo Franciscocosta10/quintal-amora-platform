@@ -62,3 +62,67 @@
   outline-offset: 2px;
 }
 
+.sidebar__topo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+/* Botão ☰: só existe no celular/tablet (ver media query abaixo). */
+.sidebar__menu-btn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  border: none;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.16);
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.sidebar__menu-btn:hover {
+  background: rgba(255, 255, 255, 0.26);
+}
+
+.sidebar__menu-btn:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+}
+
+/*
+ * Celular e tablet (mesmo ponto de quebra do Layout.css): a sidebar vira
+ * uma barra fina no topo, com logo e ☰. Os links ficam escondidos até o
+ * menu ser aberto (.sidebar--aberta) e aparecem embaixo da barra.
+ */
+@media (max-width: 1024px) {
+  .sidebar {
+    width: auto;
+    padding: 10px 16px;
+    gap: 0;
+  }
+
+  .sidebar__logo-imagem {
+    width: 36px;
+    height: 36px;
+  }
+
+  .sidebar__logo span {
+    font-size: 14px;
+  }
+
+  .sidebar__menu-btn {
+    display: flex;
+  }
+
+  .sidebar__nav {
+    display: none;
+    gap: 4px;
+  }
+
+  .sidebar--aberta .sidebar__nav {
+    display: flex;
+    padding-top: 12px;
+  }
+}

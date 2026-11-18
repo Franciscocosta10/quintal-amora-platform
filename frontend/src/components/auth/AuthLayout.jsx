@@ -44,7 +44,7 @@ export default function AuthLayout({ children }) {
   return (
     <div className="min-h-screen flex bg-amora-50">
       {/* Painel esquerdo — decorativo, escondido em telas pequenas */}
-      <aside className="hidden lg:flex lg:w-[38%] relative flex-col justify-between overflow-hidden bg-gradient-to-b from-amora-100 via-amora-50 to-white px-10 pb-8 pt-10">
+      <aside className="font-destaque hidden lg:flex lg:w-[38%] relative flex-col justify-between overflow-hidden bg-gradient-to-b from-amora-100 via-amora-50 to-white px-10 pb-8 pt-10">
         <SakuraDecoration className="pointer-events-none absolute -left-6 -top-4 h-48 w-64" />
         <SakuraDecoration className="pointer-events-none absolute -right-16 top-1/3 h-40 w-52 rotate-90 opacity-60" />
 

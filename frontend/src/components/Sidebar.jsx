@@ -1,17 +1,13 @@
+import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { Menu, X } from 'lucide-react';
 import { useAuth } from '../hooks/useAuth';
 import logoAmora from '../assets/quintal/logo-amora.webp';
 import './Sidebar.css';
 
 /**
- * Sidebar — navegação lateral fixa (ver mockup: Início, Concursos,
- * Check-in, Favoritos, Login/Cadastro).
- *
- * Só "Início" e "Check-in" têm rota real até agora (Check-in já existe
- * das etapas anteriores). "Concursos" e "Favoritos" ainda não têm
- * funcionalidade (RF08-RF10 e a futura feature de favoritos), então
- * apontam para rotas que ainda não existem — troque o `to` quando essas
- * telas forem criadas, ou me avise para eu já deixar como "em breve".
+ * Sidebar — navegação lateral fixa. No desktop fica sempre aberta; até
+ * 1024px vira uma barra fina com o botão ☰, que abre e fecha os links.
  */
 const ITENS_MENU = [
   { label: 'Início', to: '/home' },
@@ -24,17 +20,38 @@ const ITENS_MENU = [
 // Só aparece para administradores (RNF07).
 const ITEM_ADMIN = { label: 'Painel admin', to: '/admin' };
 
+/*
+ * No celular e tablet (até 1024px) a sidebar vira uma barra no topo só
+ * com a logo e o botão ☰; os links aparecem ao tocar nele. No computador
+ * o botão fica escondido pelo CSS e os links aparecem sempre.
+ *
+ * Não precisa fechar o menu ao trocar de página: cada página monta o seu
+ * próprio Layout, então a Sidebar nasce de novo com o menu fechado.
+ */
 export default function Sidebar() {
   const { isAdmin } = useAuth();
+  const [menuAberto, setMenuAberto] = useState(false);
   const itens = isAdmin ? [...ITENS_MENU, ITEM_ADMIN] : ITENS_MENU;
 
   return (
-    <aside className="sidebar">
-      <div className="sidebar__logo">
-        <img src={logoAmora} alt="" className="sidebar__logo-imagem" />
-        <span>Quintal<br />Amora</span>
+    <aside className={`sidebar ${menuAberto ? 'sidebar--aberta' : ''}`}>
+      <div className="sidebar__topo">
+        <div className="sidebar__logo">
+          <img src={logoAmora} alt="" className="sidebar__logo-imagem" />
+          <span>Quintal<br />Amora</span>
+        </div>
+        <button
+          type="button"
+          className="sidebar__menu-btn"
+          aria-label={menuAberto ? 'Fechar menu' : 'Abrir menu'}
+          aria-expanded={menuAberto}
+          aria-controls="sidebar-nav"
+          onClick={() => setMenuAberto((aberto) => !aberto)}
+        >
+          {menuAberto ? <X size={24} aria-hidden="true" /> : <Menu size={24} aria-hidden="true" />}
+        </button>
       </div>
-      <nav className="sidebar__nav">
+      <nav id="sidebar-nav" className="sidebar__nav">
         {itens.map((item) => (
           <NavLink
             key={item.to}

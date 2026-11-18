@@ -13,8 +13,6 @@ module.exports.routes = {
 
   'POST /auth/reset-password': { action: 'auth/reset-password' },
 
-  'PUT /auth/change-profile': { action: 'auth/change-profile'},
-
   'PUT /auth/change-photo': { action: 'auth/change-photo' },
 
   'PUT /auth/update-profile': { action: 'auth/update-profile' },
