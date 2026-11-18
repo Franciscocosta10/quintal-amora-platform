@@ -4,7 +4,7 @@
  * Funções que conversam com os endpoints de /activity (RF06 e RF07).
  */
 
-import { api } from './scheduleApi';
+import { apiFetch } from '../lib/api';
 
 /**
  * RF06 — lista a programação, com filtros opcionais.
@@ -22,18 +22,18 @@ export function listarAtividades(filtros = {}) {
 
   const query = params.toString();
 
-  return api.get(`/activity${query ? `?${query}` : ''}`);
+  return apiFetch(`/activity${query ? `?${query}` : ''}`);
 }
 
-// RF07 — usadas na futura tela de administração de programação.
+// RF07 — usadas pelo admin na tela de Programação.
 export function criarAtividade(dados) {
-  return api.post('/activity/create', dados);
+  return apiFetch('/activity/create', { method: 'POST', body: dados });
 }
 
 export function editarAtividade(id, dados) {
-  return api.put(`/activity/update/${id}`, dados);
+  return apiFetch(`/activity/update/${id}`, { method: 'PUT', body: dados });
 }
 
 export function removerAtividade(id) {
-  return api.delete(`/activity/delete/${id}`);
+  return apiFetch(`/activity/delete/${id}`, { method: 'DELETE' });
 }

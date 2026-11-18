@@ -4,7 +4,6 @@ import { ArrowLeft, Check } from 'lucide-react';
 import ModalPagina from '../ModalPagina';
 import { useAuth } from '../../hooks/useAuth';
 import { useFecharModalPagina } from '../../hooks/useFecharModalPagina';
-import { apiFetch } from '../../lib/api';
 import { atualizarDadosPerfil } from '../../services/perfil';
 import './Profile.css';
 
@@ -27,8 +26,6 @@ function ConteudoPerfil({ fechar }) {
     email: usuario?.email || ''
   });
 
-  const [alterandoPerfil, setAlterandoPerfil] = useState(false);
-  const [erroPerfil, setErroPerfil] = useState('');
   const [mensagemSucesso, setMensagemSucesso] = useState('');
   const [salvando, setSalvando] = useState(false);
   const [erroDados, setErroDados] = useState('');
@@ -62,44 +59,6 @@ function ConteudoPerfil({ fechar }) {
       setErroDados(error.message);
     } finally {
       setSalvando(false);
-    }
-  }
-
-  async function alternarPerfil() {
-    setErroPerfil('');
-    setMensagemSucesso('');
-    setAlterandoPerfil(true);
-
-    try {
-      const novoPerfil = isAdmin
-        ? 'visitante'
-        : 'administrador';
-
-      await apiFetch('/auth/change-profile', {
-        method: 'PUT',
-        body: {
-          perfil: novoPerfil
-        }
-      });
-
-      await atualizarUsuario();
-
-      setMensagemSucesso(
-        novoPerfil === 'administrador'
-          ? 'Perfil alterado para Administrador com sucesso!'
-          : 'Perfil alterado para Visitante com sucesso!'
-      );
-
-      setTimeout(() => {
-        setMensagemSucesso('');
-      }, 3000);
-
-    } catch (error) {
-      setErroPerfil(
-        error.message || 'Não foi possível alterar o perfil.'
-      );
-    } finally {
-      setAlterandoPerfil(false);
     }
   }
 
@@ -172,38 +131,6 @@ function ConteudoPerfil({ fechar }) {
             {isAdmin ? 'Administrador' : 'Visitante'}
           </strong>
         </div>
-
-        {import.meta.env.DEV && (
-          <div className="profile__dev-section">
-            <p className="profile__dev-title">
-              Área de testes
-            </p>
-
-            <p className="profile__dev-description">
-              Utilize este botão para testar as permissões
-              de visitante e administrador.
-            </p>
-
-            <button
-              type="button"
-              className="profile__btn profile__btn--profile"
-              onClick={alternarPerfil}
-              disabled={alterandoPerfil}
-            >
-              {alterandoPerfil
-                ? 'Alterando...'
-                : isAdmin
-                  ? 'Alternar para Visitante'
-                  : 'Alternar para Administrador'}
-            </button>
-
-            {erroPerfil && (
-              <p className="profile__error">
-                {erroPerfil}
-              </p>
-            )}
-          </div>
-        )}
 
         {erroDados && (
           <p className="profile__error" role="alert">

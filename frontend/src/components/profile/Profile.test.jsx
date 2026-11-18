@@ -53,6 +53,15 @@ describe('Profile', () => {
     expect(screen.getByRole('button', { name: 'Cancelar' })).toBeInTheDocument();
   });
 
+  // O perfil só muda pela tela de Usuários do painel admin (RF17).
+  it('não oferece trocar o próprio perfil', () => {
+    useAuth.mockReturnValue(autenticacao({ usuario: { ...USUARIO, perfil: 'administrador' }, isAdmin: true }));
+    renderizar();
+
+    expect(screen.getByText('Administrador')).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: /Alternar para/ })).not.toBeInTheDocument();
+  });
+
   describe('salvar alterações', () => {
     const digitar = (rotulo, valor) => fireEvent.change(screen.getByLabelText(rotulo), { target: { value: valor } });
     const salvar = () => act(async () => fireEvent.click(screen.getByRole('button', { name: 'Salvar alterações' })));

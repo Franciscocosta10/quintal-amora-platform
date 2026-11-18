@@ -17,6 +17,10 @@
   --color-amora-700: #a81846;
 
   --color-plum-900: #3c1330;
+
+  /* Fonte do painel de boas-vindas do login/cadastro (classe font-destaque).
+     Carregada do Google Fonts no index.html. */
+  --font-destaque: "Poppins", system-ui, sans-serif;
 }
 
 :root {

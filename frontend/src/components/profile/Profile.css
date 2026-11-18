@@ -96,39 +96,6 @@
   color: var(--accent);
 }
 
-.profile__dev-section {
-  padding: 16px;
-  border: 1px dashed var(--accent);
-  border-radius: 10px;
-  background-color: #fffafb;
-}
-
-.profile__dev-title {
-  margin: 0 0 6px;
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--accent);
-}
-
-.profile__dev-description {
-  margin: 0 0 12px;
-  font-size: 13px;
-  color: #666;
-  line-height: 1.5;
-}
-
-.profile__btn--profile {
-  width: 100%;
-  background-color: transparent;
-  border: 1px solid var(--accent);
-  color: var(--accent);
-}
-
-.profile__btn--profile:hover {
-  background-color: var(--accent);
-  color: #ffffff;
-}
-
 .profile__btn:disabled {
   opacity: 0.6;
   cursor: not-allowed;

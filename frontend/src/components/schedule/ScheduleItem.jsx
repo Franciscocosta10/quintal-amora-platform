@@ -122,7 +122,8 @@ export default function ScheduleItem({
               Editar
             </button>
           </>
-        ) : (
+        ) : onToggleFavorito && (
+          // Estrela de favorito: só aparece se a tela passou o que fazer no clique.
           <button
             type="button"
             className={`schedule-item__star ${

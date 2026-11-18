@@ -6,6 +6,8 @@ import AvisosCard from '../components/home/AvisosCard';
 import Carrossel from '../components/home/Carrossel';
 import ScheduleList from '../components/schedule/ScheduleList';
 import { useAtividades } from '../hooks/useSchedule';
+import { useFavoriteAtividades } from '../hooks/useFavoriteAtividades';
+import { useAuth } from '../hooks/useAuth';
 import { agruparPorDia } from '../utils/agruparPorDia';
 import { formatarHorario, formatarPeriodo } from '../utils/dataEvento';
 import { buscarEventoAtual } from '../services/event';
@@ -25,6 +27,12 @@ export default function HomePage() {
   const { atividades, carregando, erro } = useAtividades();
   const { expositores } = useExpositores();
   const [evento, setEvento] = useState(null);
+  // Mesmos favoritos da Programação (salvos no navegador): o que for marcado
+  // aqui aparece na aba "★ Favoritos" de lá. Admin não favorita, então não
+  // recebe a estrela.
+  const { isAdmin } = useAuth();
+  const { ehFavorito, alternarFavorito } = useFavoriteAtividades();
+  const favoritos = isAdmin ? {} : { ehFavorito, onAlternarFavorito: alternarFavorito };
 
   useEffect(() => {
     buscarEventoAtual().then(setEvento).catch(() => setEvento(null));
@@ -99,6 +107,7 @@ export default function HomePage() {
             atividades={previewAtividades}
             carregando={carregando}
             erro={erro}
+            {...favoritos}
           />
         ) : (
           <div className="home-schedule__dias">
@@ -110,6 +119,7 @@ export default function HomePage() {
                   atividades={porDia[dia.chave] || []}
                   carregando={false}
                   erro={null}
+                  {...favoritos}
                 />
               </div>
             ))}
