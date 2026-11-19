@@ -1,0 +1,133 @@
+# Pipeline de integração contínua do Quintal da Amora.
+#
+# Em todo push e pull request, backend e frontend rodam em paralelo:
+# instalação limpa (npm ci), lint, testes com a cobertura mínima do
+# portfólio (75% backend / 25% frontend) e, no frontend, o build de produção.
+# Se qualquer passo falhar, o PR fica marcado como reprovado.
+#
+# Depois que os dois passam, o job "sonarcloud" faz a análise estática e de
+# segurança, já com a cobertura dos testes.
+#
+# O job de deploy (CD) para a Azure entra aqui depois que a hospedagem
+# for criada, rodando só quando a main for atualizada.
+
+name: CI
+
+on:
+  push:
+    branches: [main, 'feature/**']
+  pull_request:
+    branches: [main]
+
+# Um push novo na mesma branch cancela a execução anterior, que ficou velha.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  backend:
+    name: Backend (Sails.js)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: backend/package-lock.json
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Testes unitários com cobertura (mínimo 75%)
+        run: npm run test:coverage
+
+      - name: Guardar relatório de cobertura
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cobertura-backend
+          path: backend/coverage/
+          retention-days: 14
+
+  frontend:
+    name: Frontend (React + Vite)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Testes com cobertura (mínimo 25%)
+        run: npm run test:coverage
+
+      - name: Build de produção
+        run: npm run build
+
+      - name: Guardar relatório de cobertura
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cobertura-frontend
+          path: frontend/coverage/
+          retention-days: 14
+
+  sonarcloud:
+    name: Análise estática (SonarCloud)
+    needs: [backend, frontend]
+    runs-on: ubuntu-latest
+    # PRs vindos de forks não recebem o SONAR_TOKEN; nesses casos o job é pulado.
+    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Histórico completo: o Sonar usa o git para saber o que é código novo.
+          fetch-depth: 0
+
+      - name: Baixar cobertura do backend
+        uses: actions/download-artifact@v4
+        with:
+          name: cobertura-backend
+          path: backend/coverage
+
+      - name: Baixar cobertura do frontend
+        uses: actions/download-artifact@v4
+        with:
+          name: cobertura-frontend
+          path: frontend/coverage
+
+      # Os relatórios citam os arquivos a partir de cada pasta (ex.: "api/...",
+      # "src/..."); o Sonar lê a partir da raiz do repositório.
+      - name: Ajustar caminhos da cobertura para a raiz do repositório
+        run: |
+          sed -i 's#^SF:#SF:backend/#' backend/coverage/lcov.info
+          sed -i 's#^SF:#SF:frontend/#' frontend/coverage/lcov.info
+
+      - name: Análise SonarCloud
+        uses: SonarSource/sonarqube-scan-action@v5
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: https://sonarcloud.io

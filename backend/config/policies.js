@@ -39,14 +39,14 @@ module.exports.policies = {
 
   // Programação do evento (atividade)
   'activity': {
-  'find': true,
-  'create': ['isLoggedIn', 'isAdmin'],
-  'update': ['isLoggedIn', 'isAdmin'],
-  'delete': ['isLoggedIn', 'isAdmin']
-},
+    'find': true,
+    'create': ['isLoggedIn', 'isAdmin'],
+    'update': ['isLoggedIn', 'isAdmin'],
+    'delete': ['isLoggedIn', 'isAdmin']
+  },
 
   // Concursos
-    'contest': {
+  'contest': {
     'find': true,
     'create': ['isLoggedIn', 'isAdmin'],
     'update': ['isLoggedIn', 'isAdmin'],

@@ -36,12 +36,12 @@ module.exports = {
     const usuario = await Usuario.findOne({ email: emailNormalizado });
 
     if (!usuario) {
-  sails.log.info(`Solicitação de redefinição para e-mail não cadastrado: ${emailNormalizado}`);
+      sails.log.info(`Solicitação de redefinição para e-mail não cadastrado: ${emailNormalizado}`);
 
-  return exits.success({
-    message: 'Recuperação de senha iniciada com sucesso.'
-  });
-}
+      return exits.success({
+        message: 'Recuperação de senha iniciada com sucesso.'
+      });
+    }
     const tokenCru = crypto.randomBytes(32).toString('hex');
     const tokenHash = crypto.createHash('sha256').update(tokenCru).digest('hex');
     const TEMPO_EXPIRACAO_MS = 30 * 60 * 1000; // 30 minutos
@@ -56,7 +56,7 @@ module.exports = {
     try {
       await sails.helpers.sendPasswordResetEmail.with({
         destinatario: usuario.email,
-        nome: usuario.nome, // ajuste pro nome real do atributo, se for diferente
+        nome: usuario.nomeCompleto,
         link: linkRedefinicao
       });
     } catch (err) {
@@ -66,8 +66,8 @@ module.exports = {
     }
 
     return exits.success({
-  message: 'Recuperação de senha iniciada com sucesso.'
-});
+      message: 'Recuperação de senha iniciada com sucesso.'
+    });
 
   }
 

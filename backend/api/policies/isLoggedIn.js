@@ -22,7 +22,7 @@ module.exports = async function (req, res, proceed) {
   var decoded;
   try {
     decoded = jwt.verify(token, sails.config.custom.jwtSecret);
-  } catch (err) {
+  } catch (unusedErr) {
     return res.status(401).json({ error: 'Token inválido ou expirado.' });
   }
 

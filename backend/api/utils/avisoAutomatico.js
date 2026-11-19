@@ -40,7 +40,7 @@ function formatarDataHora(timestamp) {
  * reenvia todos os campos, mesmo os que não foram alterados.
  */
 function mudouHorario(registroAntigo, camposNovos) {
-  return ['dataHoraInicio', 'dataHoraFim'].some(function (campo) {
+  return ['dataHoraInicio', 'dataHoraFim'].some((campo) => {
     return camposNovos[campo] !== undefined && camposNovos[campo] !== registroAntigo[campo];
   });
 }

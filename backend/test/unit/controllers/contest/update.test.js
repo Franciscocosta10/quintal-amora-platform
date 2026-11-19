@@ -74,13 +74,13 @@ describe('contest/update', function () {
   });
 
   it('usa o novo dataHoraInicio quando ele é informado na edição', async function () {
-  const novoInicio = concursoExistente.dataHoraInicio + 60 * 60 * 1000; // 1h depois
+    const novoInicio = concursoExistente.dataHoraInicio + 60 * 60 * 1000; // 1h depois
 
-  await contestUpdate.fn.call({ req: { usuario: { id: 7 } } }, { id: 1, dataHoraInicio: novoInicio });
+    await contestUpdate.fn.call({ req: { usuario: { id: 7 } } }, { id: 1, dataHoraInicio: novoInicio });
 
-  const camposEnviados = global.Concurso.updateOne().set.firstCall.args[0];
-  expect(camposEnviados.dataHoraInicio).to.equal(novoInicio);
-});
+    const camposEnviados = global.Concurso.updateOne().set.firstCall.args[0];
+    expect(camposEnviados.dataHoraInicio).to.equal(novoInicio);
+  });
 
   it('avisa os participantes quando o horário do concurso muda (RF09)', async function () {
     const novoInicio = new Date('2026-11-20T15:00:00-03:00').getTime();
@@ -107,12 +107,12 @@ describe('contest/update', function () {
   });
 
   it('permite editar um concurso cuja data já passou (não revalida "no passado" no update)', async function () {
-  concursoExistente.inicioInscricao = new Date('2019-12-20T00:00:00-03:00').getTime();
-  concursoExistente.fimInscricao = new Date('2019-12-30T23:59:59-03:00').getTime();
-  concursoExistente.dataHoraInicio = new Date('2020-01-01T10:00:00-03:00').getTime();
-  concursoExistente.dataHoraFim = new Date('2020-01-01T12:00:00-03:00').getTime();
+    concursoExistente.inicioInscricao = new Date('2019-12-20T00:00:00-03:00').getTime();
+    concursoExistente.fimInscricao = new Date('2019-12-30T23:59:59-03:00').getTime();
+    concursoExistente.dataHoraInicio = new Date('2020-01-01T10:00:00-03:00').getTime();
+    concursoExistente.dataHoraFim = new Date('2020-01-01T12:00:00-03:00').getTime();
 
-  const resultado = await contestUpdate.fn({ id: 1, descricao: 'Atualizando concurso antigo' });
-  expect(resultado).to.deep.equal({ id: 1 });
-});
+    const resultado = await contestUpdate.fn({ id: 1, descricao: 'Atualizando concurso antigo' });
+    expect(resultado).to.deep.equal({ id: 1 });
+  });
 });

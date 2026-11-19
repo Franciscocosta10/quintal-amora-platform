@@ -10,9 +10,11 @@ export default defineConfig({
     setupFiles: './src/test/setup.js',
     coverage: {
       provider: 'v8',
-      reporter: ['text', 'html'],
+      reporter: ['text', 'html', 'lcov'],
       include: ['src/**/*.{js,jsx}'],
-      exclude: ['src/main.jsx', 'src/**/*.test.{js,jsx}']
+      exclude: ['src/main.jsx', 'src/**/*.test.{js,jsx}'],
+      // Meta mínima do portfólio para o frontend; o CI falha abaixo disso.
+      thresholds: { lines: 25, statements: 25 }
     }
   }
 })

@@ -3,7 +3,6 @@ process.chdir(__dirname);
 require('dotenv').config();
 
 var sails = require('sails');
-var Sails = sails.Sails;
 
 try {
   sails = require('sails');
