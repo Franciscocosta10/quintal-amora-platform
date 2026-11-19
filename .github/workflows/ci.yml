@@ -43,8 +43,10 @@ jobs:
           cache: npm
           cache-dependency-path: backend/package-lock.json
 
+      # --ignore-scripts: não executa scripts de instalação dos pacotes
+      # (proteção contra pacote comprometido; nenhuma dependência precisa deles).
       - name: Instalar dependências
-        run: npm ci
+        run: npm ci --ignore-scripts
 
       - name: Lint
         run: npm run lint
@@ -75,8 +77,10 @@ jobs:
           cache: npm
           cache-dependency-path: frontend/package-lock.json
 
+      # --ignore-scripts: não executa scripts de instalação dos pacotes
+      # (proteção contra pacote comprometido; nenhuma dependência precisa deles).
       - name: Instalar dependências
-        run: npm ci
+        run: npm ci --ignore-scripts
 
       - name: Lint
         run: npm run lint
@@ -126,8 +130,15 @@ jobs:
           sed -i 's#^SF:#SF:backend/#' backend/coverage/lcov.info
           sed -i 's#^SF:#SF:frontend/#' frontend/coverage/lcov.info
 
+      # Ação de terceiros fixada pelo SHA do commit (v5.3.2), e não pela tag,
+      # que pode ser movida para outro código.
       - name: Análise SonarCloud
-        uses: SonarSource/sonarqube-scan-action@v5
+        uses: SonarSource/sonarqube-scan-action@2f77a1ec69fb1d595b06f35ab27e97605bdef703 # v5.3.2
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: https://sonarcloud.io
+        with:
+          # A configuração automática do scanner ignora sonar.sources e sonar.tests
+          # do sonar-project.properties e contava os testes do backend como código.
+          args: >
+            -Dsonar.scanner.autoconfig.enabled=false

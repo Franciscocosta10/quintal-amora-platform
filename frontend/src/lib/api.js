@@ -1,6 +1,4 @@
 /**
- * lib/api.js
- *
  * Client HTTP único para toda a aplicação falar com a API Sails.
  * Centraliza: URL base, header Authorization automático (quando há
  * token salvo) e o formato de erro — assim cada tela só chama
