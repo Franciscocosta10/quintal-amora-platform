@@ -56,12 +56,12 @@ module.exports = {
     resetPasswordToken: {
       type: 'string',
       allowNull: true,
-},
+    },
 
     resetPasswordExpiresAt: {
       type: 'number',
       allowNull: true,
-},
+    },
 
     // ---------------------------------------------------------------------
     // Associações (preenchidas conforme os demais módulos forem implementados)
@@ -93,7 +93,7 @@ module.exports = {
     if (!usuario.senha) {
       return proceed(new Error('Senha é obrigatória.'));
     }
-    bcrypt.hash(usuario.senha, 10, function (err, hash) {
+    bcrypt.hash(usuario.senha, 10, (err, hash) => {
       if (err) { return proceed(err); }
       usuario.senha = hash;
       return proceed();
@@ -106,7 +106,7 @@ module.exports = {
     if (!valuesToUpdate.senha) {
       return proceed();
     }
-    bcrypt.hash(valuesToUpdate.senha, 10, function (err, hash) {
+    bcrypt.hash(valuesToUpdate.senha, 10, (err, hash) => {
       if (err) { return proceed(err); }
       valuesToUpdate.senha = hash;
       return proceed();

@@ -1,4 +1,4 @@
-  /**
+/**
    * evento/find-atual.js
    *
    * Retorna o evento mais recente cadastrado — usado no cabeçalho da Home
@@ -15,26 +15,26 @@
    * atributos reais do seu model Evento.
    */
 
-  module.exports = {
+module.exports = {
 
-    friendlyName: 'Find evento atual',
+  friendlyName: 'Find evento atual',
 
-    description: 'Retorna os dados do evento mais recente para exibir no cabeçalho da Home.',
+  description: 'Retorna os dados do evento mais recente para exibir no cabeçalho da Home.',
 
-    inputs: {},
+  inputs: {},
 
-    exits: {
-      success: {
-        description: 'Evento retornado com sucesso (ou null se nenhum evento cadastrado).'
-      }
-    },
-
-    fn: async function () {
-
-      var eventoAtual = await Evento.find().sort('createdAt DESC').limit(1);
-
-      return eventoAtual[0] || null;
-
+  exits: {
+    success: {
+      description: 'Evento retornado com sucesso (ou null se nenhum evento cadastrado).'
     }
+  },
 
-  };
+  fn: async function () {
+
+    var eventoAtual = await Evento.find().sort('createdAt DESC').limit(1);
+
+    return eventoAtual[0] || null;
+
+  }
+
+};

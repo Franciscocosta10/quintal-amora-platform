@@ -1,0 +1,13 @@
+{
+  // Testes rodam no mocha (describe/it/beforeEach), e o mocha recomenda
+  // `function () {}` nos blocos para ter acesso ao `this` do teste.
+  "parserOptions": {
+    "ecmaVersion": 2019
+  },
+  "env": {
+    "mocha": true
+  },
+  "rules": {
+    "prefer-arrow-callback": "off"
+  }
+}

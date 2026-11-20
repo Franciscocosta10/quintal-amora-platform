@@ -40,19 +40,19 @@ module.exports = {
     });
 
     const info = await transportador.sendMail({
-  from: process.env.SMTP_FROM || '"Quintal da Amora" <no-reply@quintaldaamora.com>',
-  to: inputs.destinatario,
-  subject: 'Redefinição de senha — Quintal da Amora',
-  html: `
+      from: process.env.SMTP_FROM || '"Quintal da Amora" <no-reply@quintaldaamora.com>',
+      to: inputs.destinatario,
+      subject: 'Redefinição de senha — Quintal da Amora',
+      html: `
     <p>Olá${inputs.nome ? ', ' + inputs.nome : ''}!</p>
     <p>Recebemos uma solicitação para redefinir sua senha na plataforma Quintal da Amora.</p>
     <p><a href="${inputs.link}">Clique aqui para criar uma nova senha</a></p>
     <p>Esse link expira em 30 minutos. Se você não solicitou, pode ignorar este e-mail.</p>
   `
-});
+    });
 
-console.log('E-mail enviado!');
-console.log('Preview:', nodemailer.getTestMessageUrl(info));
+    console.log('E-mail enviado!');
+    console.log('Preview:', nodemailer.getTestMessageUrl(info));
 
   }
 

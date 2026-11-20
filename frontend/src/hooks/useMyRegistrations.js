@@ -11,8 +11,9 @@ export function useMyRegistrations() {
   const [inscricoes, setInscricoes] = useState([]);
   const [carregando, setCarregando] = useState(true);
 
+  // Sem setState síncrono (regra react-hooks/set-state-in-effect): ao
+  // recarregar, a lista atual fica na tela até a nova chegar.
   const carregar = useCallback(() => {
-    setCarregando(true);
     return listarMinhasInscricoes()
       .then((resultado) => setInscricoes(resultado || []))
       .catch(() => setInscricoes([]))
