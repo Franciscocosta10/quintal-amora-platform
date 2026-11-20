@@ -18,6 +18,9 @@ module.exports.policies = {
   // -------------------------------------------------------------------
   '*': false,
 
+  // Monitoramento: pública, para o monitor de disponibilidade (sem login).
+  'health/check': true,
+
   // -------------------------------------------------------------------
   // Autenticação (públicas: cadastro e login não podem exigir login)
   // -------------------------------------------------------------------

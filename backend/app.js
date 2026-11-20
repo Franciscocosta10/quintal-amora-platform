@@ -2,6 +2,13 @@ process.chdir(__dirname);
 
 require('dotenv').config();
 
+// Monitoramento (New Relic): só liga quando a chave existe, ou seja, em
+// produção. Precisa vir antes do Sails para instrumentar o servidor HTTP
+// e o banco de dados. Configuração em newrelic.js.
+if (process.env.NEW_RELIC_LICENSE_KEY) {
+  require('newrelic');
+}
+
 var sails = require('sails');
 
 try {

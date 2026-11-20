@@ -1,26 +1,41 @@
-# backend
+# Backend — Quintal da Amora
 
-a [Sails v1](https://sailsjs.com) application
+API REST da plataforma, feita com [Sails.js v1](https://sailsjs.com) e PostgreSQL.
 
+## Rodar localmente
 
-### Links
+Pré-requisitos: Node.js 22.16 ou mais recente e o PostgreSQL do `docker-compose.yml` (na raiz do repositório).
 
-+ [Sails framework documentation](https://sailsjs.com/get-started)
-+ [Version notes / upgrading](https://sailsjs.com/documentation/upgrading)
-+ [Deployment tips](https://sailsjs.com/documentation/concepts/deployment)
-+ [Community support options](https://sailsjs.com/support)
-+ [Professional / enterprise options](https://sailsjs.com/enterprise)
+```bash
+npm install
+npm run dev
+```
 
+A API sobe em `http://localhost:1337`.
 
-### Version info
+## Testes
 
-This app was originally generated on Mon Jul 27 2026 13:13:14 GMT-0300 (Horário Padrão de Brasília) using Sails v1.5.18.
+```bash
+npm run test:unit       # testes unitários (mocha + chai + sinon)
+npm run test:coverage   # testes com cobertura (c8), mínimo de 75% de linhas
+npm run lint            # ESLint
+```
 
-<!-- Internally, Sails used [`sails-generate@2.0.13`](https://github.com/balderdashy/sails-generate/tree/v2.0.13/lib/core-generators/new). -->
+## Variáveis de ambiente
 
+Ficam no arquivo `.env` (local, fora do git) ou nas configurações do servidor (produção).
 
+| Variável | Obrigatória | Para que serve |
+|---|---|---|
+| `DATABASE_URL` | sim | Conexão com o PostgreSQL |
+| `JWT_SECRET` | sim | Assinatura dos tokens de login |
+| `PORT` | não | Porta da API (padrão 1337) |
+| `FRONTEND_URL` | sim | Endereço do frontend, usado no link de redefinição de senha |
+| `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `SMTP_FROM` | não | Envio de e-mail. Sem elas, o link de redefinição aparece só no log |
+| `NEW_RELIC_LICENSE_KEY` | só em produção | Liga o monitoramento do New Relic. Sem ela, o agente não é carregado |
+| `NEW_RELIC_APP_NAME` | não | Nome do app no painel do New Relic (padrão `quintal-amora-backend`) |
 
-<!--
-Note:  Generators are usually run using the globally-installed `sails` CLI (command-line interface).  This CLI version is _environment-specific_ rather than app-specific, thus over time, as a project's dependencies are upgraded or the project is worked on by different developers on different computers using different versions of Node.js, the Sails dependency in its package.json file may differ from the globally-installed Sails CLI release it was originally generated with.  (Be sure to always check out the relevant [upgrading guides](https://sailsjs.com/upgrading) before upgrading the version of Sails used by your app.  If you're stuck, [get help here](https://sailsjs.com/support).)
--->
+## Monitoramento
 
+- **APM (New Relic):** o agente é carregado em `app.js` apenas quando `NEW_RELIC_LICENSE_KEY` existe. A configuração está em `newrelic.js`. Token, cookies e parâmetros das requisições não são enviados ao New Relic.
+- **Health check:** `GET /health` é pública e responde `200` com `{ "status": "ok", "banco": "ok" }` quando a API e o banco estão funcionando, ou `503` quando o banco não responde. É a URL usada pelo monitor de disponibilidade.

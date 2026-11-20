@@ -1,5 +1,8 @@
 module.exports.routes = {
 
+  // Monitoramento: verificação de saúde (API + banco)
+  'GET /health': { action: 'health/check' },
+
   // Login e registro
   'POST /auth/signup': { action: 'auth/signup' },
 
