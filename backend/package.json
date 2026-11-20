@@ -9,6 +9,7 @@
     "bcryptjs": "^3.0.3",
     "dotenv": "^17.4.2",
     "jsonwebtoken": "^9.0.3",
+    "newrelic": "14.10.0",
     "nodemailer": "^9.0.4",
     "sails": "^1.5.18",
     "sails-hook-orm": "^4.0.3",
@@ -39,6 +40,6 @@
   "author": "anonymous node/sails user",
   "license": "",
   "engines": {
-    "node": "^20.11"
+    "node": ">=22.16"
   }
 }
