@@ -30,6 +30,20 @@ exports.config = {
     filepath: 'stdout'
   },
 
+  // 401 (sem login) e 403 (sem permissão) são a segurança funcionando, não
+  // falhas: continuam visíveis no painel, mas não entram na taxa de erro,
+  // no Apdex nem nos alertas.
+  error_collector: {
+    expected_status_codes: [401, 403]
+  },
+
+  // O servidor roda na Azure: não procura AWS nem Google Cloud ao iniciar
+  // (evita erros sem importância no log a cada reinício).
+  utilization: {
+    detect_aws: false,
+    detect_gcp: false
+  },
+
   // Dados sensíveis nunca saem do servidor (LGPD): token JWT, cookies e
   // parâmetros das requisições (que podem conter e-mail e senha).
   attributes: {

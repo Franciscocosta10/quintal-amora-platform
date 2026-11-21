@@ -11,6 +11,9 @@
 
 module.exports.sockets = {
 
+  // Mesmos endereços autorizados no CORS (config/security.js).
+  onlyAllowOrigins: require('./security').security.cors.allowOrigins,
+
   /***************************************************************************
   *                                                                          *
   * `transports`                                                             *

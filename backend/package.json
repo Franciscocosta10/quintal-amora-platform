@@ -40,6 +40,6 @@
   "author": "anonymous node/sails user",
   "license": "",
   "engines": {
-    "node": ">=22.16"
+    "node": "^22.16.0 || ^24.20.0 || >=26.7.0"
   }
 }

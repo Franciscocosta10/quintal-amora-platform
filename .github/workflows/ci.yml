@@ -8,8 +8,9 @@
 # Depois que os dois passam, o job "sonarcloud" faz a análise estática e de
 # segurança, já com a cobertura dos testes.
 #
-# O job de deploy (CD) para a Azure entra aqui depois que a hospedagem
-# for criada, rodando só quando a main for atualizada.
+# Por fim, só quando a main é atualizada (merge de PR), os jobs de deploy
+# (CD) publicam o backend e o frontend na Azure e conferem se subiram.
+# Nada é publicado se lint, testes, cobertura ou build falharem.
 
 name: CI
 
@@ -20,9 +21,10 @@ on:
     branches: [main]
 
 # Um push novo na mesma branch cancela a execução anterior, que ficou velha.
+# Na main não cancela, para nunca interromper um deploy no meio.
 concurrency:
   group: ci-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
 
 permissions:
   contents: read
@@ -142,3 +144,86 @@ jobs:
           # do sonar-project.properties e contava os testes do backend como código.
           args: >
             -Dsonar.scanner.autoconfig.enabled=false
+
+  deploy-backend:
+    name: Deploy do backend (Azure)
+    needs: [backend, frontend, sonarcloud]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment:
+      name: producao-backend
+      url: ${{ steps.deploy.outputs.webapp-url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: backend/package-lock.json
+
+      # Só as dependências de produção vão para o servidor.
+      - name: Instalar dependências de produção
+        working-directory: backend
+        run: npm ci --omit=dev --ignore-scripts
+
+      # Ação de terceiros fixada pelo SHA do commit (v3.0.8).
+      - name: Publicar no Azure App Service
+        id: deploy
+        uses: azure/webapps-deploy@02a81bead70021f5284939794bcec79c271ab383 # v3.0.8
+        with:
+          app-name: quintal-amora-api
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          package: backend
+
+      # Confere se a API subiu e conversa com o banco (rota de monitoramento).
+      # O Sails leva alguns segundos para iniciar: tenta por até ~4 minutos.
+      - name: Verificar /health
+        env:
+          URL_API: ${{ steps.deploy.outputs.webapp-url }}
+        run: curl --fail --silent --show-error --retry 16 --retry-delay 15 --retry-all-errors "$URL_API/health"
+
+  deploy-frontend:
+    name: Deploy do frontend (Azure)
+    needs: [backend, frontend, sonarcloud]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment:
+      name: producao-frontend
+      url: ${{ steps.deploy.outputs.webapp-url }}
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Instalar dependências
+        run: npm ci --ignore-scripts
+
+      # O endereço da API entra no JavaScript na hora do build (variável
+      # VITE_API_URL do repositório; não é segredo, fica visível no site).
+      - name: Build de produção
+        env:
+          VITE_API_URL: ${{ vars.VITE_API_URL }}
+        run: npm run build
+
+      # Na Azure, o comando de inicialização "pm2 serve /home/site/wwwroot
+      # --no-daemon --spa" serve a pasta dist e resolve o F5 nas rotas do React.
+      - name: Publicar no Azure App Service
+        id: deploy
+        uses: azure/webapps-deploy@02a81bead70021f5284939794bcec79c271ab383 # v3.0.8
+        with:
+          app-name: quintal-amora-web
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE_FRONTEND }}
+          package: frontend/dist
+
+      - name: Verificar se o site responde
+        env:
+          URL_SITE: ${{ steps.deploy.outputs.webapp-url }}
+        run: curl --fail --silent --show-error --output /dev/null --retry 16 --retry-delay 15 --retry-all-errors "$URL_SITE"
