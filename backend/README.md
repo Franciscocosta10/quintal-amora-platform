@@ -34,9 +34,18 @@ Ficam no arquivo `.env` (local, fora do git) ou nas configurações do servidor 
 | `JWT_SECRET` | sim | Assinatura dos tokens de login |
 | `PORT` | não | Porta da API (padrão 1337). Na Azure é definida pela própria plataforma |
 | `FRONTEND_URL` | sim | Endereço do frontend: único site autorizado a chamar a API (CORS) e base do link de redefinição de senha. Aceita mais de um, separados por vírgula |
-| `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `SMTP_FROM` | não | Envio de e-mail. Sem elas, o link de redefinição aparece só no log |
+| `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `SMTP_FROM` | só em produção | Envio de e-mail (recuperação de senha). Em dev, sem elas, o link aparece só no log; em produção, sem elas, o envio falha e o erro vai para o log. O Ethereal (`smtp.ethereal.email`) é só para testes: aceita o e-mail mas nunca entrega |
 | `NEW_RELIC_LICENSE_KEY` | só em produção | Liga o monitoramento do New Relic. Sem ela, o agente não é carregado |
 | `NEW_RELIC_APP_NAME` | não | Nome do app no painel do New Relic (padrão `quintal-amora-backend`) |
+
+### E-mail em produção
+
+Qualquer servidor SMTP real funciona. Duas opções gratuitas:
+
+- **Gmail** (mais simples, sem domínio próprio): ative a verificação em duas etapas na conta, crie uma *senha de app* e use `SMTP_HOST=smtp.gmail.com`, `SMTP_PORT=465`, `SMTP_USER=<conta>@gmail.com`, `SMTP_PASS=<senha de app>`, `SMTP_FROM="Quintal da Amora" <conta@gmail.com>`. O remetente precisa ser a própria conta.
+- **Brevo** (300 e-mails/dia grátis): `SMTP_HOST=smtp-relay.brevo.com`, `SMTP_PORT=587`, usuário e chave SMTP do painel. O `SMTP_FROM` precisa ser um remetente verificado lá.
+
+Na Azure, as variáveis vão em **App Service `quintal-amora-api` → Configurações → Variáveis de ambiente**. Confira também se `FRONTEND_URL` aponta para o frontend publicado, porque o link do e-mail usa o primeiro endereço dela. O `NODE_ENV=production` não precisa ser cadastrado: a Azure inicia a API com `npm start`, que já o define.
 
 ## Monitoramento
 

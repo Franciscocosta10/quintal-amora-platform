@@ -29,16 +29,18 @@ module.exports.http = {
     *                                                                          *
     ***************************************************************************/
 
-    // order: [
-    //   'cookieParser',
-    //   'session',
-    //   'bodyParser',
-    //   'compress',
-    //   'poweredBy',
-    //   'router',
-    //   'www',
-    //   'favicon',
-    // ],
+    // Ordem padrão do Sails sem o 'poweredBy': a API não anuncia no
+    // cabeçalho X-Powered-By qual framework usa (menos pistas para quem
+    // procura falhas conhecidas).
+    order: [
+      'cookieParser',
+      'session',
+      'bodyParser',
+      'compress',
+      'router',
+      'www',
+      'favicon',
+    ],
 
 
     /***************************************************************************

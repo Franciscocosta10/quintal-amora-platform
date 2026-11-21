@@ -26,7 +26,7 @@ describe('helpers/jwt/sign-token', function () {
 });
 
 describe('helpers/send-password-reset-email', function () {
-  const VARIAVEIS = ['SMTP_HOST', 'SMTP_PORT', 'SMTP_USER', 'SMTP_PASS', 'SMTP_FROM'];
+  const VARIAVEIS = ['SMTP_HOST', 'SMTP_PORT', 'SMTP_USER', 'SMTP_PASS', 'SMTP_FROM', 'NODE_ENV'];
   const ENTRADA = { destinatario: 'ana@email.com', nome: 'Ana Souza', link: 'https://quintal.exemplo/redefinir-senha?token=abc' };
   let ambienteOriginal;
   let sendMail;
@@ -37,10 +37,9 @@ describe('helpers/send-password-reset-email', function () {
       ambienteOriginal[nome] = process.env[nome];
       delete process.env[nome];
     });
-    global.sails = { log: { warn: sinon.stub() } };
+    global.sails = { log: { warn: sinon.stub(), info: sinon.stub() } };
     sendMail = sinon.stub().resolves({ messageId: '1' });
     sinon.stub(nodemailer, 'createTransport').returns({ sendMail });
-    sinon.stub(console, 'log');
   });
 
   afterEach(function () {
@@ -71,6 +70,22 @@ describe('helpers/send-password-reset-email', function () {
     expect(global.sails.log.warn.secondCall.args[0]).to.equal(`[dev] Link para ana@email.com: ${ENTRADA.link}`);
   });
 
+  it('em produção sem SMTP configurado, falha sem logar o link', async function () {
+    process.env.NODE_ENV = 'production';
+
+    let erro;
+    try {
+      await sendPasswordResetEmail.fn(ENTRADA);
+    } catch (e) {
+      erro = e;
+    }
+
+    expect(erro).to.be.an('error');
+    expect(erro.message).to.include('SMTP não configurado');
+    expect(global.sails.log.warn.called).to.be.false;
+    expect(nodemailer.createTransport.called).to.be.false;
+  });
+
   it('com SMTP configurado, envia o e-mail com o link e o nome', async function () {
     configurarSmtp();
 
@@ -88,6 +103,9 @@ describe('helpers/send-password-reset-email', function () {
     expect(email.subject).to.equal('Redefinição de senha — Quintal da Amora');
     expect(email.html).to.include('Olá, Ana Souza!');
     expect(email.html).to.include(`href="${ENTRADA.link}"`);
+    expect(email.text).to.include('Olá, Ana Souza!');
+    expect(email.text).to.include(ENTRADA.link);
+    expect(global.sails.log.info.calledOnce).to.be.true;
   });
 
   it('usa conexão segura na porta 465 e o remetente configurado', async function () {
