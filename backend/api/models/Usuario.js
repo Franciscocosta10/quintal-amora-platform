@@ -11,6 +11,7 @@
  */
 
 var bcrypt = require('bcryptjs');
+var usuarioPublico = require('../utils/usuarioPublico');
 
 module.exports = {
 
@@ -83,9 +84,10 @@ module.exports = {
 
   },
 
-  // Nunca deixa a senha (nem campos internos) vazarem em um `.toJSON()`
+  // Nunca deixa a senha nem os dados internos da recuperação de senha
+  // vazarem em um `.toJSON()` (lista em api/utils/usuarioPublico.js)
   customToJSON: function () {
-    return _.omit(this, ['senha']);
+    return usuarioPublico.semCamposPrivados(this);
   },
 
   // Faz o hash da senha antes de gravar um novo usuário

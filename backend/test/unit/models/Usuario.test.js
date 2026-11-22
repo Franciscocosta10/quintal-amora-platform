@@ -46,8 +46,14 @@ describe('models/Usuario', function () {
     expect(valores).to.deep.equal({ nomeCompleto: 'Ana' });
   });
 
-  it('nunca inclui a senha no JSON da resposta', function () {
-    const registro = { id: 7, email: 'ana@email.com', senha: 'hash' };
+  it('nunca inclui a senha nem os dados da recuperação de senha no JSON da resposta', function () {
+    const registro = {
+      id: 7,
+      email: 'ana@email.com',
+      senha: 'hash',
+      resetPasswordToken: 'hash-do-token',
+      resetPasswordExpiresAt: 1700000000000
+    };
 
     expect(Usuario.customToJSON.call(registro)).to.deep.equal({ id: 7, email: 'ana@email.com' });
   });

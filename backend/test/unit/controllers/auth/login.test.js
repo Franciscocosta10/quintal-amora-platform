@@ -18,7 +18,16 @@ describe('auth/login', function () {
     global._ = require('@sailshq/lodash');
     exits = criarExits('credenciaisInvalidas', 'muitasTentativas');
     global.Usuario = {
-      findOne: sinon.stub().resolves({ id: 7, email: 'ana@email.com', senha: hashDaSenha, perfil: 'visitante', ativo: true })
+      findOne: sinon.stub().resolves({
+        id: 7,
+        email: 'ana@email.com',
+        senha: hashDaSenha,
+        perfil: 'visitante',
+        ativo: true,
+        // Sobra de um pedido de redefinição que não foi usado: não pode sair na resposta.
+        resetPasswordToken: 'hash-do-token',
+        resetPasswordExpiresAt: 1700000000000
+      })
     };
     global.sails = { helpers: { jwt: { signToken: sinon.stub().resolves('token-jwt') } } };
   });
@@ -29,7 +38,7 @@ describe('auth/login', function () {
     delete global.sails;
   });
 
-  it('busca pelo e-mail normalizado e devolve o usuário sem a senha e o token', async function () {
+  it('busca pelo e-mail normalizado e devolve o usuário sem a senha e sem os dados da recuperação de senha', async function () {
     await login.fn({ email: ' ANA@Email.com ', senha: 'senha-correta' }, exits);
 
     expect(global.Usuario.findOne.firstCall.args[0]).to.deep.equal({ email: 'ana@email.com' });
