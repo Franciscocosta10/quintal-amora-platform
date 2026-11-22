@@ -65,7 +65,7 @@ module.exports = {
       .updateOne({ id: idUsuario })
       .set({ nomeCompleto: nome, email: email });
 
-    return usuarioPublico.semCamposPrivados(usuarioAtualizado);
+    return usuarioPublico.apenasCamposPublicos(usuarioAtualizado);
   }
 
 };

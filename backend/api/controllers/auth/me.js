@@ -19,7 +19,7 @@ module.exports = {
   description: 'Retorna os dados do usuário autenticado.',
 
   fn: async function (inputs, exits) {
-    return exits.success(usuarioPublico.semCamposPrivados(this.req.usuario));
+    return exits.success(usuarioPublico.apenasCamposPublicos(this.req.usuario));
   }
 
 };

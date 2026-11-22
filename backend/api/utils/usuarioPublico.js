@@ -1,31 +1,35 @@
 /**
  * utils/usuarioPublico.js
  *
- * Lista única dos campos do usuário que nunca podem sair nas respostas da
- * API: a senha (hash bcrypt) e os dados internos da recuperação de senha
- * (hash do token e validade). Usado pelo `customToJSON` do model Usuario e
- * pelas actions de autenticação que devolvem o próprio usuário (login,
- * cadastro, /auth/me, edição de perfil e troca de foto).
+ * Define quais campos do usuário podem sair nas respostas da API. Usado
+ * pelo `customToJSON` do model Usuario e pelas actions de autenticação que
+ * devolvem o próprio usuário (login, cadastro, /auth/me, edição de perfil e
+ * troca de foto).
  *
- * Centralizar aqui evita que um campo sensível novo seja escondido em uma
- * rota e esquecido em outra.
+ * Abordagem de allowlist: só os campos listados em CAMPOS_PUBLICOS saem.
+ * Qualquer atributo novo do model (ex.: um token, um telefone) fica fora da
+ * resposta até alguém decidir, de propósito, incluí-lo aqui. Assim a senha
+ * (hash bcrypt) e os dados internos da recuperação de senha nunca vazam,
+ * nem os que ainda vierem a existir.
  */
 
-var CAMPOS_PRIVADOS = ['senha', 'resetPasswordToken', 'resetPasswordExpiresAt'];
+var CAMPOS_PUBLICOS = ['id', 'nomeCompleto', 'email', 'perfil', 'fotoPerfil', 'ativo', 'createdAt', 'updatedAt'];
 
 /**
- * Devolve uma cópia do usuário sem os campos privados. Não altera o objeto
- * recebido.
+ * Devolve um objeto novo só com os campos públicos que o usuário tem. Não
+ * altera o objeto recebido.
  */
-function semCamposPrivados(usuario) {
-  var copia = Object.assign({}, usuario);
-  CAMPOS_PRIVADOS.forEach((campo) => {
-    delete copia[campo];
+function apenasCamposPublicos(usuario) {
+  var publico = {};
+  CAMPOS_PUBLICOS.forEach((campo) => {
+    if (usuario && Object.prototype.hasOwnProperty.call(usuario, campo)) {
+      publico[campo] = usuario[campo];
+    }
   });
-  return copia;
+  return publico;
 }
 
 module.exports = {
-  CAMPOS_PRIVADOS,
-  semCamposPrivados
+  CAMPOS_PUBLICOS,
+  apenasCamposPublicos
 };

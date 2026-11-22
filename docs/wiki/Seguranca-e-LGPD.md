@@ -16,7 +16,7 @@
 
 ## Senhas e dados sensíveis
 
-- **Senhas** viram hash **bcrypt** (custo 10) nos hooks `beforeCreate` e `beforeUpdate` de `models/Usuario.js`, e nunca saem nas respostas. A lista de campos privados (`senha`, `resetPasswordToken`, `resetPasswordExpiresAt`) fica em um lugar só, `api/utils/usuarioPublico.js`, usado pelo `customToJSON` do model e pelas rotas que devolvem o próprio usuário (login, cadastro, `/auth/me`, perfil e foto).
+- **Senhas** viram hash **bcrypt** (custo 10) nos hooks `beforeCreate` e `beforeUpdate` de `models/Usuario.js`, e nunca saem nas respostas. As respostas usam uma **allowlist**: `api/utils/usuarioPublico.js` lista os únicos campos que podem sair (`id`, `nomeCompleto`, `email`, `perfil`, `fotoPerfil`, `ativo`, `createdAt`, `updatedAt`), usada pelo `customToJSON` do model e pelas rotas que devolvem o próprio usuário (login, cadastro, `/auth/me`, perfil e foto). Um campo novo no model fica fora das respostas até ser liberado de propósito.
 - **Recuperação de senha:** o token enviado por e-mail é aleatório (32 bytes). No banco fica só o **hash SHA-256**, com validade de 30 minutos, e ele é apagado depois do uso. A resposta é sempre a mesma, exista ou não a conta.
 - **Login:** a mensagem de erro é a mesma para "e-mail não existe" e "senha errada". Depois de 10 senhas erradas para o mesmo e-mail, o login fica bloqueado por 15 minutos (`api/utils/limiteLogin.js`).
 - **Segredos** (`JWT_SECRET`, `DATABASE_URL`, `SMTP_PASS`, chave do New Relic) ficam em variáveis de ambiente: no `.env` local, que está no `.gitignore`, e nas configurações do App Service em produção. Nenhum segredo está no repositório.

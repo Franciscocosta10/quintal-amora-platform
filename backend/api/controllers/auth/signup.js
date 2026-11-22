@@ -61,7 +61,7 @@ module.exports = {
     var token = await sails.helpers.jwt.signToken(usuario.id, usuario.perfil);
 
     return exits.success({
-      usuario: usuarioPublico.semCamposPrivados(usuario),
+      usuario: usuarioPublico.apenasCamposPublicos(usuario),
       token: token
     });
   }
