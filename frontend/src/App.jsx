@@ -4,6 +4,7 @@ import LoginPage from "./pages/auth/LoginPage";
 import SignupPage from "./pages/auth/SignupPage";
 import ForgotPasswordPage from "./pages/auth/ForgotPasswordPage";
 import RedefinirSenha from "./pages/auth/RedefinirSenha";
+import PoliticaPrivacidade from "./pages/auth/PoliticaPrivacidade";
 import CheckIn from "./pages/checkin/CheckIn";
 import Schedule from "./pages/schedule/Schedule";
 import Profile from "./components/profile/Profile";
@@ -37,6 +38,7 @@ function App() {
       <Route path="/cadastro" element={<SignupPage />} />
       <Route path="/esqueci-senha" element={<ForgotPasswordPage />} />
       <Route path="/redefinir-senha" element={<RedefinirSenha />} />
+      <Route path="/privacidade" element={<PoliticaPrivacidade />} />
       {/* Protegida: quem abre o link do QR sem estar logado faz login e volta. */}
       <Route path="/checkin" element={<ProtectedRoute><CheckIn /></ProtectedRoute>} />
       <Route path="/home" element={<HomePage />} />

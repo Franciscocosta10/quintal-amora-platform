@@ -52,7 +52,7 @@ export default function SignupPage() {
   return (
     <AuthLayout>
       <div className="mb-6 flex flex-col items-center text-center">
-        <span className="mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-amora-500 text-white shadow-sm shadow-amora-200">
+        <span className="mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-amora-600 text-white shadow-sm shadow-amora-200">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
             <circle cx="12" cy="8" r="4" />
             <path d="M4 20c0-3.9 3.6-7 8-7s8 3.1 8 7" />
@@ -121,15 +121,24 @@ export default function SignupPage() {
         <button
           type="submit"
           disabled={enviando}
-          className="mt-6 w-full rounded-xl bg-amora-500 py-3 text-sm font-semibold text-white transition hover:bg-amora-600 disabled:cursor-not-allowed disabled:opacity-60"
+          className="mt-6 w-full rounded-xl bg-amora-600 py-3 text-sm font-semibold text-white transition hover:bg-amora-700 disabled:cursor-not-allowed disabled:opacity-60"
         >
           {enviando ? 'Criando conta...' : 'Criar conta'}
         </button>
+
+        {/* LGPD: informa, no momento da coleta, como os dados são tratados. */}
+        <p className="mt-4 text-center text-xs leading-relaxed text-gray-600">
+          Ao criar sua conta, você concorda com o uso dos seus dados conforme a nossa{' '}
+          <Link to="/privacidade" className="font-medium text-amora-600 underline underline-offset-2 hover:text-amora-700">
+            Política de Privacidade
+          </Link>
+          .
+        </p>
       </form>
 
       <p className="mt-5 text-center text-sm text-gray-500">
         Já tem conta?{' '}
-        <Link to="/login" state={{ voltarPara }} className="font-medium text-amora-500 hover:text-amora-600">
+        <Link to="/login" state={{ voltarPara }} className="font-medium text-amora-600 hover:text-amora-700">
           Fazer login
         </Link>
       </p>

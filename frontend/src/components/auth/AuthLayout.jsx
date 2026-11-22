@@ -51,7 +51,7 @@ export default function AuthLayout({ children }) {
         <div className="relative z-10">
           <div className="flex items-baseline gap-1.5">
             <h2 className="text-xl font-bold text-plum-900">Quintal</h2>
-            <h2 className="com-icone text-xl font-bold text-amora-500">da Amora <Flower2 size="1em" aria-hidden="true" /></h2>
+            <h2 className="com-icone text-xl font-bold text-amora-600">da Amora <Flower2 size="1em" aria-hidden="true" /></h2>
           </div>
           <p className="mt-0.5 text-xs text-gray-500">Cultura geek e otaku</p>
 
@@ -80,7 +80,7 @@ export default function AuthLayout({ children }) {
                 strokeWidth="1.6"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                className="h-5 w-5 text-amora-500"
+                className="h-5 w-5 text-amora-600"
               >
                 {item.icon}
               </svg>

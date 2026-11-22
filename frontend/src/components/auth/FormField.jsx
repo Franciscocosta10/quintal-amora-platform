@@ -19,7 +19,7 @@ export default function FormField({ label, required, error, id, type, ...inputPr
     <label htmlFor={id} className="mb-4 block text-left last:mb-0">
       <span className="mb-1.5 block text-sm font-medium text-plum-900">
         {label}
-        {required && <span className="text-amora-500"> *</span>}
+        {required && <span className="text-amora-600"> *</span>}
       </span>
       <span className="relative block">
         <input
@@ -28,7 +28,7 @@ export default function FormField({ label, required, error, id, type, ...inputPr
           {...inputProps}
           aria-invalid={!!error}
           className={`w-full rounded-xl border bg-white px-4 py-2.5 text-sm text-plum-900
-            placeholder:text-gray-400 transition
+            placeholder:text-gray-500 transition
             focus:outline-none focus:ring-2 focus:ring-amora-200 focus:border-amora-400
             ${ehSenha ? 'pr-12' : ''}
             ${error ? 'border-red-400' : 'border-gray-200'}`}
@@ -41,8 +41,8 @@ export default function FormField({ label, required, error, id, type, ...inputPr
             aria-pressed={mostrarSenha}
             aria-controls={id}
             className="absolute inset-y-0 right-0 flex w-11 items-center justify-center rounded-r-xl
-              text-gray-400 transition hover:text-amora-500
-              focus:outline-none focus-visible:text-amora-500 focus-visible:ring-2 focus-visible:ring-amora-200"
+              text-gray-500 transition hover:text-amora-700
+              focus:outline-none focus-visible:text-amora-700 focus-visible:ring-2 focus-visible:ring-amora-200"
           >
             {mostrarSenha ? <EyeOff size={18} aria-hidden="true" /> : <Eye size={18} aria-hidden="true" />}
           </button>

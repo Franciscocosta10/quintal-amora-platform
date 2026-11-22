@@ -36,8 +36,21 @@
 
 ## LGPD
 
+- **Política de Privacidade:** página pública em `/privacidade` (`frontend/src/pages/auth/PoliticaPrivacidade.jsx`), com dados coletados, finalidade, base legal, compartilhamento (Azure, Gmail, New Relic), armazenamento no navegador, retenção, direitos do titular (art. 18) e o contato para pedir acesso, correção ou exclusão. A tela de cadastro informa e leva até ela no momento da coleta.
 - **Dados coletados:** apenas nome, e-mail, senha (em hash) e, opcionalmente, foto de perfil. Não são coletados CPF, telefone, endereço ou dados de pagamento.
 - **Finalidade:** identificar o participante no evento (check-in e inscrições) e permitir a recuperação de senha.
 - **Minimização:** o painel admin e as listas de inscritos mostram só nome e e-mail. Rotas que listam usuários usam `select` com campos não sensíveis.
 - **Desativação:** o administrador pode desativar uma conta, que perde o acesso imediatamente.
 - **Monitoramento:** o New Relic está configurado para não enviar token, cookies nem parâmetros das requisições (`backend/newrelic.js`).
+
+## Licenças
+
+- O projeto é distribuído sob a **licença MIT** (`LICENSE` na raiz). As imagens da marca do evento pertencem à organização e são usadas com autorização, fora da licença MIT.
+- Todas as dependências de produção usam licenças permissivas, compatíveis com a MIT: MIT (React, React Router, Sails, jsonwebtoken), BSD (bcryptjs, dotenv), Apache-2.0 (newrelic, html5-qrcode), ISC (lucide-react) e MIT-0 (nodemailer).
+
+## Acessibilidade (WCAG 2.1)
+
+- **Contraste (nível AA, 4,5:1 para texto):** o rosa principal (`--accent`) é `#c2185b` (5,9:1 sobre o branco) e os botões das telas de acesso usam `amora-600` (5,1:1). Placeholders e o selo "Atrasada" também atingem o mínimo.
+- **Semântica e leitores de tela:** idioma `pt-BR` na página, texto alternativo nas imagens, rótulos em todos os campos e `aria-label` nos botões de ícone (fechar, sino, mostrar senha).
+- **Teclado e toque:** contorno visível no foco (`focus-visible`) e áreas de toque de pelo menos 44px no celular.
+- **Movimento:** o carrossel respeita a preferência de reduzir animações (`prefers-reduced-motion`).

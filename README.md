@@ -88,3 +88,8 @@ Automático: a cada merge na `main`, o GitHub Actions roda lint, testes e SonarC
 - [Wiki do projeto](https://github.com/Franciscocosta10/quintal-amora-platform/wiki): requisitos, fluxos de negócio, arquitetura, API, segurança, deploy, testes e decisões técnicas
 - [RFC](./docs/RFC.md): proposta original do projeto ([versão no Google Docs](https://docs.google.com/document/d/1LlH1-6CzqvI3EezxPAWkU6ZBoxwEpqQD06bHw8eh-LI/edit?usp=sharing))
 - [Backend](./backend/README.md) e [Frontend](./frontend/README.md): detalhes de cada parte
+- Política de Privacidade (LGPD): disponível na aplicação, em `/privacidade`
+
+## Licença
+
+[MIT](./LICENSE). As imagens da marca do evento Quintal da Amora pertencem à organização e são usadas com autorização.
