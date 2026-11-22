@@ -108,6 +108,43 @@ describe('helpers/send-password-reset-email', function () {
     expect(global.sails.log.info.calledOnce).to.be.true;
   });
 
+  it('escapa o HTML do nome, para ele não virar marcação no e-mail (HTML injection)', async function () {
+    configurarSmtp();
+    const nomeMalicioso = '<a href="https://golpe.exemplo">Clique aqui</a> & <b>Ana</b>';
+
+    await sendPasswordResetEmail.fn({ ...ENTRADA, nome: nomeMalicioso });
+
+    const { html, text } = sendMail.firstCall.args[0];
+    expect(html).to.include(
+      'Olá, &lt;a href=&quot;https://golpe.exemplo&quot;&gt;Clique aqui&lt;/a&gt; &amp; &lt;b&gt;Ana&lt;/b&gt;!'
+    );
+    expect(html).to.not.include('golpe.exemplo">');
+    expect(html).to.not.include('<b>Ana</b>');
+    // O único link do e-mail continua sendo o de redefinição.
+    expect(html.match(/<a /g)).to.have.length(1);
+    // No texto puro não há marcação para interpretar: o nome vai como foi digitado.
+    expect(text).to.include(`Olá, ${nomeMalicioso}!`);
+  });
+
+  it('escapa aspas e apóstrofos do nome', async function () {
+    configurarSmtp();
+
+    await sendPasswordResetEmail.fn({ ...ENTRADA, nome: `Ana "Amora" D'Ávila` });
+
+    expect(sendMail.firstCall.args[0].html).to.include('Olá, Ana &quot;Amora&quot; D&#39;Ávila!');
+  });
+
+  it('escapa o link dentro do atributo href', async function () {
+    configurarSmtp();
+    const link = 'https://quintal.exemplo/redefinir-senha?token=abc&x="><script>';
+
+    await sendPasswordResetEmail.fn({ ...ENTRADA, link });
+
+    const { html } = sendMail.firstCall.args[0];
+    expect(html).to.include('href="https://quintal.exemplo/redefinir-senha?token=abc&amp;x=&quot;&gt;&lt;script&gt;"');
+    expect(html).to.not.include('<script>');
+  });
+
   it('usa conexão segura na porta 465 e o remetente configurado', async function () {
     configurarSmtp(465);
     process.env.SMTP_FROM = 'Quintal <contato@quintal.exemplo>';

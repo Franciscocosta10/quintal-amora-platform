@@ -10,6 +10,8 @@
  * body: { nomeCompleto, email, senha }
  */
 
+var usuarioPublico = require('../../utils/usuarioPublico');
+
 module.exports = {
 
   friendlyName: 'Signup',
@@ -59,7 +61,7 @@ module.exports = {
     var token = await sails.helpers.jwt.signToken(usuario.id, usuario.perfil);
 
     return exits.success({
-      usuario: _.omit(usuario, ['senha']),
+      usuario: usuarioPublico.semCamposPrivados(usuario),
       token: token
     });
   }

@@ -17,6 +17,8 @@
 var TAMANHO_MAXIMO = 400 * 1024; // caracteres da data URL (~300 KB de imagem)
 var FORMATO_FOTO = /^data:image\/(jpeg|png|webp);base64,[A-Za-z0-9+/]+={0,2}$/;
 
+var usuarioPublico = require('../../utils/usuarioPublico');
+
 module.exports = {
 
   friendlyName: 'Change photo',
@@ -60,7 +62,7 @@ module.exports = {
       .updateOne({ id: this.req.usuario.id })
       .set({ fotoPerfil: foto });
 
-    return _.omit(usuarioAtualizado, ['senha']);
+    return usuarioPublico.semCamposPrivados(usuarioAtualizado);
   }
 
 };

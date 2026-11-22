@@ -22,9 +22,20 @@ describe('auth/me', function () {
     delete global._;
   });
 
-  it('devolve o usuário autenticado sem a senha', async function () {
+  it('devolve o usuário autenticado sem a senha e sem os dados da recuperação de senha', async function () {
     const exits = criarExits();
-    const contexto = { req: { usuario: { id: 7, nomeCompleto: 'Ana', perfil: 'administrador', senha: 'hash' } } };
+    const contexto = {
+      req: {
+        usuario: {
+          id: 7,
+          nomeCompleto: 'Ana',
+          perfil: 'administrador',
+          senha: 'hash',
+          resetPasswordToken: 'hash-do-token',
+          resetPasswordExpiresAt: 1700000000000
+        }
+      }
+    };
 
     await me.fn.call(contexto, {}, exits);
 

@@ -11,6 +11,8 @@
  * (forgot/reset-password) e perfil só muda por admin.
  */
 
+var usuarioPublico = require('../../utils/usuarioPublico');
+
 module.exports = {
 
   friendlyName: 'Update profile',
@@ -63,7 +65,7 @@ module.exports = {
       .updateOne({ id: idUsuario })
       .set({ nomeCompleto: nome, email: email });
 
-    return _.omit(usuarioAtualizado, ['senha']);
+    return usuarioPublico.semCamposPrivados(usuarioAtualizado);
   }
 
 };

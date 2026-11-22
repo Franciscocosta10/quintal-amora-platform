@@ -10,6 +10,8 @@
  * (protegido pela policy isLoggedIn — ver config/policies.js)
  */
 
+var usuarioPublico = require('../../utils/usuarioPublico');
+
 module.exports = {
 
   friendlyName: 'Me',
@@ -17,7 +19,7 @@ module.exports = {
   description: 'Retorna os dados do usuário autenticado.',
 
   fn: async function (inputs, exits) {
-    return exits.success(_.omit(this.req.usuario, ['senha']));
+    return exits.success(usuarioPublico.semCamposPrivados(this.req.usuario));
   }
 
 };

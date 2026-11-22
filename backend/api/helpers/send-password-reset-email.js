@@ -6,7 +6,25 @@
  *                  configuradas, apenas loga o link no console. Em produção
  *                  isso é tratado como erro: o link nunca vai para o log e a
  *                  falha aparece no log de erros da API.
+ *
+ *                  O nome vem do cadastro (digitado pelo próprio usuário),
+ *                  então é escapado antes de entrar no HTML: um nome como
+ *                  `<a href="...">Clique aqui</a>` apareceria como texto, e
+ *                  não como um link falso dentro de um e-mail legítimo.
  */
+
+/**
+ * Troca os caracteres especiais do HTML pelas entidades equivalentes, para
+ * o texto ser exibido como texto e nunca interpretado como marcação.
+ */
+function escaparHtml(texto) {
+  return String(texto)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
 
 module.exports = {
 
@@ -43,7 +61,9 @@ module.exports = {
       }
     });
 
+    // Texto puro não interpreta HTML: aqui o nome vai como foi digitado.
     const saudacao = `Olá${inputs.nome ? ', ' + inputs.nome : ''}!`;
+    const saudacaoHtml = `Olá${inputs.nome ? ', ' + escaparHtml(inputs.nome) : ''}!`;
 
     const info = await transportador.sendMail({
       from: process.env.SMTP_FROM || '"Quintal da Amora" <no-reply@quintaldaamora.com>',
@@ -58,9 +78,9 @@ module.exports = {
         'Esse link expira em 30 minutos. Se você não solicitou, pode ignorar este e-mail.'
       ].join('\n'),
       html: `
-    <p>${saudacao}</p>
+    <p>${saudacaoHtml}</p>
     <p>Recebemos uma solicitação para redefinir sua senha na plataforma Quintal da Amora.</p>
-    <p><a href="${inputs.link}">Clique aqui para criar uma nova senha</a></p>
+    <p><a href="${escaparHtml(inputs.link)}">Clique aqui para criar uma nova senha</a></p>
     <p>Esse link expira em 30 minutos. Se você não solicitou, pode ignorar este e-mail.</p>
   `
     });
