@@ -56,8 +56,9 @@ export function agruparPorDia(atividades) {
     porDia[chave].push(atividade);
   }
 
+  // Chaves no formato AAAA-MM-DD: a ordem alfabética é a ordem cronológica.
   const dias = Object.keys(porDia)
-    .sort()
+    .sort((a, b) => a.localeCompare(b))
     .map((chave) => ({
       chave,
       rotulo: rotuloDia(chave)

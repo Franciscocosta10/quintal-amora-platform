@@ -15,14 +15,14 @@ export function criarConcurso(dados) {
 }
 
 export function editarConcurso(id, dados) {
-  return apiFetch(`/contest/update/${id}`, {
+  return apiFetch(`/contest/update/${encodeURIComponent(id)}`, {
     method: 'PUT',
     body: dados,
   });
 }
 
 export function removerConcurso(id) {
-  return apiFetch(`/contest/delete/${id}`, {
+  return apiFetch(`/contest/delete/${encodeURIComponent(id)}`, {
     method: 'DELETE',
   });
 }

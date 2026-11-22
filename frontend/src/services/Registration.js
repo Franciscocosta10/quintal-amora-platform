@@ -1,14 +1,14 @@
 import { apiFetch } from '../lib/api';
 
 export function inscreverEmConcurso(concursoId) {
-  return apiFetch(`/contest/${concursoId}/register`, {
+  return apiFetch(`/contest/${encodeURIComponent(concursoId)}/register`, {
     method: 'POST',
     body: {},
   });
 }
 
 export function cancelarInscricao(id) {
-  return apiFetch(`/registration/${id}`, {
+  return apiFetch(`/registration/${encodeURIComponent(id)}`, {
     method: 'DELETE',
   });
 }
@@ -19,12 +19,12 @@ export function listarMinhasInscricoes() {
 
 // RF10 — lista de participantes de um concurso (somente admin).
 export function listarInscritosDoConcurso(concursoId) {
-  return apiFetch(`/contest/${concursoId}/registrations`);
+  return apiFetch(`/contest/${encodeURIComponent(concursoId)}/registrations`);
 }
 
 // RF10 — admin marca/desmarca quem compareceu ao concurso.
 export function marcarPresenca(id, presencaConfirmada) {
-  return apiFetch(`/registration/${id}/presence`, {
+  return apiFetch(`/registration/${encodeURIComponent(id)}/presence`, {
     method: 'PUT',
     body: { presencaConfirmada },
   });

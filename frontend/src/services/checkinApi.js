@@ -8,7 +8,7 @@ export async function registrarCheckin(qrCode) {
 }
 
 export async function consultarStatusCheckin(eventoId) {
-  return apiFetch(`/checkin/status/${eventoId}`, {
+  return apiFetch(`/checkin/status/${encodeURIComponent(eventoId)}`, {
     method: 'GET',
   });
 }

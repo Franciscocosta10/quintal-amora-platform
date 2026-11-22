@@ -21,6 +21,11 @@ describe('services/Registration', () => {
     expect(apiFetch).toHaveBeenCalledWith('/contest/3/register', { method: 'POST', body: {} });
   });
 
+  it('codifica o id na URL, para um valor estranho não mudar o caminho chamado', () => {
+    cancelarInscricao('1/../../admin/users');
+    expect(apiFetch).toHaveBeenCalledWith('/registration/1%2F..%2F..%2Fadmin%2Fusers', { method: 'DELETE' });
+  });
+
   it('cancelarInscricao envia DELETE /registration/:id', () => {
     cancelarInscricao(10);
     expect(apiFetch).toHaveBeenCalledWith('/registration/10', { method: 'DELETE' });

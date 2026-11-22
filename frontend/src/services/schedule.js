@@ -31,9 +31,9 @@ export function criarAtividade(dados) {
 }
 
 export function editarAtividade(id, dados) {
-  return apiFetch(`/activity/update/${id}`, { method: 'PUT', body: dados });
+  return apiFetch(`/activity/update/${encodeURIComponent(id)}`, { method: 'PUT', body: dados });
 }
 
 export function removerAtividade(id) {
-  return apiFetch(`/activity/delete/${id}`, { method: 'DELETE' });
+  return apiFetch(`/activity/delete/${encodeURIComponent(id)}`, { method: 'DELETE' });
 }
