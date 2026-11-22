@@ -1,13 +1,10 @@
 /**
- * registration/find.js
+ * RF10 — lista os inscritos em um concurso (só admin). De cada inscrito
+ * vem só nome e e-mail (RNF06).
  *
- * RF10 — lista os participantes inscritos em um concurso.
- * Protegida por isAdmin. De cada inscrito vem só nome e e-mail, em linha
- * com RNF06 (proteger dados do usuário).
- *
- * Os usuários são buscados numa segunda consulta (e não com
- * `.populate('usuario', { select })`): o Waterline não aceita `select`
- * no populate de uma associação singular (`model`) e responde 500.
+ * Os usuários vêm numa segunda consulta, e não com `.populate('usuario',
+ * { select })`: o Waterline não aceita `select` no populate de uma
+ * associação singular e responde 500.
  */
 
 module.exports = {

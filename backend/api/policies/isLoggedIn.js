@@ -1,12 +1,7 @@
 /**
- * isLoggedIn.js
- *
- * Policy de autenticação (RNF05). Espera o header:
- *   Authorization: Bearer <token>
- *
- * Se válido, popula `req.usuario` com o registro completo do banco
- * (não confia apenas no payload do token) e libera a requisição.
- * Qualquer controller/action pode então usar `this.req.usuario`.
+ * Autenticação (RNF05): valida o header `Authorization: Bearer <token>`
+ * e preenche `req.usuario` com o registro do banco (não confia só no
+ * conteúdo do token).
  */
 
 module.exports = async function (req, res, proceed) {

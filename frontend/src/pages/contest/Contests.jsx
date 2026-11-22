@@ -81,9 +81,8 @@ export default function Contests() {
       ? concursos
       : (porCategoria[categoriaSelecionada] || []);
 
-  // Reaproveita o mesmo agrupamento por dia da Programação — Concurso
-  // também tem `dataHoraInicio`, então o cabeçalho de data em cima do
-  // card fica idêntico ao da tela de Programação.
+  // Mesmo agrupamento por dia da Programação (Concurso também tem
+  // `dataHoraInicio`).
   const { dias: diasDosConcursos, porDia: concursosPorDia } = useMemo(
     () => agruparPorDia(concursosExibidos),
     [concursosExibidos]

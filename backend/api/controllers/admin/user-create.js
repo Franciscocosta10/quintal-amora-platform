@@ -1,6 +1,4 @@
 /**
- * admin/user-create.js
- *
  * RF17 — "adicionar usuário": o admin cria uma conta para outra pessoa
  * (ex.: alguém da organização que vai ajudar no evento) já com o perfil
  * escolhido. A senha é provisória: o admin repassa e a pessoa pode trocar

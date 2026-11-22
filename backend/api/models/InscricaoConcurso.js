@@ -1,14 +1,8 @@
 /**
- * InscricaoConcurso.js
+ * Inscrição de um usuário em um concurso (RF08, RF10).
  *
- * Tabela de junção entre Usuario e Concurso (RF08: confirmação de presença
- * em concursos; RF10: gerenciar lista de participantes).
- *
- * IMPORTANTE: Waterline não tem suporte nativo a chave única composta
- * (usuario + concurso). Na etapa 3 (controller de inscrição), o código
- * deve checar manualmente se já existe uma InscricaoConcurso para o par
- * antes de criar uma nova, para não deixar o mesmo usuário se inscrever
- * duas vezes no mesmo concurso.
+ * O Waterline não tem chave única composta (usuario + concurso), então
+ * registration/create confere se a inscrição já existe antes de criar.
  */
 
 module.exports = {

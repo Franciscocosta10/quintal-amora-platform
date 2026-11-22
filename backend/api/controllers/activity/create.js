@@ -1,6 +1,5 @@
 /**
- * Protegida pela policy `isAdmin` (ver config/policies.js) — só quem tem
- * perfil administrador (RF03) pode cadastrar um item de programação.
+ * RF07 — cadastro de um item da programação. Protegida por `isAdmin`.
  */
 
 module.exports = {

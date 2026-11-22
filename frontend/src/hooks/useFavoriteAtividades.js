@@ -3,9 +3,8 @@ import { useCallback, useEffect, useState } from 'react';
 const STORAGE_KEY = 'quintalAmora:atividadesFavoritas';
 
 /**
- * useFavoriteAtividades — mesmo mecanismo do useFavoriteContests
- * agora aplicado à Programação, que tinha
- * a UI (DayTabs/ScheduleItem) pronta mas nunca recebia os dados.
+ * useFavoriteAtividades — favoritos da Programação guardados no
+ * localStorage, como no useFavoriteContests.
  */
 export function useFavoriteAtividades() {
   const [favoritos, setFavoritos] = useState(() => {

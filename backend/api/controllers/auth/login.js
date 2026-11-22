@@ -1,6 +1,4 @@
 /**
- * auth/login.js
- *
  * RF02 – O sistema deve permitir login/logout.
  * Retorna sempre a mesma mensagem de erro para "e-mail não existe" e
  * "senha errada" — evita que a API revele quais e-mails têm conta.
@@ -8,9 +6,6 @@
  * Depois de várias senhas erradas para o mesmo e-mail, o login desse
  * e-mail fica bloqueado por alguns minutos (utils/limiteLogin.js). E-mails
  * sem conta também contam, senão o bloqueio revelaria quais existem.
- *
- * POST /api/v1/auth/login
- * body: { email, senha }
  */
 
 var limiteLogin = require('../../utils/limiteLogin');

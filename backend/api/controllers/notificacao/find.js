@@ -1,12 +1,8 @@
 /**
- * notificacao/find.js
+ * RF11 — últimos avisos. Pública, como a programação.
  *
- * RF11 — lista os avisos mais recentes. Pública, como a programação e os
- * concursos: são informações gerais do evento.
- *
- * O frontend chama esta rota a cada poucos segundos (polling) para
- * mostrar avisos novos no sino sem recarregar a página. Por isso devolve
- * só os últimos avisos e só os campos que a tela usa.
+ * O frontend chama esta rota a cada 20 segundos (polling), por isso ela
+ * devolve só os avisos mais recentes e só os campos que a tela usa.
  */
 
 var LIMITE = 20;

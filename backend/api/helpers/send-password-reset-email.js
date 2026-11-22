@@ -1,16 +1,10 @@
 /**
- * send-password-reset-email.js
+ * Envia o e-mail de redefinição de senha pelo SMTP (nodemailer). Sem
+ * SMTP configurado, em desenvolvimento só mostra o link no console; em
+ * produção é erro.
  *
- * @description :: Envia o e-mail de redefinição via SMTP (nodemailer).
- *                  Em desenvolvimento, se as variáveis de SMTP não estiverem
- *                  configuradas, apenas loga o link no console. Em produção
- *                  isso é tratado como erro: o link nunca vai para o log e a
- *                  falha aparece no log de erros da API.
- *
- *                  O nome vem do cadastro (digitado pelo próprio usuário),
- *                  então é escapado antes de entrar no HTML: um nome como
- *                  `<a href="...">Clique aqui</a>` apareceria como texto, e
- *                  não como um link falso dentro de um e-mail legítimo.
+ * O nome vem do cadastro, então é escapado antes de entrar no HTML, para
+ * não virar um link ou uma marcação falsa dentro do e-mail.
  */
 
 /**

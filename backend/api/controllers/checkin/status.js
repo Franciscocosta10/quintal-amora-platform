@@ -1,5 +1,5 @@
 /**
- * checkin/status.js
+ * Diz se o usuário logado já fez check-in no evento.
  */
 
 module.exports = {
@@ -23,7 +23,6 @@ module.exports = {
 
   fn: async function (inputs, exits) {
 
-    // TODO: ajuste conforme o nome real usado pela sua policy de autenticação.
     const usuarioId = this.req.usuario.id;
 
     const checkin = await Checkin.findOne({

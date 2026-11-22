@@ -1,13 +1,9 @@
 /**
- * registration/cancel.js
+ * Cancela uma inscrição mudando o `status` (não apaga): a vaga volta a
+ * ficar livre e o histórico fica guardado.
  *
- * Cancela uma inscrição via mudança de `status` (não destroyOne) — assim
- * a vaga volta a ficar disponível (registration/create conta apenas
- * status != 'cancelado') e o histórico fica preservado.
- *
- * O próprio usuário pode cancelar a própria inscrição; um administrador
- * pode cancelar a de qualquer um. Protegida só por isLoggedIn — a
- * checagem de dono/admin é feita aqui dentro.
+ * O dono da inscrição ou um admin podem cancelar; essa checagem é feita
+ * aqui dentro, porque a rota só exige isLoggedIn.
  */
 
 module.exports = {

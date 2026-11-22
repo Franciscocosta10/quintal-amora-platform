@@ -7,9 +7,6 @@ import './Layout.css';
  * sidebar fixa à esquerda, header no topo, conteúdo principal no centro
  * e uma coluna direita opcional (usada pela Home para "Avisos" e
  * "Lojas participantes", e pela Programação para "Destaque do dia").
- *
- * Extraído para cá em vez de repetir em cada página, seguindo o mesmo
- * raciocínio de reuso do ScheduleList/ScheduleItem.
  */
 export default function Layout({ children, rightRail }) {
   return (

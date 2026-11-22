@@ -1,9 +1,7 @@
 /**
- * auth/forgot-password.js
- *
- * @description :: Inicia o fluxo de recuperação de senha.
- *                  Por segurança, sempre responde com sucesso genérico,
- *                  para não revelar se um e-mail existe na base (user enumeration).
+ * Inicia o fluxo de recuperação de senha.
+ * Por segurança, sempre responde com sucesso genérico,
+ * para não revelar se um e-mail existe na base (user enumeration).
  */
 
 const crypto = require('crypto');

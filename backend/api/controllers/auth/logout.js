@@ -1,13 +1,6 @@
 /**
- * auth/logout.js
- *
- * RF02 – logout. Como a autenticação é JWT stateless (nenhuma sessão
- * fica guardada no servidor), "fazer logout" é, na prática, o frontend
- * descartar o token guardado (ex.: localStorage). Este endpoint existe
- * para o frontend ter um contrato claro e para permitir, no futuro,
- * evoluir para uma blacklist de tokens sem quebrar o cliente.
- *
- * POST /api/v1/auth/logout
+ * RF02 — logout. A autenticação é JWT sem sessão no servidor, então o
+ * logout de fato acontece no frontend, que descarta o token.
  */
 
 module.exports = {

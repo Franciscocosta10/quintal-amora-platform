@@ -1,7 +1,5 @@
 /**
- * checkin/historico.js
- *
- * Retorna o histórico de check-ins do usuário autenticado.
+ * Histórico de check-ins do usuário logado.
  */
 
 module.exports = {

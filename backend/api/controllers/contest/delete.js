@@ -1,10 +1,8 @@
 /**
- * contest/delete.js
- *
- * Remove um concurso (somente admin). As inscrições relacionadas são
- * removidas em cascata pelo `cascadeOnDestroy: true` já configurado
- * globalmente em config/models.js.
+ * Remove um concurso (só admin). As inscrições saem junto, pelo
+ * `cascadeOnDestroy: true` de config/models.js.
  */
+
 module.exports = {
 
   friendlyName: 'Delete contest',

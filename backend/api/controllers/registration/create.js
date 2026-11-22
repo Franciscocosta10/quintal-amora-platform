@@ -1,21 +1,11 @@
 /**
- * registration/create.js
+ * RF08 — inscrição em concurso. A inscrição já é a confirmação de
+ * presença (nasce com status 'inscrito'); no dia, o admin marca quem
+ * compareceu (RF10, registration/presence).
  *
- * RF08 — inscrição em concurso. "Confirmação de presença" é o próprio
- * ato de se inscrever (decisão confirmada em conversa) — não existe uma
- * etapa separada de confirmação; o registro já nasce com status
- * 'inscrito'. O campo `presencaConfirmada` é marcado pelo admin no dia,
- * na lista de inscritos do concurso (RF10, registration/presence).
- *
- * Protegida por isLoggedIn — qualquer usuário autenticado pode se
- * inscrever (ver config/policies.js).
- *
- * ATENÇÃO (mesma limitação já documentada em InscricaoConcurso.js):
- * Waterline não garante unicidade composta nem atomicidade na contagem
- * de vagas a nível de banco. Para o volume esperado do evento isso é
- * aceitável; se virar requisito real, a solução é uma constraint única
- * composta via SQL bruto, como já foi feito para check-in em
- * schema-quintal-amora.sql.
+ * Limitação: o Waterline não garante unicidade composta nem contagem
+ * atômica de vagas. Para o volume do evento é aceitável; a solução seria
+ * uma constraint única no banco, como a do check-in.
  */
 
 module.exports = {

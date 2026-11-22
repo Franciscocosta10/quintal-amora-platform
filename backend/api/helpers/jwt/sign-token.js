@@ -1,7 +1,3 @@
-/**
- * jwt/sign-token.js
- */
-
 module.exports = {
 
   friendlyName: 'Sign token',

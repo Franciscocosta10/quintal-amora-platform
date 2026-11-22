@@ -1,17 +1,5 @@
 /**
- * auth/change-photo.js
- *
  * Troca (ou remove, com `null`) a foto de perfil do usuário logado.
- *
- * PUT /auth/change-photo
- * Body: { "fotoPerfil": "data:image/jpeg;base64,..." } ou { "fotoPerfil": null }
- * Requer header: Authorization: Bearer <token> (policy isLoggedIn)
- *
- * Por que data URL em vez de upload de arquivo: o frontend já reduz a foto
- * para 256x256 antes de enviar (~30 KB), então ela cabe direto na coluna
- * `fotoPerfil` e vira `<img src>` sem precisar de pasta de uploads nem de
- * servir arquivos estáticos. Só aceita JPEG/PNG/WebP (SVG fica de fora por
- * poder carregar script) e limita o tamanho para não inchar o banco.
  */
 
 var TAMANHO_MAXIMO = 400 * 1024; // caracteres da data URL (~300 KB de imagem)

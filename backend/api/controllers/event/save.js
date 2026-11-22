@@ -1,12 +1,9 @@
 /**
- * event/save.js
+ * RF18 — cadastra ou edita o evento.
  *
- * RF18 — o administrador cadastra ou edita os dados do evento.
- *
- * O sistema trabalha com um evento por vez (o mais recente, o mesmo que a
- * Home, o check-in e o painel usam). Então esta action é um "salvar":
- * se ainda não existe evento, cria; se já existe, atualiza o atual.
- * Uma nova edição do Quintal é só editar nome, edição e datas.
+ * O sistema trabalha com um evento por vez (o mais recente), então esta
+ * action é um "salvar": se ainda não existe evento, cria; se existe,
+ * atualiza.
  */
 
 module.exports = {

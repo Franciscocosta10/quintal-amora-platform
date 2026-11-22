@@ -1,6 +1,4 @@
 /**
- * admin/user-update.js
- *
  * RF17 — "remover usuário" e troca de perfil.
  *
  * Remover é desativar (`ativo: false`), não apagar: o histórico de

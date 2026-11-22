@@ -1,14 +1,7 @@
 /**
- * auth/update-profile.js
- *
  * Atualiza nome e e-mail do usuário logado (tela "Minha conta").
- *
- * PUT /auth/update-profile
- * Body: { "nomeCompleto": "...", "email": "..." }
- * Requer header: Authorization: Bearer <token> (policy isLoggedIn)
- *
- * Senha e perfil ficam de fora de propósito: senha tem fluxo próprio
- * (forgot/reset-password) e perfil só muda por admin.
+ * Senha e perfil ficam de fora: a senha tem fluxo próprio e o perfil só
+ * muda por admin.
  */
 
 var usuarioPublico = require('../../utils/usuarioPublico');

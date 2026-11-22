@@ -20,14 +20,8 @@ const ITENS_MENU = [
 // Só aparece para administradores (RNF07).
 const ITEM_ADMIN = { label: 'Painel admin', to: '/admin' };
 
-/*
- * No celular e tablet (até 1024px) a sidebar vira uma barra no topo só
- * com a logo e o botão ☰; os links aparecem ao tocar nele. No computador
- * o botão fica escondido pelo CSS e os links aparecem sempre.
- *
- * Não precisa fechar o menu ao trocar de página: cada página monta o seu
- * próprio Layout, então a Sidebar nasce de novo com o menu fechado.
- */
+// Não precisa fechar o menu ao trocar de página: cada página monta o
+// próprio Layout, então a Sidebar nasce de novo com o menu fechado.
 export default function Sidebar() {
   const { isAdmin } = useAuth();
   const [menuAberto, setMenuAberto] = useState(false);

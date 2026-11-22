@@ -1,12 +1,8 @@
 /**
- * Política de Privacidade (LGPD — Lei nº 13.709/2018).
- *
- * Página pública, linkada no cadastro. Informa ao titular quais dados são
- * coletados, para quê, com quem são compartilhados, por quanto tempo ficam
- * guardados e como pedir acesso, correção ou exclusão (art. 9º e art. 18).
- *
- * O e-mail de contato fica em CONTATO_PRIVACIDADE, num lugar só.
+ * Política de Privacidade (LGPD — Lei nº 13.709/2018). Página pública,
+ * linkada no cadastro. O e-mail de contato fica em CONTATO_PRIVACIDADE.
  */
+
 import { Link } from 'react-router-dom';
 import { ShieldCheck } from 'lucide-react';
 

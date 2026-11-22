@@ -1,19 +1,13 @@
 /**
- * utils/expositor.js
+ * Regras de formato do Expositor, usadas por expositor/create e
+ * expositor/update.
  *
- * Regras de formato do Expositor compartilhadas por expositor/create e
- * expositor/update. Fica fora de api/helpers de propósito: é uma função
- * pura (sem banco, sem `sails`), então um `require` simples basta e os
- * testes unitários não precisam simular `sails.helpers`.
- *
- * Por que validar URL aqui: `imagem` vira `<img src>` e as redes sociais
- * viram `<a href>` no catálogo público. Sem essa checagem um admin (ou um
- * token de admin vazado) poderia gravar `javascript:...` e executar script
- * no navegador de qualquer visitante — por isso só http/https passam.
+ * Só URLs http/https passam: a imagem vira `<img src>` e as redes viram
+ * `<a href>` no catálogo, e um `javascript:` executaria script no
+ * navegador do visitante.
  */
 
-// Import explícito (em vez do `_` global do Sails) para o módulo funcionar
-// isolado, inclusive nos testes.
+// Import explícito (em vez do `_` global do Sails) para funcionar nos testes.
 var _ = require('@sailshq/lodash');
 
 var TIPOS = ['loja', 'artista'];

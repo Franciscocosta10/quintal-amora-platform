@@ -1,13 +1,8 @@
 /**
- * expositor/find.js
- *
- * Action pública do catálogo, cobrindo os dois requisitos de leitura:
- *  - RF13 (listagem): GET /expositor           → array, com filtros opcionais
- *  - RF14 (detalhe):  GET /expositor/:id       → um expositor ou 404
- *
- * Uma única action para os dois casos mantém a mesma policy (`true`) e o
- * mesmo formato de resposta de cada expositor, sem duplicar código.
+ * Catálogo público: sem `id` lista os expositores (RF13), com `id`
+ * devolve um só ou 404 (RF14).
  */
+
 var TIPOS = require('../../utils/expositor').TIPOS;
 
 module.exports = {

@@ -1,10 +1,8 @@
 /**
- * expositor/update.js
- *
- * RF15: edição de loja/artista pelo administrador. Atualização parcial —
- * só os campos enviados mudam. `evento` não é editável: mover um expositor
- * para outra edição é, na prática, um novo cadastro (mesma regra de Concurso).
+ * RF15 — edição parcial de loja/artista: só os campos enviados mudam.
+ * O `evento` não é editável.
  */
+
 var regrasExpositor = require('../../utils/expositor');
 
 module.exports = {

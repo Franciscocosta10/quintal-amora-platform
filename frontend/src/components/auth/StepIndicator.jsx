@@ -1,11 +1,6 @@
 /**
- * components/auth/StepIndicator.jsx
- *
- * Indicador de 3 etapas do fluxo de "esqueci a senha" (E-mail →
- * Verificação → Nova senha), igual ao protótipo. `etapaAtual` é 1, 2
- * ou 3. Hoje só a etapa 1 tem tela implementada (ver observação no
- * ForgotPasswordPage) — o componente já fica pronto para quando as
- * etapas 2 e 3 existirem.
+ * Indicador das etapas da recuperação de senha (E-mail → Verificação →
+ * Nova senha). `etapaAtual` vai de 1 a 3.
  */
 
 const ETAPAS = [

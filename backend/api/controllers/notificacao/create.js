@@ -1,12 +1,7 @@
 /**
- * notificacao/create.js
- *
- * RF11 / RF12 — o administrador envia um aviso para os participantes.
- * Regra "Permissões de Disparo": só administradores (policy isAdmin).
- *
- * As notificações são internas: ficam gravadas no banco e o frontend
- * consulta as novas periodicamente (ver notificacao/find). O aviso é
- * vinculado ao evento atual (o mais recente), quando houver um.
+ * RF11 / RF12 — o administrador envia um aviso aos participantes.
+ * O aviso fica no banco, ligado ao evento atual, e o frontend busca os
+ * novos periodicamente (notificacao/find).
  */
 
 module.exports = {

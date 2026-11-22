@@ -1,7 +1,5 @@
 /**
- * schedule.js
- *
- * Funções que conversam com os endpoints de /activity (RF06 e RF07).
+ * Chamadas aos endpoints de /activity (RF06 e RF07).
  */
 
 import { apiFetch } from '../lib/api';

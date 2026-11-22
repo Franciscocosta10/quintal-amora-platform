@@ -1,10 +1,6 @@
 /**
- * Evento.js
- *
- * Representa uma edição do Quintal da Amora. Modelar como entidade própria
- * (em vez de fixar tudo em variáveis globais) permite que a plataforma
- * sobreviva à 16ª, 17ª... edições sem retrabalho, e é a raiz de onde
- * pendura toda a Programação, Concursos, Check-ins e Expositores.
+ * Uma edição do Quintal da Amora. É a raiz da programação, dos
+ * concursos, dos check-ins e dos expositores.
  */
 
 module.exports = {
@@ -44,10 +40,8 @@ module.exports = {
       required: true
     },
 
-    // Usado pela regra de negócio "Exceção 3: Encerramento do Evento":
-    // enquanto true, ações interativas (check-in, inscrições, notificações)
-    // continuam liberadas; após o horário de término, o sistema pode
-    // marcar como false e travar essas ações no backend.
+    // Situação do evento, exibida no painel admin. Previsto para a regra
+    // "Exceção 3: Encerramento do Evento" da RFC.
     ativo: {
       type: 'boolean',
       defaultsTo: true

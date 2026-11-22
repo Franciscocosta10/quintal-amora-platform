@@ -1,6 +1,4 @@
 /**
- * admin/user-find.js
- *
  * RF17 — lista todos os usuários para a tela "Usuários" do painel.
  * Só campos não sensíveis (RNF06): nunca senha nem token de recuperação.
  * Protegida por isLoggedIn + isAdmin (RNF07).

@@ -1,13 +1,9 @@
 /**
- * Usuario.js
+ * Qualquer pessoa com conta no sistema (RF01–RF03). O `perfil` separa
+ * visitante de administrador e é usado pela policy isAdmin (RNF07).
  *
- * Representa qualquer pessoa com conta no sistema (RF01, RF02, RF03).
- * O campo `perfil` diferencia visitantes de administradores (RF03),
- * usado pela policy `isAdmin` para restringir o painel administrativo (RNF07).
- *
- * A senha nunca é retornada nas respostas da API: além do `customToJSON`
- * abaixo (rede de segurança automática), os controllers de auth também
- * removem o campo manualmente antes de responder.
+ * A senha nunca sai nas respostas: o `customToJSON` usa a allowlist de
+ * api/utils/usuarioPublico.js.
  */
 
 var bcrypt = require('bcryptjs');
@@ -64,9 +60,7 @@ module.exports = {
       allowNull: true,
     },
 
-    // ---------------------------------------------------------------------
-    // Associações (preenchidas conforme os demais módulos forem implementados)
-    // ---------------------------------------------------------------------
+    // Associações
     inscricoes: {
       collection: 'inscricaoconcurso',
       via: 'usuario'
@@ -102,8 +96,7 @@ module.exports = {
     });
   },
 
-  // Se algum dia um endpoint de "editar perfil" atualizar a senha,
-  // ela é hasheada de novo aqui automaticamente.
+  // Faz o hash de novo quando a senha muda (ex.: redefinição de senha)
   beforeUpdate: function (valuesToUpdate, proceed) {
     if (!valuesToUpdate.senha) {
       return proceed();

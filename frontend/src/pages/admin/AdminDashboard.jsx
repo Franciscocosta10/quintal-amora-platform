@@ -20,10 +20,8 @@ import '../../components/contest/ContestForm.css';
 import './AdminDashboard.css';
 
 /**
- * Painel administrativo (RF16) — versão simplificada da "Central de
- * Gerenciamento" do mockup: só leitura dos dados gerais do evento.
- * Cada cartão leva para a tela onde aquele dado já é gerenciado, então o
- * painel não duplica cadastro/edição de nada.
+ * Painel administrativo (RF16): só leitura dos dados gerais do evento.
+ * Cada cartão leva à tela onde aquele dado é gerenciado.
  */
 
 const CARTOES = [
@@ -66,9 +64,7 @@ export default function AdminDashboard() {
   const [carregando, setCarregando] = useState(true);
   const [erro, setErro] = useState('');
 
-  // Nenhum setState síncrono aqui (regra react-hooks/set-state-in-effect,
-  // mesmo padrão do useExpositores): o erro só é limpo quando a nova
-  // resposta chega, e os dados antigos ficam na tela enquanto isso.
+  // Sem setState síncrono no efeito (regra react-hooks/set-state-in-effect).
   const carregar = useCallback(() => {
     return buscarPainelAdmin()
       .then((resultado) => {
