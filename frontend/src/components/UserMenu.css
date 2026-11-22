@@ -111,3 +111,10 @@
   font-size: 14px;
   font-weight: 700;
 }
+
+/* Celular e tablet: itens do menu mais altos, mais fáceis de tocar. */
+@media (max-width: 1024px) {
+  .user-menu__link {
+    padding: 12px 16px;
+  }
+}

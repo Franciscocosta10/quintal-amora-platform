@@ -3,7 +3,7 @@
  *
  * RF16 — painel administrativo. Versão enxuta da "Central de Gerenciamento"
  * do mockup: devolve, numa única chamada, os números gerais do evento atual
- * e duas listas curtas (próximas atividades e usuários recentes).
+ * e a lista curta de usuários recentes.
  *
  * Protegida por isLoggedIn + isAdmin (RNF07). Os dados de usuários trazem
  * só campos não sensíveis (RNF06).
@@ -15,7 +15,7 @@
  * evento específico.
  */
 
-var LIMITE_LISTAS = 5;
+var LIMITE_USUARIOS_RECENTES = 5;
 
 module.exports = {
 
@@ -41,7 +41,7 @@ module.exports = {
     var usuariosRecentes = await Usuario
       .find({ select: ['nomeCompleto', 'email', 'perfil', 'ativo', 'createdAt'] })
       .sort('createdAt DESC')
-      .limit(LIMITE_LISTAS);
+      .limit(LIMITE_USUARIOS_RECENTES);
 
     // Sem evento cadastrado ainda: o painel continua útil (usuários), mas
     // tudo que depende de evento vem zerado.
@@ -56,7 +56,6 @@ module.exports = {
           inscricoes: 0,
           expositores: 0
         },
-        proximasAtividades: [],
         usuariosRecentes: usuariosRecentes
       };
     }
@@ -77,18 +76,6 @@ module.exports = {
     var atividades = await Atividade.count({ evento: evento.id, status: { '!=': 'cancelada' } });
     var expositores = await Expositor.count({ evento: evento.id });
 
-    var proximasAtividades = await Atividade
-      .find({
-        where: {
-          evento: evento.id,
-          dataHoraInicio: { '>=': Date.now() },
-          status: { '!=': 'cancelada' }
-        },
-        select: ['titulo', 'tipo', 'local', 'dataHoraInicio', 'status']
-      })
-      .sort('dataHoraInicio ASC')
-      .limit(LIMITE_LISTAS);
-
     return {
       evento: {
         id: evento.id,
@@ -107,7 +94,6 @@ module.exports = {
         inscricoes: inscricoes,
         expositores: expositores
       },
-      proximasAtividades: proximasAtividades,
       usuariosRecentes: usuariosRecentes
     };
 

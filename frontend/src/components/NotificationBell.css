@@ -43,7 +43,7 @@
   z-index: 100;
   width: 320px;
   max-width: calc(100vw - 32px);
-  max-height: 420px;
+  max-height: min(420px, 70dvh);
   overflow-y: auto;
   padding: 12px 16px;
   box-sizing: border-box;
@@ -108,4 +108,22 @@
   line-height: 1.4;
   color: var(--text);
   white-space: pre-line;
+}
+
+/* Celular e tablet: o sino não fica no canto da tela (o avatar vem depois),
+   então o painel alinhado à direita do sino saía pela esquerda. Aqui ele se
+   posiciona pelo header (Header.css) e ocupa a largura da tela. */
+@media (max-width: 1024px) {
+  .notification-bell {
+    position: static;
+  }
+
+  .notification-bell__painel {
+    top: calc(100% - 4px);
+    left: 16px;
+    right: 16px;
+    width: auto;
+    max-width: 420px;
+    margin-left: auto; /* no tablet, fica encostado à direita */
+  }
 }

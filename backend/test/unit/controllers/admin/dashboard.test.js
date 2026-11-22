@@ -116,14 +116,11 @@ describe('admin/dashboard', function () {
     expect(resultado.usuariosRecentes).to.deep.equal(USUARIOS);
   });
 
-  it('lista só atividades futuras e não canceladas', async function () {
+  it('não busca a lista de próximas atividades', async function () {
     const resultado = await adminDashboard.fn();
 
-    const { where } = global.Atividade.find.firstCall.args[0];
-    expect(where.evento).to.equal(7);
-    expect(where.status).to.deep.equal({ '!=': 'cancelada' });
-    expect(where.dataHoraInicio['>=']).to.be.a('number');
-    expect(resultado.proximasAtividades).to.deep.equal(ATIVIDADES);
+    expect(global.Atividade.find.called).to.equal(false);
+    expect(resultado).to.not.have.property('proximasAtividades');
   });
 
   it('zera os dados do evento quando nenhum evento foi cadastrado', async function () {
@@ -140,7 +137,7 @@ describe('admin/dashboard', function () {
       inscricoes: 0,
       expositores: 0
     });
-    expect(resultado.proximasAtividades).to.deep.equal([]);
+    expect(resultado).to.not.have.property('proximasAtividades');
     expect(resultado.usuariosRecentes).to.deep.equal(USUARIOS);
     expect(global.Checkin.count.called).to.equal(false);
   });

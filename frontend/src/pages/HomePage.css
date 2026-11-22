@@ -112,3 +112,11 @@
 .home-card__link:hover {
   text-decoration: underline;
 }
+
+/* Celular: menos margem interna no card do cronograma, sobra mais largura
+   para o texto das atividades. */
+@media (max-width: 480px) {
+  .home-schedule {
+    padding: 16px;
+  }
+}

@@ -188,3 +188,18 @@
     margin-left: auto;
   }
 }
+
+/* Celular e tablet pequeno: horário, tipo e botões na primeira linha;
+   título e descrição embaixo, com a largura toda do card (antes ficavam
+   espremidos ao lado). */
+@media (max-width: 700px) {
+  .schedule-item__actions {
+    order: 2;
+  }
+
+  .schedule-item__content {
+    order: 3;
+    flex-basis: 100%;
+    width: 100%;
+  }
+}

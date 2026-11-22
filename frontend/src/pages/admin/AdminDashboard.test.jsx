@@ -27,10 +27,6 @@ const PAINEL = {
     inscricoes: 55,
     expositores: 18
   },
-  proximasAtividades: [
-    { id: 1, titulo: 'Abertura do Evento', local: 'Palco 1', dataHoraInicio: new Date(2026, 9, 10, 9).getTime(), status: 'confirmada' },
-    { id: 2, titulo: 'Concurso Cosplay', local: null, dataHoraInicio: new Date(2026, 9, 10, 10, 30).getTime(), status: 'atrasada' }
-  ],
   usuariosRecentes: [
     { id: 1, nomeCompleto: 'Ana Beatriz', email: 'ana@email.com', perfil: 'visitante', ativo: true, createdAt: new Date(2026, 4, 10).getTime() },
     { id: 2, nomeCompleto: 'Luiza Helena', email: 'luiza@email.com', perfil: 'administrador', ativo: false, createdAt: new Date(2026, 4, 11).getTime() }
@@ -68,13 +64,12 @@ describe('AdminDashboard', () => {
     expect(screen.getByRole('link', { name: /18\s*Lojas e artistas/ })).toHaveAttribute('href', '/catalogo');
   });
 
-  it('lista as próximas atividades e destaca as atrasadas', async () => {
+  it('não mostra a lista de próximas atividades', async () => {
     buscarPainelAdmin.mockResolvedValue(PAINEL);
     await renderizar();
 
-    expect(screen.getByText('Abertura do Evento')).toBeInTheDocument();
-    expect(screen.getByText('Palco 1')).toBeInTheDocument();
-    expect(screen.getByText('Atrasada')).toBeInTheDocument();
+    expect(screen.queryByText(/Próximas atividades/)).not.toBeInTheDocument();
+    expect(screen.queryByRole('link', { name: 'Ver programação' })).not.toBeInTheDocument();
   });
 
   it('lista os usuários recentes com perfil ou status inativo', async () => {
@@ -90,13 +85,11 @@ describe('AdminDashboard', () => {
     buscarPainelAdmin.mockResolvedValue({
       ...PAINEL,
       evento: null,
-      proximasAtividades: [],
       usuariosRecentes: []
     });
     await renderizar();
 
     expect(screen.getByText(/Nenhum evento cadastrado ainda/)).toBeInTheDocument();
-    expect(screen.getByText('Nenhuma atividade futura na programação.')).toBeInTheDocument();
     expect(screen.getByText('Nenhum usuário cadastrado.')).toBeInTheDocument();
   });
 

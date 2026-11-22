@@ -41,3 +41,15 @@
   background: var(--accent);
   color: #fff;
 }
+
+/* Celular e tablet: header mais compacto e botões mais altos para toque. */
+@media (max-width: 1024px) {
+  .app-header {
+    position: relative; /* referência do painel de notificações */
+    padding: 10px 16px;
+  }
+
+  .app-header__btn {
+    padding: 11px 18px;
+  }
+}
