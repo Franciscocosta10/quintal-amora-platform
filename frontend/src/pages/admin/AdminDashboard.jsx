@@ -45,15 +45,6 @@ function formatarData(timestamp) {
     .format(new Date(timestamp));
 }
 
-function formatarDataHora(timestamp) {
-  return new Intl.DateTimeFormat('pt-BR', {
-    day: '2-digit',
-    month: '2-digit',
-    hour: '2-digit',
-    minute: '2-digit'
-  }).format(new Date(timestamp));
-}
-
 function Cartao({ rotulo, Icone, valor, to }) {
   const conteudo = (
     <>
@@ -164,29 +155,6 @@ export default function AdminDashboard() {
           </section>
 
           <div className="admin-listas">
-            <section className="contests-highlight">
-              <h3 className="com-icone"><CalendarDays size="1em" aria-hidden="true" /> Próximas atividades</h3>
-              {dados.proximasAtividades.length === 0 ? (
-                <p className="contests-highlight__vazio">Nenhuma atividade futura na programação.</p>
-              ) : (
-                <ul className="admin-lista">
-                  {dados.proximasAtividades.map((atividade) => (
-                    <li key={atividade.id} className="admin-lista__item">
-                      <span className="admin-lista__hora">{formatarDataHora(atividade.dataHoraInicio)}</span>
-                      <span className="admin-lista__texto">
-                        <strong>{atividade.titulo}</strong>
-                        {atividade.local && <span>{atividade.local}</span>}
-                      </span>
-                      {atividade.status === 'atrasada' && (
-                        <span className="admin-selo admin-selo--alerta">Atrasada</span>
-                      )}
-                    </li>
-                  ))}
-                </ul>
-              )}
-              <Link to="/schedule" className="admin-listas__ver-mais">Ver programação</Link>
-            </section>
-
             <section className="contests-highlight">
               <h3 className="com-icone"><Users size="1em" aria-hidden="true" /> Usuários recentes</h3>
               {dados.usuariosRecentes.length === 0 ? (

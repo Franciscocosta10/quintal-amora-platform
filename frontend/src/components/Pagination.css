@@ -80,3 +80,13 @@
     display: none;
   }
 }
+
+/* Celular e tablet: área de toque de 44px nos números e nas setas. */
+@media (max-width: 1024px) {
+  .paginacao__seta,
+  .paginacao__pagina {
+    min-width: 44px;
+    min-height: 44px;
+    justify-content: center;
+  }
+}

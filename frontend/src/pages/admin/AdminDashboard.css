@@ -80,16 +80,6 @@
   border-bottom: none;
 }
 
-.admin-lista__hora {
-  flex-shrink: 0;
-  padding: 4px 8px;
-  border-radius: 6px;
-  background: var(--accent-bg);
-  color: var(--accent);
-  font-size: 12px;
-  font-weight: 600;
-}
-
 .admin-lista__texto {
   flex: 1;
   min-width: 0;
@@ -117,11 +107,6 @@
   color: var(--accent);
   font-size: 11px;
   font-weight: 600;
-}
-
-.admin-selo--alerta {
-  border-color: #e6a23c;
-  color: #b7791f;
 }
 
 .admin-selo--inativo {

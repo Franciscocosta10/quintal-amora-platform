@@ -38,7 +38,7 @@ export default function Sidebar() {
       <div className="sidebar__topo">
         <div className="sidebar__logo">
           <img src={logoAmora} alt="" className="sidebar__logo-imagem" />
-          <span>Quintal<br />Amora</span>
+          <span>Quintal<br />da Amora</span>
         </div>
         <button
           type="button"
