@@ -34,6 +34,25 @@
 | Tráfego em texto puro | HTTPS no App Service e SSL obrigatório na conexão com o PostgreSQL da Azure (`DATABASE_SSL=true`) |
 | Dado inválido | Cada action declara os tipos das entradas (`inputs`) e valida as regras antes de gravar. O frontend também valida os formulários, mas a validação que vale é a do backend |
 
+## Vulnerabilidades em dependências (risco conhecido)
+
+O painel de vulnerabilidades do New Relic e o `npm audit --omit=dev` apontam alertas em dependências de produção do backend: 2 críticos e 6 altos no `npm audit`, em novembro de 2026. Os alertas estão em bibliotecas de terceiros, não no código do projeto, e cada um foi analisado:
+
+| Pacote | Origem | Vulnerabilidade | Por que não afeta o projeto hoje |
+|---|---|---|---|
+| `proxy-addr` (crítico) | `sails-hook-sockets` | Falsificação de IP quando o proxy confiável é configurado por sub-rede | O `trustProxy` não está ativado e o projeto não usa WebSocket |
+| `engine.io` | `sails-hook-sockets` | Negação de serviço (DoS) no protocolo do WebSocket | O frontend não abre conexão por socket. Os avisos chegam por polling (a cada 20 s) |
+| `body-parser`, `compression`, `sails` | Sails 1 | Negação de serviço em configurações ou situações específicas | O limite de tamanho das requisições segue o padrão. O risco é de indisponibilidade, sem vazamento de dados |
+| `nodemailer` 9 | dependência direta | Acesso indevido a arquivo ou URL ao montar anexos | O único e-mail enviado (recuperação de senha) tem conteúdo fixo, sem anexos |
+| `brace-expansion` | ferramentas internas das dependências | Negação de serviço com padrão de texto muito grande | Não recebe entrada do usuário |
+
+**Decisão:** o risco foi aceito para a versão 1.0.0. Para a maioria desses alertas, a única correção oferecida pelo `npm audit` é voltar para o Sails 0.12, uma versão antiga e sem suporte. O `npm audit fix` também trocaria versões internas do Waterline (o ORM), o que poderia quebrar o acesso ao banco perto da entrega.
+
+**Próximos passos:**
+1. Atualizar o `nodemailer` para a versão 10 e testar de novo o envio da recuperação de senha.
+2. Desativar o hook de sockets do Sails, que não é usado. Isso remove as dependências `proxy-addr` e `engine.io`.
+3. Atualizar o Sails quando sair uma versão 1.x com as dependências corrigidas.
+
 ## LGPD
 
 - **Política de Privacidade:** página pública em `/privacidade` (`frontend/src/pages/auth/PoliticaPrivacidade.jsx`), com dados coletados, finalidade, base legal, compartilhamento (Azure, Gmail, New Relic), armazenamento no navegador, retenção, direitos do titular (art. 18) e o contato para pedir acesso, correção ou exclusão. A tela de cadastro informa e leva até ela no momento da coleta.
