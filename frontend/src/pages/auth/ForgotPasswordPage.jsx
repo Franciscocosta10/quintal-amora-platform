@@ -41,7 +41,7 @@ try {
     <AuthLayout>
       <Link
         to="/login"
-        className="mb-6 inline-flex items-center gap-1.5 text-sm font-medium text-amora-500 hover:text-amora-600"
+        className="mb-6 inline-flex items-center gap-1.5 text-sm font-medium text-amora-600 hover:text-amora-700"
       >
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4">
           <path d="M19 12H5M12 19l-7-7 7-7" />
@@ -85,7 +85,7 @@ try {
             <button
               type="submit"
               disabled={enviando}
-              className="mt-6 w-full rounded-xl bg-amora-500 py-3 text-sm font-semibold text-white transition hover:bg-amora-600 disabled:cursor-not-allowed disabled:opacity-60"
+              className="mt-6 w-full rounded-xl bg-amora-600 py-3 text-sm font-semibold text-white transition hover:bg-amora-700 disabled:cursor-not-allowed disabled:opacity-60"
             >
               {enviando ? 'Enviando...' : 'Enviar link para redefinição'}
             </button>
@@ -95,7 +95,7 @@ try {
 
       <div className="mt-5 text-center text-sm">
         <p className="font-semibold text-plum-900">Ainda está com problemas?</p>
-        <p className="text-amora-500">
+        <p className="text-amora-600">
           Entre em contato com o suporte:{' '}
           <a href="mailto:suportequintaldaamora@gmail.com" className="underline underline-offset-2">
             suportequintaldaamora@gmail.com

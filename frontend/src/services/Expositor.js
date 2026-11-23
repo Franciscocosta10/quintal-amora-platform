@@ -18,14 +18,14 @@ export function criarExpositor(dados) {
 }
 
 export function editarExpositor(id, dados) {
-  return apiFetch(`/expositor/update/${id}`, {
+  return apiFetch(`/expositor/update/${encodeURIComponent(id)}`, {
     method: 'PUT',
     body: dados,
   });
 }
 
 export function removerExpositor(id) {
-  return apiFetch(`/expositor/destroy/${id}`, {
+  return apiFetch(`/expositor/destroy/${encodeURIComponent(id)}`, {
     method: 'DELETE',
   });
 }

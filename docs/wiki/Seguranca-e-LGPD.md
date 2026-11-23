@@ -16,7 +16,7 @@
 
 ## Senhas e dados sensíveis
 
-- **Senhas** viram hash **bcrypt** (custo 10) nos hooks `beforeCreate` e `beforeUpdate` de `models/Usuario.js`, e nunca saem nas respostas. A lista de campos privados (`senha`, `resetPasswordToken`, `resetPasswordExpiresAt`) fica em um lugar só, `api/utils/usuarioPublico.js`, usado pelo `customToJSON` do model e pelas rotas que devolvem o próprio usuário (login, cadastro, `/auth/me`, perfil e foto).
+- **Senhas** viram hash **bcrypt** (custo 10) nos hooks `beforeCreate` e `beforeUpdate` de `models/Usuario.js`, e nunca saem nas respostas. As respostas usam uma **allowlist**: `api/utils/usuarioPublico.js` lista os únicos campos que podem sair (`id`, `nomeCompleto`, `email`, `perfil`, `fotoPerfil`, `ativo`, `createdAt`, `updatedAt`), usada pelo `customToJSON` do model e pelas rotas que devolvem o próprio usuário (login, cadastro, `/auth/me`, perfil e foto). Um campo novo no model fica fora das respostas até ser liberado de propósito.
 - **Recuperação de senha:** o token enviado por e-mail é aleatório (32 bytes). No banco fica só o **hash SHA-256**, com validade de 30 minutos, e ele é apagado depois do uso. A resposta é sempre a mesma, exista ou não a conta.
 - **Login:** a mensagem de erro é a mesma para "e-mail não existe" e "senha errada". Depois de 10 senhas erradas para o mesmo e-mail, o login fica bloqueado por 15 minutos (`api/utils/limiteLogin.js`).
 - **Segredos** (`JWT_SECRET`, `DATABASE_URL`, `SMTP_PASS`, chave do New Relic) ficam em variáveis de ambiente: no `.env` local, que está no `.gitignore`, e nas configurações do App Service em produção. Nenhum segredo está no repositório.
@@ -36,8 +36,21 @@
 
 ## LGPD
 
+- **Política de Privacidade:** página pública em `/privacidade` (`frontend/src/pages/auth/PoliticaPrivacidade.jsx`), com dados coletados, finalidade, base legal, compartilhamento (Azure, Gmail, New Relic), armazenamento no navegador, retenção, direitos do titular (art. 18) e o contato para pedir acesso, correção ou exclusão. A tela de cadastro informa e leva até ela no momento da coleta.
 - **Dados coletados:** apenas nome, e-mail, senha (em hash) e, opcionalmente, foto de perfil. Não são coletados CPF, telefone, endereço ou dados de pagamento.
 - **Finalidade:** identificar o participante no evento (check-in e inscrições) e permitir a recuperação de senha.
 - **Minimização:** o painel admin e as listas de inscritos mostram só nome e e-mail. Rotas que listam usuários usam `select` com campos não sensíveis.
 - **Desativação:** o administrador pode desativar uma conta, que perde o acesso imediatamente.
 - **Monitoramento:** o New Relic está configurado para não enviar token, cookies nem parâmetros das requisições (`backend/newrelic.js`).
+
+## Licenças
+
+- O projeto é distribuído sob a **licença MIT** (`LICENSE` na raiz). As imagens da marca do evento pertencem à organização e são usadas com autorização, fora da licença MIT.
+- Todas as dependências de produção usam licenças permissivas, compatíveis com a MIT: MIT (React, React Router, Sails, jsonwebtoken), BSD (bcryptjs, dotenv), Apache-2.0 (newrelic, html5-qrcode), ISC (lucide-react) e MIT-0 (nodemailer).
+
+## Acessibilidade (WCAG 2.1)
+
+- **Contraste (nível AA, 4,5:1 para texto):** o rosa principal (`--accent`) é `#c2185b` (5,9:1 sobre o branco) e os botões das telas de acesso usam `amora-600` (5,1:1). Placeholders e o selo "Atrasada" também atingem o mínimo.
+- **Semântica e leitores de tela:** idioma `pt-BR` na página, texto alternativo nas imagens, rótulos em todos os campos e `aria-label` nos botões de ícone (fechar, sino, mostrar senha).
+- **Teclado e toque:** contorno visível no foco (`focus-visible`) e áreas de toque de pelo menos 44px no celular.
+- **Movimento:** o carrossel respeita a preferência de reduzir animações (`prefers-reduced-motion`).

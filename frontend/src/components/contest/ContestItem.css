@@ -171,7 +171,7 @@
 }
 
 .contest-item__status--quase-lotado {
-  color: #b7791f;
+  color: #975a16; /* contraste 5,5:1 (WCAG AA) */
   font-weight: 600;
 }
 

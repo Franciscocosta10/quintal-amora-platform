@@ -1,7 +1,7 @@
 {
   "name": "backend",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "a Sails application",
   "keywords": [],
   "dependencies": {
@@ -38,7 +38,7 @@
     "url": "git://github.com/anonymous node/sails user/backend.git"
   },
   "author": "anonymous node/sails user",
-  "license": "",
+  "license": "MIT",
   "engines": {
     "node": "^22.16.0 || ^24.20.0 || >=26.7.0"
   }

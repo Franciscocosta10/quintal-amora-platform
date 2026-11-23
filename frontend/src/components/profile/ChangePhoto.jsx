@@ -67,7 +67,8 @@ export default function ChangePhoto() {
 
   function aoEnviar(evento) {
     evento.preventDefault();
-    salvar(novaFoto, 'Foto de perfil atualizada!');
+    // `void`: salvar() já trata os próprios erros; a promessa é descartada de propósito.
+    void salvar(novaFoto, 'Foto de perfil atualizada!');
   }
 
   return (

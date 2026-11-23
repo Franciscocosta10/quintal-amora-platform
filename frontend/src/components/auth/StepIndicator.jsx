@@ -27,7 +27,7 @@ export default function StepIndicator({ etapaAtual = 1 }) {
             <div className="flex w-full items-center">
               <span
                 className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs font-semibold
-                  ${destacada ? 'bg-amora-500 text-white' : 'border-2 border-gray-200 text-gray-400'}`}
+                  ${destacada ? 'bg-amora-600 text-white' : 'border-2 border-gray-200 text-gray-400'}`}
               >
                 {etapa.numero}
               </span>

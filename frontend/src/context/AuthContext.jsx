@@ -50,7 +50,8 @@ export function AuthProvider({ children }) {
       }
     }
 
-    carregarUsuarioAtual();
+    // `void`: a função já trata os próprios erros; a promessa é descartada de propósito.
+    void carregarUsuarioAtual();
 
     return () => {
       cancelado = true;

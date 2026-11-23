@@ -62,7 +62,7 @@ module.exports = {
       .updateOne({ id: this.req.usuario.id })
       .set({ fotoPerfil: foto });
 
-    return usuarioPublico.semCamposPrivados(usuarioAtualizado);
+    return usuarioPublico.apenasCamposPublicos(usuarioAtualizado);
   }
 
 };

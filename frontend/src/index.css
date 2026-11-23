@@ -29,7 +29,9 @@
   --bg: #fff;
   --border: #e5e4e7;
   --code-bg: #f4f3ec;
-  --accent: #e91e63;
+  /* #c2185b: rosa da marca com contraste de 5,9:1 sobre o branco (WCAG AA
+     pede 4,5:1). O tom anterior, #e91e63, ficava em 4,4:1. */
+  --accent: #c2185b;
   --accent-bg: rgba(233, 30, 99, 0.1);
   --accent-border: rgba(233, 30, 99, 0.5);
   --social-bg: rgba(244, 243, 236, 0.5);

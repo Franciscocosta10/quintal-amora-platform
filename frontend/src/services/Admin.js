@@ -16,5 +16,5 @@ export function adicionarUsuario(dados) {
 
 // `alteracoes`: { ativo } para desativar/reativar ou { perfil } para trocar o perfil.
 export function alterarUsuario(id, alteracoes) {
-  return apiFetch(`/admin/users/${id}`, { method: 'PUT', body: alteracoes });
+  return apiFetch(`/admin/users/${encodeURIComponent(id)}`, { method: 'PUT', body: alteracoes });
 }

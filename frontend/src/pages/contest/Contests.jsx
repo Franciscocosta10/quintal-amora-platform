@@ -58,7 +58,8 @@ export default function Contests() {
       }
     }
 
-    carregarEventoAtual();
+    // `void`: a função já trata os próprios erros; a promessa é descartada de propósito.
+    void carregarEventoAtual();
 
     return () => {
       cancelado = true;

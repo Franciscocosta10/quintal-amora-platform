@@ -46,7 +46,8 @@ export default function QrScanner({ onScan, onError }) {
       }
     }
 
-    iniciarScanner();
+    // `void`: a função já trata os próprios erros; a promessa é descartada de propósito.
+    void iniciarScanner();
 
     return () => {
       cancelled = true;

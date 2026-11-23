@@ -84,10 +84,10 @@ module.exports = {
 
   },
 
-  // Nunca deixa a senha nem os dados internos da recuperação de senha
-  // vazarem em um `.toJSON()` (lista em api/utils/usuarioPublico.js)
+  // Só os campos públicos saem em um `.toJSON()` (allowlist em
+  // api/utils/usuarioPublico.js): senha e dados internos nunca vazam.
   customToJSON: function () {
-    return usuarioPublico.semCamposPrivados(this);
+    return usuarioPublico.apenasCamposPublicos(this);
   },
 
   // Faz o hash da senha antes de gravar um novo usuário

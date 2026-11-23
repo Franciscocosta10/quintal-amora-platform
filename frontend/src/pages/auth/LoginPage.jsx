@@ -36,7 +36,7 @@ export default function LoginPage() {
   return (
     <AuthLayout>
       <div className="mb-6 flex flex-col items-center text-center">
-        <span className="mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-amora-500 text-white shadow-sm shadow-amora-200">
+        <span className="mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-amora-600 text-white shadow-sm shadow-amora-200">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
             <rect x="5" y="11" width="14" height="9" rx="2" />
             <path d="M8 11V8a4 4 0 0 1 8 0v3" />
@@ -82,19 +82,19 @@ export default function LoginPage() {
         <button
           type="submit"
           disabled={enviando}
-          className="mt-6 w-full rounded-xl bg-amora-500 py-3 text-sm font-semibold text-white transition hover:bg-amora-600 disabled:cursor-not-allowed disabled:opacity-60"
+          className="mt-6 w-full rounded-xl bg-amora-600 py-3 text-sm font-semibold text-white transition hover:bg-amora-700 disabled:cursor-not-allowed disabled:opacity-60"
         >
           {enviando ? 'Entrando...' : 'Entrar'}
         </button>
       </form>
 
       <div className="mt-5 flex flex-col items-center gap-2 text-center text-sm">
-        <Link to="/esqueci-senha" className="font-medium text-amora-500 underline underline-offset-2 hover:text-amora-600">
+        <Link to="/esqueci-senha" className="font-medium text-amora-600 underline underline-offset-2 hover:text-amora-700">
           Esqueceu a senha?
         </Link>
         <p className="text-gray-500">
           Não tem conta?{' '}
-          <Link to="/cadastro" state={{ voltarPara }} className="font-medium text-amora-500 hover:text-amora-600">
+          <Link to="/cadastro" state={{ voltarPara }} className="font-medium text-amora-600 hover:text-amora-700">
             Cadastre-se
           </Link>
         </p>
