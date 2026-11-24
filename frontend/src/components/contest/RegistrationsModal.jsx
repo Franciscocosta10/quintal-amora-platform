@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ClipboardList, X } from 'lucide-react';
 import {
   cancelarInscricao,
@@ -34,6 +34,7 @@ function ListaDeInscritos({ concurso, onFechar }) {
   const [erro, setErro] = useState('');
   const [alterandoId, setAlterandoId] = useState(null);
   const [houveRemocao, setHouveRemocao] = useState(false);
+  const fundoRef = useRef(null);
 
   useEffect(() => {
     let cancelado = false;
@@ -55,8 +56,15 @@ function ListaDeInscritos({ concurso, onFechar }) {
     function aoApertarTecla(event) {
       if (event.key === 'Escape') onFechar(houveRemocao);
     }
+    function aoClicar(event) {
+      if (event.target === fundoRef.current) onFechar(houveRemocao);
+    }
     document.addEventListener('keydown', aoApertarTecla);
-    return () => document.removeEventListener('keydown', aoApertarTecla);
+    document.addEventListener('click', aoClicar);
+    return () => {
+      document.removeEventListener('keydown', aoApertarTecla);
+      document.removeEventListener('click', aoClicar);
+    };
   }, [onFechar, houveRemocao]);
 
   async function executar(inscricao, acao) {
@@ -91,13 +99,12 @@ function ListaDeInscritos({ concurso, onFechar }) {
   const presentes = inscricoes?.filter((inscricao) => inscricao.presencaConfirmada).length ?? 0;
 
   return (
-    <div className="inscritos-overlay" onClick={() => onFechar(houveRemocao)}>
+    <div className="inscritos-overlay" ref={fundoRef}>
       <div
         className="inscritos-modal"
         role="dialog"
         aria-modal="true"
         aria-labelledby="inscritos-titulo"
-        onClick={(event) => event.stopPropagation()}
       >
         <div className="inscritos-modal__topo">
           <div>

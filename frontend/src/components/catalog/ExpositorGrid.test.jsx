@@ -108,5 +108,7 @@ describe('ExpositorGrid', () => {
 
     fireEvent.click(screen.getByRole('button', { name: 'Ver detalhes de Loja Geek' }));
     fireEvent.click(screen.getByRole('button', { name: 'Editar' }));
+
+    expect(screen.getByRole('button', { name: 'Ver detalhes de Loja Geek' })).toBeInTheDocument();
   });
 });

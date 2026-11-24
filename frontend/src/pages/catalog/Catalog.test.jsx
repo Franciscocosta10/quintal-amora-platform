@@ -284,11 +284,13 @@ describe('Catalog', () => {
     const primeiro = render(<Catalog />);
     primeiro.unmount();
     await act(async () => resolver({ id: 1 }));
+    expect(primeiro.container).toBeEmptyDOMElement();
 
     let rejeitar;
     buscarEventoAtual.mockReturnValueOnce(new Promise((_, reject) => { rejeitar = reject; }));
     const segundo = render(<Catalog />);
     segundo.unmount();
     await act(async () => rejeitar(new Error('x')));
+    expect(segundo.container).toBeEmptyDOMElement();
   });
 });

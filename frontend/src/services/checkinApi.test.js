@@ -21,10 +21,13 @@ describe('services/checkinApi', () => {
     expect(apiFetch).toHaveBeenCalledWith('/checkin/status/3', { method: 'GET' });
   });
 
-  it('consultarStatusCheckin codifica o id, para um valor estranho não mudar o caminho chamado', async () => {
-    await consultarStatusCheckin('3/../../admin/dashboard');
-    expect(apiFetch).toHaveBeenCalledWith('/checkin/status/3%2F..%2F..%2Fadmin%2Fdashboard', { method: 'GET' });
-  });
+  it.each(['3/../../admin/dashboard', '..', 'abc', '', null, undefined, 0, -1, 1.5])(
+    'consultarStatusCheckin recusa o id %s, para um valor estranho não mudar o caminho chamado',
+    async (id) => {
+      await expect(consultarStatusCheckin(id)).rejects.toThrow('Evento inválido.');
+      expect(apiFetch).not.toHaveBeenCalled();
+    }
+  );
 
   it('consultarHistoricoCheckins busca o histórico do usuário', async () => {
     await consultarHistoricoCheckins();
