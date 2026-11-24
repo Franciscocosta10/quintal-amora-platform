@@ -60,7 +60,7 @@ module.exports = {
         inputs.dia + 'T23:59:59.999-03:00'
       );
 
-      if (isNaN(inicioDoDia.getTime())) {
+      if (Number.isNaN(inicioDoDia.getTime())) {
         throw {
           badRequest: {
             message: 'Formato de data inválido. Use YYYY-MM-DD.'

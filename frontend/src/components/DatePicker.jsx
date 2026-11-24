@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import './DatePicker.css';
 
 const DIAS_SEMANA = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'];
@@ -59,22 +59,30 @@ export default function DatePicker({
 
   // Devolve o foco ao input sem disparar o onFocus, que reabriria o calendário
   // logo depois de fechá-lo.
-  function fechar() {
+  const fechar = useCallback(() => {
     setAberto(false);
     devolvendoFocoRef.current = true;
     inputRef.current?.focus();
     devolvendoFocoRef.current = false;
-  }
+  }, []);
 
-  function aoFocarInput() {
-    if (!devolvendoFocoRef.current) abrirNoMesDoValor();
-  }
+  // O Esc fecha só o calendário: sem o stopPropagation, fecharia também o
+  // modal em que o campo estiver.
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!aberto || !container) return undefined;
 
-  function aoPressionarTecla(event) {
-    if (event.key === 'Escape' && aberto) {
+    function aoPressionarTecla(event) {
+      if (event.key !== 'Escape') return;
       event.stopPropagation();
       fechar();
     }
+    container.addEventListener('keydown', aoPressionarTecla);
+    return () => container.removeEventListener('keydown', aoPressionarTecla);
+  }, [aberto, fechar]);
+
+  function aoFocarInput() {
+    if (!devolvendoFocoRef.current) abrirNoMesDoValor();
   }
 
   function abrirNoMesDoValor() {
@@ -121,7 +129,7 @@ export default function DatePicker({
   for (let dia = 1; dia <= totalDiasDoMes; dia++) celulas.push(dia);
 
   return (
-    <div className="date-picker" ref={containerRef} onKeyDown={aoPressionarTecla}>
+    <div className="date-picker" ref={containerRef}>
       <input
         ref={inputRef}
         type="text"

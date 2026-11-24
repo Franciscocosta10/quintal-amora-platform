@@ -8,7 +8,13 @@ export async function registrarCheckin(qrCode) {
 }
 
 export async function consultarStatusCheckin(eventoId) {
-  return apiFetch(`/checkin/status/${encodeURIComponent(eventoId)}`, {
+  // Só aceita um id numérico: outro valor poderia mudar o caminho chamado.
+  const id = Number(eventoId);
+  if (!Number.isInteger(id) || id <= 0) {
+    throw new Error('Evento inválido.');
+  }
+
+  return apiFetch(`/checkin/status/${id}`, {
     method: 'GET',
   });
 }

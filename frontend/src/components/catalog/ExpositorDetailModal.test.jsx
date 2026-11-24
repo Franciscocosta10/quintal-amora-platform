@@ -87,6 +87,8 @@ describe('ExpositorDetailModal', () => {
 
     fireEvent.keyDown(document, { key: 'Escape' });
     fireEvent.mouseDown(screen.getByRole('dialog').parentElement);
+
+    expect(screen.getByRole('dialog', { name: 'Loja Geek' })).toBeInTheDocument();
   });
 
   it('remove o listener de teclado ao fechar', () => {
@@ -112,5 +114,7 @@ describe('ExpositorDetailModal', () => {
   it('não quebra ao clicar em "Editar expositor" sem onEditar', () => {
     render(<ExpositorDetailModal expositor={COMPLETO} isAdmin />);
     fireEvent.click(screen.getByRole('button', { name: 'Editar expositor' }));
+
+    expect(screen.getByRole('dialog', { name: 'Loja Geek' })).toBeInTheDocument();
   });
 });

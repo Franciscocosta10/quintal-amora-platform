@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { MapPin } from 'lucide-react';
 import ExpositorImagem from './ExpositorImagem';
 import { rotuloDoTipo } from './tiposExpositor';
@@ -12,6 +12,8 @@ import './ExpositorDetailModal.css';
  * outra requisição. Fecha no "×", no Esc ou clicando fora do card.
  */
 export default function ExpositorDetailModal({ expositor, isAdmin = false, onFechar, onEditar }) {
+  const fundoRef = useRef(null);
+
   useEffect(() => {
     if (!expositor) return undefined;
 
@@ -19,8 +21,16 @@ export default function ExpositorDetailModal({ expositor, isAdmin = false, onFec
       if (event.key === 'Escape') onFechar?.();
     }
 
+    function aoClicarNoFundo(event) {
+      if (event.target === fundoRef.current) onFechar?.();
+    }
+
     document.addEventListener('keydown', aoPressionarTecla);
-    return () => document.removeEventListener('keydown', aoPressionarTecla);
+    document.addEventListener('mousedown', aoClicarNoFundo);
+    return () => {
+      document.removeEventListener('keydown', aoPressionarTecla);
+      document.removeEventListener('mousedown', aoClicarNoFundo);
+    };
   }, [expositor, onFechar]);
 
   if (!expositor) return null;
@@ -29,12 +39,8 @@ export default function ExpositorDetailModal({ expositor, isAdmin = false, onFec
     .map((rede) => ({ ...rede, url: expositor.redesSociais?.[rede.chave] }))
     .filter((rede) => ehLinkSeguro(rede.url));
 
-  function aoClicarNoFundo(event) {
-    if (event.target === event.currentTarget) onFechar?.();
-  }
-
   return (
-    <div className="expositor-detail-overlay" onMouseDown={aoClicarNoFundo}>
+    <div className="expositor-detail-overlay" ref={fundoRef}>
       <div
         className="expositor-detail"
         role="dialog"
