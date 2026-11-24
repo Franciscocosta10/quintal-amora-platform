@@ -1,6 +1,4 @@
 /**
- * activity/update.js
- *
  * RF07 — edição de um item já existente na programação.
  * Protegida pela policy `isAdmin`.
  */

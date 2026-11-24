@@ -1,13 +1,9 @@
 /**
- * components/auth/FormField.jsx
- *
- * Label + input no estilo do protótipo (cartão branco, borda cinza
- * clara, foco rosa). Reaproveitado pelos 3 formulários para manter a
- * mesma aparência sem repetir classes Tailwind em cada tela.
- *
- * Campos type="password" ganham um botão de olho para mostrar ou
- * esconder o que foi digitado. Cada campo controla o seu próprio estado.
+ * Label + input no estilo das telas de acesso, usado nos formulários de
+ * login, cadastro e senha. Campos `type="password"` ganham o botão de olho
+ * para mostrar ou esconder a senha.
  */
+
 import { useState } from 'react';
 import { Eye, EyeOff } from 'lucide-react';
 

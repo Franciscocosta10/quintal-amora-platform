@@ -1,16 +1,12 @@
 /**
- * utils/limiteLogin.js
+ * Proteção contra força bruta no login (usada por auth/login). Depois de
+ * MAX_FALHAS senhas erradas para o mesmo e-mail, esse e-mail fica
+ * bloqueado até completar JANELA_MS desde a primeira falha. Um login certo
+ * zera a contagem.
  *
- * Proteção contra descobrir senhas por tentativa e erro (força bruta).
- * Depois de MAX_FALHAS senhas erradas para o mesmo e-mail, novas tentativas
- * para esse e-mail são recusadas até completar JANELA_MS desde a primeira
- * falha. Um login certo zera a contagem. Usado por auth/login.
- *
- * A contagem é por e-mail, e não por IP: no evento muita gente usa o mesmo
- * Wi-Fi e sairia pelo mesmo IP, e um bloqueio por IP travaria todo mundo.
- *
- * Fica na memória do servidor (uma única instância na Azure). Reiniciar o
- * servidor zera as contagens, o que é aceitável aqui.
+ * Conta por e-mail, não por IP, porque no evento muita gente divide o
+ * mesmo Wi-Fi. Fica na memória do servidor (uma instância só), então
+ * reiniciar zera as contagens.
  */
 
 var MAX_FALHAS = 10;

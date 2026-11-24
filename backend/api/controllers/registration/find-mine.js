@@ -1,9 +1,6 @@
 /**
- * registration/find-mine.js
- *
- * Lista as inscrições do próprio usuário autenticado, com o concurso
- * populado — usado pelo frontend pra saber qual botão mostrar
- * ("Inscrever-se" x "Inscrito ✓ Cancelar"). Protegida por isLoggedIn.
+ * Inscrições do usuário logado, com o concurso, para o frontend saber
+ * qual botão mostrar ("Inscrever-se" ou "Cancelar").
  */
 
 module.exports = {

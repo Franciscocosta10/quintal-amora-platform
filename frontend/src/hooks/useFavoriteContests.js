@@ -4,9 +4,7 @@ const STORAGE_KEY = 'quintalAmora:concursosFavoritos';
 
 /**
  * useFavoriteContests — favoritos de Concursos guardados no localStorage
- * do navegador. ASSUMI esse mecanismo por não ter acesso ao hook real de
- * favoritos de Programação — se lá for diferente (ex.: backend), avisa
- * que eu troco a implementação pra bater.
+ * do navegador.
  */
 export function useFavoriteContests() {
   const [favoritos, setFavoritos] = useState(() => {

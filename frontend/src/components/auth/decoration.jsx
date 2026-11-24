@@ -1,10 +1,5 @@
 /**
- * components/auth/SakuraDecoration.jsx
- *
- * Decoração de galho + pétalas de cerejeira, feita em SVG puro.
- * Fica no lugar da ilustração das personagens do protótipo — não
- * recrio arte de personagens, mas mantém a mesma paleta/atmosfera.
- * `position` controla o canto onde o galho aparece.
+ * Galho e pétalas de cerejeira em SVG, decoração das telas de acesso.
  */
 
 export default function Decoration({ className = '' }) {

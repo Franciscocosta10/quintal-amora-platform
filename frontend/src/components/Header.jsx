@@ -12,7 +12,6 @@ export default function Header() {
   const { usuario, isAuthenticated, carregando, logout } = useAuth();
   const navigate = useNavigate();
 
-  // Dados reais do usuário logado (antes era um usuário fixo de exemplo).
   const user = usuario && {
     name: usuario.nomeCompleto,
     email: usuario.email,

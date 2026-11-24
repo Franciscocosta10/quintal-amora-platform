@@ -55,9 +55,8 @@ module.exports = {
       return concursos;
     }
 
-    // Uma única consulta buscando as inscrições de TODOS os concursos da
-    // lista de uma vez, em vez de uma consulta de count por concurso
-    // (N+1). A contagem por concurso é feita em memória depois.
+    // Busca as inscrições de todos os concursos numa consulta só (evita
+    // N+1) e conta por concurso em memória.
     var idsDosConcursos = concursos.map((concurso) => {
       return concurso.id;
     });

@@ -1,8 +1,3 @@
-/**
- * Atividade.js
- *
- */
-
 module.exports = {
 
   attributes: {
@@ -41,8 +36,8 @@ module.exports = {
       allowNull: true
     },
 
-    // Suporta a "Exceção 1" e afins: cancelamentos/atrasos feitos pelo admin
-    // refletem aqui e a tela pública consome esse status.
+    // Cancelamentos e atrasos feitos pelo admin aparecem na tela pública
+    // por este status.
     status: {
       type: 'string',
       isIn: ['confirmada', 'atrasada', 'cancelada', 'concluida'],

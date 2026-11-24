@@ -1,9 +1,6 @@
 /**
- * isAdmin.js
- *
- * Policy de autorização para administradores.
- * A policy isLoggedIn deve ser executada antes,
- * pois ela popula `req.usuario`.
+ * Libera só administradores. Roda depois da isLoggedIn, que preenche
+ * `req.usuario`.
  */
 
 module.exports = async function (req, res, proceed) {

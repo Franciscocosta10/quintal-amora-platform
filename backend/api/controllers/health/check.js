@@ -1,15 +1,7 @@
 /**
- * health/check.js
- *
- * Verificação de saúde da API (monitoramento / RNF08 — disponibilidade).
- * Consultada pelo monitor de disponibilidade do New Relic: responde 200
- * quando a API está no ar e consegue falar com o banco, e 503 quando o
- * banco não responde — o que dispara o alerta.
- *
- * Pública de propósito (o monitor não tem login) e sem dados do sistema
- * além do necessário para saber se está tudo funcionando.
- *
- * GET /health
+ * Verificação de saúde usada pelo monitor do New Relic (RNF08): 200
+ * quando a API e o banco respondem, 503 quando o banco não responde.
+ * Pública de propósito, porque o monitor não tem login.
  */
 
 module.exports = {

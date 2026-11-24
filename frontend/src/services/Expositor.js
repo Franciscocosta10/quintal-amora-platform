@@ -1,7 +1,6 @@
 import { apiFetch } from '../lib/api';
 
-// Catálogo de lojas e artistas (RF13–RF15). Mesmo formato de
-// services/Contest.js; a listagem e o detalhe são públicos.
+// Catálogo de lojas e artistas (RF13–RF15); listagem e detalhe são públicos.
 
 export function listarExpositores(filtros = {}) {
   const params = new URLSearchParams(filtros).toString();

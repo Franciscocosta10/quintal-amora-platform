@@ -1,16 +1,7 @@
 /**
- * utils/usuarioPublico.js
- *
- * Define quais campos do usuário podem sair nas respostas da API. Usado
- * pelo `customToJSON` do model Usuario e pelas actions de autenticação que
- * devolvem o próprio usuário (login, cadastro, /auth/me, edição de perfil e
- * troca de foto).
- *
- * Abordagem de allowlist: só os campos listados em CAMPOS_PUBLICOS saem.
- * Qualquer atributo novo do model (ex.: um token, um telefone) fica fora da
- * resposta até alguém decidir, de propósito, incluí-lo aqui. Assim a senha
- * (hash bcrypt) e os dados internos da recuperação de senha nunca vazam,
- * nem os que ainda vierem a existir.
+ * Allowlist dos campos do usuário que podem sair nas respostas da API
+ * (usada pelo model Usuario e pelas actions de auth). Um campo novo do
+ * model só sai se for incluído em CAMPOS_PUBLICOS.
  */
 
 var CAMPOS_PUBLICOS = ['id', 'nomeCompleto', 'email', 'perfil', 'fotoPerfil', 'ativo', 'createdAt', 'updatedAt'];

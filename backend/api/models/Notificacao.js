@@ -1,15 +1,9 @@
 /**
- * Notificacao.js
+ * RF11 / RF12 — avisos e chamadas de concurso. Só administradores criam
+ * (policy isAdmin).
  *
- * RF11: notificações sobre eventos e atividades. RF12: alertas de chamada
- * para concursos. Regra de negócio "Permissões de Disparo": só usuários
- * com perfil "administrador" podem criar notificações — reforçado pela
- * policy `isAdmin` na rota de criação (etapa 5, quando o envio for
- * implementado).
- *
- * `evento` / `concurso` / `atividade` são opcionais e servem para o
- * frontend linkar a notificação ao contexto certo (ex.: "chamada" leva
- * direto para a tela do concurso).
+ * `evento`, `concurso` e `atividade` são opcionais e ligam o aviso ao
+ * contexto (ex.: uma chamada leva direto ao concurso).
  */
 
 module.exports = {

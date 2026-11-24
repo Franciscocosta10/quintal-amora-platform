@@ -1,9 +1,8 @@
 /**
- * agruparPorCategoria — mesma lógica de agruparPorDia.js, mas agrupando
- * concursos por categoria em vez de dia. Retorna o mesmo formato
- * {chave, rotulo} que o DayTabs.jsx (reaproveitado sem alterações)
- * espera na prop `dias`.
+ * Agrupa os concursos por categoria, no mesmo formato `{ chave, rotulo }`
+ * que o DayTabs espera (como o agruparPorDia faz com os dias).
  */
+
 export function agruparPorCategoria(concursos) {
   const porCategoria = {};
 

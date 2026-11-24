@@ -4,8 +4,8 @@ Plataforma web para gestão e engajamento dos visitantes do evento **Quintal da 
 
 O evento enfrentava dificuldades de organização, comunicação e controle das atividades em tempo real: programação espalhada em redes sociais, avisos de última hora que se perdiam, inscrições manuais e nenhum registro de quem compareceu. A plataforma centraliza a gestão do evento, melhora a comunicação e otimiza a experiência dos participantes.
 
-**🌐 Aplicação no ar:** https://quintal-amora-web-erfrewcwgyc9hcfc.brazilsouth-01.azurewebsites.net/
-**📚 Documentação completa:** [Wiki do projeto](https://github.com/Franciscocosta10/quintal-amora-platform/wiki)
+**Aplicação no ar:** https://quintal-amora-web-erfrewcwgyc9hcfc.brazilsouth-01.azurewebsites.net/
+**Documentação completa:** [Wiki do projeto](https://github.com/Franciscocosta10/quintal-amora-platform/wiki)
 
 ## Funcionalidades
 

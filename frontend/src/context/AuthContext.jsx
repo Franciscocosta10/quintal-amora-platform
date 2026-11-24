@@ -1,14 +1,9 @@
 /**
- * context/AuthContext.jsx
- *
  * Guarda quem está logado e expõe as ações de autenticação para o app
- * inteiro. Todo módulo futuro (Programação, Concursos...) só precisa
- * do hook `useAuth()` (em hooks/useAuth.js) para saber se tem alguém
- * logado e qual o perfil dele.
+ * inteiro (acesso pelo hook `useAuth`).
  *
- * `useAuth` fica em outro arquivo de propósito: o Fast Refresh do Vite
- * exige que um arquivo só exporte componentes quando possível, e este
- * arquivo já exporta o componente `AuthProvider`.
+ * `useAuth` fica em outro arquivo porque o Fast Refresh do Vite pede que
+ * um arquivo de componente só exporte componentes.
  */
 
 import { useState, useEffect } from 'react';

@@ -1,9 +1,7 @@
 /**
- * components/AdminRoute.jsx
- *
- * Envolve páginas restritas a administradores (RNF07). Visitante logado
- * volta para a Home; quem não está logado vai para o login. A API também
- * bloqueia (policy isAdmin) — isto aqui só evita mostrar uma tela vazia.
+ * Envolve páginas só de administradores (RNF07). Visitante logado volta
+ * para a Home e quem não está logado vai para o login. A API também
+ * bloqueia (policy isAdmin); isto só evita mostrar uma tela vazia.
  */
 
 import { Navigate } from 'react-router-dom';

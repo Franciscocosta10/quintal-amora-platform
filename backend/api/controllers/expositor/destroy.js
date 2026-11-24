@@ -1,11 +1,9 @@
 /**
- * expositor/destroy.js
- *
- * RF15: exclusão de loja/artista pelo administrador. O nome `destroy`
- * (em vez de `delete`, usado em Concurso) coincide com a action de
- * blueprint do Sails: assim, mesmo a rota automática DELETE /expositor/:id
- * cai nesta action — e na mesma policy de admin — em vez do blueprint cru.
+ * RF15 — exclusão de loja/artista pelo administrador. O nome `destroy`
+ * coincide com a action de blueprint do Sails, então a rota automática
+ * DELETE /expositor/:id também cai aqui, com a mesma policy de admin.
  */
+
 module.exports = {
 
   friendlyName: 'Destroy expositor',

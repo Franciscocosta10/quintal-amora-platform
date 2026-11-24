@@ -1,11 +1,7 @@
 /**
- * utils/redesSociais.js
- *
- * O backend só aceita URLs http(s) nas redes sociais (proteção contra
- * links `javascript:` no catálogo público). Mas, na prática, o admin
- * digita "@lojadaamora" ou "lojadaamora.com.br". Este módulo converte o
- * que foi digitado em URL antes de enviar, e o caminho inverso (URL →
- * rótulo curto) para exibir no detalhe do expositor.
+ * Converte o que o admin digita nas redes sociais ("@loja",
+ * "loja.com.br") em URL antes de enviar, porque o backend só aceita
+ * http(s). Também faz o caminho inverso, para exibir um rótulo curto.
  */
 
 export const REDES_SOCIAIS = [

@@ -79,10 +79,8 @@ export default function Catalog() {
 
   const filtrando = Boolean(tipoSelecionado || busca.trim());
 
-  // A paginação é feita no navegador: o catálogo de um evento tem dezenas
-  // de expositores, não milhares, e a lista completa já vem do backend
-  // (a busca e as abas também filtram aqui). A página é limitada ao total
-  // para não ficar "na página 3 de 2" depois de uma exclusão.
+  // Paginação no navegador (a lista completa já vem do backend). A página
+  // é limitada ao total para não ficar "na página 3 de 2" após uma exclusão.
   const totalPaginas = Math.max(1, Math.ceil(expositoresExibidos.length / EXPOSITORES_POR_PAGINA));
   const paginaAtual = Math.min(pagina, totalPaginas);
   const expositoresDaPagina = expositoresExibidos.slice(

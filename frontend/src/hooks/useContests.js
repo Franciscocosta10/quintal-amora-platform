@@ -13,9 +13,7 @@ export function useContests(eventoId) {
   useEffect(() => {
     let cancelado = false;
 
-    // Nenhum setState síncrono aqui (regra react-hooks/set-state-in-effect):
-    // o erro só é limpo quando a nova resposta chega, e a lista atual fica
-    // na tela até a nova chegar (mesmo padrão do useExpositores).
+    // Sem setState síncrono no efeito (regra react-hooks/set-state-in-effect).
     listarConcursos(eventoId ? { eventoId } : {})
       .then((resultado) => {
         if (cancelado) return;

@@ -1,9 +1,7 @@
 /**
- * expositor/create.js
- *
- * RF15: cadastro de loja/artista pelo administrador. Protegida por
- * ['isLoggedIn', 'isAdmin'] em config/policies.js.
+ * RF15 — cadastro de loja/artista pelo administrador.
  */
+
 var regrasExpositor = require('../../utils/expositor');
 
 module.exports = {

@@ -1,18 +1,8 @@
 /**
- * admin/dashboard.js
- *
- * RF16 — painel administrativo. Versão enxuta da "Central de Gerenciamento"
- * do mockup: devolve, numa única chamada, os números gerais do evento atual
- * e a lista curta de usuários recentes.
+ * RF16 — painel administrativo.
  *
  * Protegida por isLoggedIn + isAdmin (RNF07). Os dados de usuários trazem
  * só campos não sensíveis (RNF06).
- *
- * O "evento atual" é o mais recente cadastrado — mesmo critério usado em
- * event/actual-find. Contagens de atividades, concursos, check-ins,
- * inscrições e expositores são filtradas por ele; a contagem de
- * participantes é global, porque a conta do usuário não pertence a um
- * evento específico.
  */
 
 var LIMITE_USUARIOS_RECENTES = 5;
@@ -43,8 +33,6 @@ module.exports = {
       .sort('createdAt DESC')
       .limit(LIMITE_USUARIOS_RECENTES);
 
-    // Sem evento cadastrado ainda: o painel continua útil (usuários), mas
-    // tudo que depende de evento vem zerado.
     if (!evento) {
       return {
         evento: null,

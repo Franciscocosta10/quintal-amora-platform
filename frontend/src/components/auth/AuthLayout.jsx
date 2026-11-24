@@ -1,13 +1,7 @@
 /**
- * components/auth/AuthLayout.jsx
- *
- * Painel esquerdo idêntico nas 3 telas do protótipo (marca, boas-vindas
- * e a barra de 4 destaques) — centralizado aqui para não duplicar em
- * cada página. `children` é o conteúdo da coluna direita (o cartão de
- * cada tela).
- *
- * No mobile, o painel esquerdo some (a ilustração é decorativa, não
- * essencial para usar o formulário) e sobra só o cartão, centralizado.
+ * Painel esquerdo comum às telas de acesso (marca, boas-vindas e
+ * destaques). `children` é o cartão da direita. No celular o painel some
+ * e sobra só o cartão.
  */
 
 import SakuraDecoration from './decoration';
@@ -63,9 +57,6 @@ export default function AuthLayout({ children }) {
           </p>
         </div>
 
-        {/* Espaço reservado para a ilustração real (ex.: exportada do
-            Figma). Troque este bloco por:
-            <img src="/src/assets/hero-illustration.png" alt="" className="..." /> */}
         <div className="relative z-10 flex flex-1 items-center justify-center" aria-hidden="true">
           <SakuraDecoration className="h-40 w-40 opacity-70" />
         </div>

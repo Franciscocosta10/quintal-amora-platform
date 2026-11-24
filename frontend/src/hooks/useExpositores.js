@@ -5,10 +5,8 @@ import { listarExpositores } from '../services/Expositor';
  * useExpositores — busca o catálogo uma vez; filtros por tipo e busca por
  * nome acontecem no cliente (o catálogo de uma edição tem dezenas de
  * expositores, não milhares).
- *
- * Diferente do useContests, expõe `recarregar`: depois de criar, editar
- * ou excluir, a página atualiza só a lista — sem `window.location.reload()`,
- * então a aba e a busca que o admin estava usando continuam lá.
+ * Expõe `recarregar` para atualizar só a lista depois de criar, editar ou
+ * excluir, sem perder a aba e a busca abertas.
  */
 export function useExpositores() {
   const [expositores, setExpositores] = useState([]);

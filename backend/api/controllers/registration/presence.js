@@ -1,11 +1,6 @@
 /**
- * registration/presence.js
- *
- * RF10 — gerenciar lista de participantes. No dia do evento, o admin abre a
- * lista de inscritos do concurso e marca quem compareceu (campo
- * `presencaConfirmada` do model). Inscrição cancelada não recebe presença.
- *
- * Protegida por isLoggedIn + isAdmin.
+ * RF10 — no dia do evento, o admin marca na lista de inscritos quem
+ * compareceu. Inscrição cancelada não recebe presença.
  */
 
 module.exports = {

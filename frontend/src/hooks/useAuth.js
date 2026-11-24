@@ -1,7 +1,5 @@
 /**
- * hooks/useAuth.js
- *
- * Hook de acesso ao AuthContext. Uso em qualquer componente:
+ * Hook de acesso ao AuthContext:
  *   const { usuario, isAuthenticated, login, cadastrar, logout } = useAuth();
  */
 

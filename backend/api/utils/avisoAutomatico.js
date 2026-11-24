@@ -1,21 +1,13 @@
 /**
- * utils/avisoAutomatico.js
+ * RF09 — avisa os participantes quando o horário de uma atividade ou de
+ * um concurso muda (usado por activity/update e contest/update).
  *
- * RF09 — avisar os participantes quando o horário de uma atividade ou de
- * um concurso muda. Usado por activity/update e contest/update.
- *
- * Reaproveita as notificações internas (RF11): o aviso automático é só
- * uma Notificacao criada pelo próprio sistema, com o admin que fez a
- * alteração como autor. O participante vê no sino e no card da Home,
- * igual a um aviso enviado à mão.
- *
- * O aviso vai para todos (não só para os inscritos): as notificações do
- * projeto são gerais, e uma mudança de horário interessa a quem pretende
- * assistir, não apenas a quem se inscreveu.
+ * O aviso é uma Notificacao comum, criada em nome do admin que fez a
+ * alteração, e vai para todos, não só para os inscritos.
  */
 
-// O evento acontece em Joinville; sem isso o servidor (ex.: Railway, em
-// UTC) escreveria o horário 3 horas adiantado na mensagem.
+// O evento é em Joinville; sem o fuso fixo, o servidor (em UTC)
+// escreveria o horário 3 horas adiantado na mensagem.
 var FUSO_DO_EVENTO = 'America/Sao_Paulo';
 
 function formatarDataHora(timestamp) {

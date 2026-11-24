@@ -1,10 +1,5 @@
 /**
- * Checkin.js
- *
- * RF04: check-in por QR Code. RF05: registrar horário de entrada.
- * Regra de negócio: o QR Code fica disponível na entrada e em pontos
- * estratégicos do evento, então guardamos `pontoDeEntrada` para permitir
- * relatórios de fluxo por local, não só por horário.
+ * RF04 / RF05 — check-in por QR Code, com o horário de entrada.
  */
 
 module.exports = {
